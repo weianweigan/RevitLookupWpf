@@ -1,0 +1,142 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:propertySys="clr-namespace:RvtLookupWpf.PropertySys"
+                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"                    
+                    xmlns:controls="clr-namespace:RvtLookupWpf.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="./Icons.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="controls:PropertyDataGrid">
+        <Setter Property="HeadersVisibility" Value="None"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="ColumnHeaderHeight" Value="30"/>
+        <Setter Property="VerticalGridLinesBrush" Value="Gray"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="Gray"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsGrouping" Value="true" />
+                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
+                </MultiTrigger.Conditions>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <controls:PropertyDataGridValueTemplateSelector x:Key="PropertyDataGridValueTemplateSelector">
+        <!--Int-->
+        <controls:PropertyDataGridValueTemplateSelector.IntDataTemplate>
+            <DataTemplate DataType="{x:Type propertySys:IntProperty}">
+                <TextBox 
+                    Text="{Binding Value}"
+                    IsReadOnly="{Binding IsReadOnly}"/>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.IntDataTemplate>
+        <!--Double-->
+        <controls:PropertyDataGridValueTemplateSelector.DoubleDataTemplate>
+            <DataTemplate DataType="{x:Type propertySys:DoubleProperty}">
+                <TextBox 
+                    Text="{Binding Value}"
+                    IsReadOnly="{Binding IsReadOnly}"/>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.DoubleDataTemplate>
+        <!--String-->
+        <controls:PropertyDataGridValueTemplateSelector.StringDataTemplate>
+            <DataTemplate DataType="{x:Type propertySys:StringProperty}">
+                <TextBox 
+                    Text="{Binding Value}"
+                    IsReadOnly="{Binding IsReadOnly}"/>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.StringDataTemplate>
+        <!--Bool-->
+        <controls:PropertyDataGridValueTemplateSelector.BoolDataTemplate>
+            <DataTemplate DataType="{x:Type propertySys:BooleanProperty}">
+                <CheckBox 
+                    IsChecked="{Binding Value}"
+                    IsEnabled="{Binding IsReadOnly}"/>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.BoolDataTemplate>
+        <!--Method-->
+        <controls:PropertyDataGridValueTemplateSelector.MethodDataTemplate>
+            <DataTemplate DataType="{x:Type propertySys:MethodProperty}">
+                <TextBlock Text="{Binding MethodValue}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding SelectedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CanExecute}" Value="True">
+                                    <Setter Property="FontWeight" Value="Black"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.MethodDataTemplate>
+        <!--Exception-->
+        <controls:PropertyDataGridValueTemplateSelector.ExceptionDataTemplate>
+            <DataTemplate DataType="{x:Type propertySys:ExceptionProperty}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image 
+                        Height="15"
+                        Source="{StaticResource color_errorDrawingImage}"/>
+                    <TextBlock 
+                        Grid.Column="1" 
+                        Text="{Binding Msg}"
+                        VerticalAlignment="Center"
+                        Foreground="Red"/>
+                </Grid>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.ExceptionDataTemplate>
+        <!--DeafultObject-->
+        <controls:PropertyDataGridValueTemplateSelector.DefaultObjectDataTemplate>
+            <DataTemplate DataType="{x:Type propertySys:DefaultObjectProperty}">
+                <TextBlock 
+                    Text="{Binding ValueType}"
+                    FontWeight="Black">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding SelectedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBlock>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.DefaultObjectDataTemplate>
+        <!--NullObject-->
+        <controls:PropertyDataGridValueTemplateSelector.NullObjectDataTemplate>
+            <DataTemplate DataType="{x:Type propertySys:NullObjectProperty}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image 
+                        Height="15"
+                        Source="{StaticResource Empty_setDrawingImage}"/>
+                    <TextBlock 
+                        Text="Null"
+                        VerticalAlignment="Center"                        
+                        Grid.Column="1"/>
+                </Grid>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.NullObjectDataTemplate>
+    </controls:PropertyDataGridValueTemplateSelector>
+</ResourceDictionary>

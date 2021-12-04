@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="./Button.xaml"/>
+        <ResourceDictionary Source="./PropertyDataGrid.xaml"/>
+        <ResourceDictionary Source="./RvtExpander.xaml"/>
+        <ResourceDictionary Source="./TreeList.xaml"/>
+        <ResourceDictionary Source="./Image.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

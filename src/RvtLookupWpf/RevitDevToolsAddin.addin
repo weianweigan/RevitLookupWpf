@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <RevitAddIns>
 	<AddIn Type="Application">
-		<Assembly>D:\weigan\repos\RevitTools\bin\RvtLookupWpf.dll</Assembly>
+		<Assembly>D:\weigan\repos\RevitTools\RevitLookupWpf\bin\RvtLookupWpf.dll</Assembly>
 		<AddInId>8EFD64B2-279C-4963-A75B-BA66FDFD8D14</AddInId>
 		<FullClassName>RvtLookupWpf.RvtAddin</FullClassName>
 		<Name>RevitWpfLookup</Name>

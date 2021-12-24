@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace RvtLookupWpf.PropertySys
 {
@@ -39,6 +40,11 @@ namespace RvtLookupWpf.PropertySys
 
         #region Properties
         public string MethodValue { get; set; }
+
+        /// <summary>
+        /// User Click this object to Snoop
+        /// </summary>
+        //public event NaviRequest OnNaviRequest;
 
         public bool CanExecute { get; set; }
 
@@ -121,15 +127,22 @@ namespace RvtLookupWpf.PropertySys
             }
         }
 
-        private static void VisitResult(object result)
+        private void VisitResult(object result)
         {
             //对值类型和引用类型分别处理
             var type = result.GetType();
             if (type.IsClass && type.FullName != "System.String")
             {
-                var window = new LookupWindow();
-                window.SetRvtInstance<object>(result);
-                window.Show();
+                if (SnoopOption.WindowOrNavi)
+                {
+                    var window = new LookupWindow();
+                    window.SetRvtInstance<object>(result);
+                    window.Show();
+                }
+                else
+                {
+                    NaviRvtObj(result);
+                }
             }
             else
             {

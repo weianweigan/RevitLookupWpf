@@ -114,8 +114,10 @@
     <Compile Include="RvtAddin.cs" />
     <Compile Include="RvtAddinBase.cs" />
     <Compile Include="SnoopingContext.cs" />
+    <Compile Include="SnoopOption.cs" />
     <Compile Include="ViewModel\LookupViewModel.cs" />
     <Compile Include="ViewModel\LookupWindowViewModel.cs" />
+    <Compile Include="PropertySys\RvtObjectMessage.cs" />
     <Compile Include="View\LookupWindow.xaml.cs">
       <DependentUpon>LookupWindow.xaml</DependentUpon>
     </Compile>
@@ -136,6 +138,10 @@
     <Content Include="RevitDevToolsAddin.addin" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Themes\BreadCrumNavigation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Image.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

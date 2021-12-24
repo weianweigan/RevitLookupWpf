@@ -28,7 +28,32 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
-        <TreeView 
+        <ListBox 
+                 Grid.ColumnSpan="2"
+                 ItemsSource="{Binding Items}"
+                 SelectedItem="{Binding LookupData}"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="7"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding NaviName}"/>
+                        <Border HorizontalAlignment="Center" Grid.Column="1" Width="1" Background="LightBlue" BorderThickness="0"/>
+                        <TextBlock Grid.Column="2" FontWeight="Black" Foreground="Black">></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TreeView  
             Grid.Row="1"
             ItemsSource="{Binding LookupData.Roots}">
             <i:Interaction.Triggers>

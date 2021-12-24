@@ -4,7 +4,7 @@
                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"                    
                     xmlns:controls="clr-namespace:RvtLookupWpf.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="./Icons.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/Icons.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="controls:PropertyDataGrid">

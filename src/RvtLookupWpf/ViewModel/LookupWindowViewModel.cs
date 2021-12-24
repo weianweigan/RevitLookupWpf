@@ -11,6 +11,7 @@ using RvtLookupWpf.PropertySys;
 using System.Windows.Data;
 using System.Collections.ObjectModel;
 using Autodesk.Revit.DB;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace RvtLookupWpf.ViewModel
 {
@@ -22,6 +23,7 @@ namespace RvtLookupWpf.ViewModel
 
         private RelayCommand _selectedItemChangedCommand;
         private LookupViewModel _lookupData;
+        private List<LookupViewModel> _items;
         #endregion
 
         #region Ctor
@@ -29,8 +31,10 @@ namespace RvtLookupWpf.ViewModel
         public LookupWindowViewModel()
         {
             LookupData = this;
-        }
+            Items = GetAllSnoopItems().ToList();
 
+            Messenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
+        }
         #endregion
 
         #region Properties
@@ -40,7 +44,16 @@ namespace RvtLookupWpf.ViewModel
 
         public ICommand CloseCommand => _closeCommand ?? (_closeCommand = new RelayCommand(CloseAction));
 
-        public LookupViewModel LookupData { get => _lookupData; set => Set(ref _lookupData,value); }
+        public LookupViewModel LookupData
+        {
+            get => _lookupData; set
+            {
+                Set(ref _lookupData, value);
+                RaisePropertyChanged(() => LookupData.DataSource);
+            }
+        }
+
+        public List<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
         #endregion
 
         #region Public Methods
@@ -69,6 +82,17 @@ namespace RvtLookupWpf.ViewModel
             }
         }
 
+        private IEnumerable<LookupViewModel> GetAllSnoopItems()
+        {
+            LookupViewModel current = this;
+            yield return current;
+            while (current.Next != null)
+            {
+                current = current.Next;
+                yield return current;
+            }
+        }
+
         private void PerformSelectedItemChanged()
         {
             if (LookupData.Roots == null)
@@ -79,22 +103,26 @@ namespace RvtLookupWpf.ViewModel
             PropertyList = GetSelectedNode()?.PropertyList;
         }
 
-        private InstanceNode GetSelectedNode()
+        private void OnNavigation(RvtObjectMessage objectMessage)
         {
-            foreach (var root in LookupData.Roots)
+            var vm = new LookupViewModel();
+
+            var root = InstanceNode.Create(objectMessage.RvtObject);
+            root.IsSelected = true;
+
+            vm.Roots = new ObservableCollection<InstanceNode>() { root };
+
+            vm.PropertyList = vm.GetSelectedNode()?.PropertyList;
+
+            //导航到下一个对象
+            if (vm.Roots.Any())
             {
-                if (root.IsSelected)
-                    return root;
-                foreach (var child in root.RecruChild())
-                {
-                    if (child.IsSelected)
-                    {
-                        return child;
-                    }
-                }
+                this.Next = vm;
+                LookupData = vm;
+                Items = GetAllSnoopItems().ToList();
             }
-            return null;
         }
+
         #endregion
     }
 }

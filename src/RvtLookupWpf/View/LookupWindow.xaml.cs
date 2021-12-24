@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using GalaSoft.MvvmLight.Messaging;
 using RvtLookupWpf.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,9 @@ namespace RvtLookupWpf.View
         public LookupWindow()
         {
             InitializeComponent();
+
             _viewModel.CloseAction = new Action(() => Close());
+            this.Closed += LookupWindow_Closed;
             DataContext = _viewModel;
         }
 
@@ -47,6 +50,13 @@ namespace RvtLookupWpf.View
         public bool SetRvtInstance<TRvtObject>(TRvtObject rvtObject)
         {
             return _viewModel.SetRvtInstance(rvtObject);
+        }
+
+        private void LookupWindow_Closed(object sender, EventArgs e)
+        {
+            this.Closed -= LookupWindow_Closed;
+
+            Messenger.Default.Unregister(_viewModel);
         }
     }
 }

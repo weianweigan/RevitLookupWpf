@@ -18,15 +18,28 @@ namespace RvtLookupWpf.PropertySys
             }
         }
 
+        /// <summary>
+        /// User Click this object to Snoop
+        /// </summary>
+        //public event NaviRequest OnNaviRequest;
+
         public string ValueType { get; set; }
 
         public ICommand SelectedCommand => _selectedCommand ?? (_selectedCommand = new RelayCommand(Selected));
 
         private void Selected()
         {
-            var lookupWindow = new LookupWindow();
-            lookupWindow.SetRvtInstance(Value);
-            lookupWindow.ShowDialog();
+            if (SnoopOption.WindowOrNavi)
+            {
+                var lookupWindow = new LookupWindow();
+                lookupWindow.SetRvtInstance(Value);
+                lookupWindow.ShowDialog();
+            }
+            else
+            {
+                //使用面包屑导航
+                NaviRvtObj(Value);
+            }
         }
     }
 }

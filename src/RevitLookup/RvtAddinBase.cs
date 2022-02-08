@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI;
 using RevitLookupWpf.Commands;
+using RevitLookupWpf.Helpers;
 
 namespace RevitLookupWpf
 {
@@ -64,6 +65,8 @@ namespace RevitLookupWpf
             var cmdType = typeof(TCommand);
             return CreatePushBtn(cmdType);
         }
+
+        
         #endregion
     }
 }

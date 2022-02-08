@@ -12,7 +12,7 @@ namespace RevitLookupWpf.Commands
 {
     [Transaction(TransactionMode.Manual)]
     [RvtCommandInfo(Name ="Snoop\nSelection", Image = "search.png")]
-    public class SnoopCurrentSeletionCommand : RvtCommandBase
+    public class SnoopCurrentSelectionCommand : RvtCommandBase
     {
         public override Result SnoopClick(
             ExternalCommandData commandData,

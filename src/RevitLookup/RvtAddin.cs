@@ -3,49 +3,65 @@
  * 1.Addin Class
  */
 
+using System.Reflection;
 using Autodesk.Revit.UI;
 using RevitLookupWpf.Commands;
+using RevitLookupWpf.Helpers;
 
 namespace RevitLookupWpf
 {
-    public class RvtAddin : RvtAddinBase
+    public class RvtAddin : IExternalApplication
     {
         #region Public Methods
-        public override Result OnStartup(UIControlledApplication application)
+        public Result OnStartup(UIControlledApplication application)
         {
-            InitUI(application);
-
+            //InitUI(application);
+            CreateRibbonPanel(application);
             return Result.Succeeded;
         }
 
-        public override Result OnShutdown(UIControlledApplication application)
+        public Result OnShutdown(UIControlledApplication application)
         {
             return Result.Failed;
         }
         #endregion
 
         #region Private Methods
-        private void InitUI(UIControlledApplication application)
+        //private void InitUI(UIControlledApplication application)
+        //{
+        //    string panelName = "RvtWpfLookup";
+
+        //    //创建按钮
+        //    var btns = CreatePushBtns(
+        //        typeof(SnoopDBCommand),
+        //        typeof(SnoopCurrentSelectionCommand),
+        //        typeof(SnoopActiveDocCommand),
+        //        typeof(SnoopApplicationCommand))
+        //        .ToList();
+
+        //    //创建Panel
+        //    var ribbonPanel = application.CreateRibbonPanel(panelName);
+
+        //    // Add the buttons to the panel
+        //    btns.ForEach(btn => ribbonPanel.AddItem(btn));
+        //}
+        private static void CreateRibbonPanel(UIControlledApplication application)
         {
-            string tabName = "RvtWpfLookup";
-            string panelName = "RvtWpfLookup";
+            var ribbonPanel = application.CreateRibbonPanel("Snoop");
+            var pulldownButtonData = new PulldownButtonData("Options", "Revit Lookup");
+            var pulldownButton = (PulldownButton)ribbonPanel.AddItem(pulldownButtonData);
+            pulldownButton.Image = BitmapSourceConverter.ToImageSource(Resource.search, BitmapSourceConverter.ImageType.Small);
+            pulldownButton.LargeImage = BitmapSourceConverter.ToImageSource(Resource.search, BitmapSourceConverter.ImageType.Large);
+            AddPushButton(pulldownButton, typeof(SnoopDBCommand), "Snoop DB...");
+            AddPushButton(pulldownButton, typeof(SnoopActiveDocCommand), "Snoop Active Document...");
+            AddPushButton(pulldownButton, typeof(SnoopCurrentSelectionCommand), "Snoop Current Selection...");
+            AddPushButton(pulldownButton, typeof(SnoopApplicationCommand), "Snoop Application..");
+        }
 
-            //创建Tab
-            application.CreateRibbonTab(tabName);
-
-            //创建按钮
-            var btns = CreatePushBtns(
-                typeof(SnoopDBCommand),
-                typeof(SnoopCurrentSeletionCommand),
-                typeof(SnoopActiveDocCommand),
-                typeof(SnoopApplicationCommand))
-                .ToList();
-
-            //创建Panel
-            var ribbonPanel = application.CreateRibbonPanel(tabName, panelName);
-
-            // Add the buttons to the panel
-            btns.ForEach(btn => ribbonPanel.AddItem(btn));
+        private static PushButton AddPushButton(PulldownButton pullDownButton, Type command, string buttonText)
+        {
+            var buttonData = new PushButtonData(command.FullName, buttonText, Assembly.GetAssembly(command).Location, command.FullName);
+            return pullDownButton.AddPushButton(buttonData);
         }
         #endregion
     }

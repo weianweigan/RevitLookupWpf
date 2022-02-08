@@ -1,29 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converter="clr-namespace:RvtLookupWpf.Converter">
-
-    <Style TargetType="{x:Type TreeView}">
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
-        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"></Setter>
-        <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
-        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
-        <Setter Property="ItemContainerStyle" Value="{DynamicResource DefaultTreeViewItem}"></Setter>
-        <Setter Property="Padding" Value="0"/>
-
-        <!--类似于SolidWorks选择框的效果-->
-        <!--<Setter Property="Background" Value="#FFCFE4F7"/>-->
-        <Setter Property="BorderBrush" Value="#FF53A9FF"></Setter>
-        <Setter Property="BorderThickness" Value="2"></Setter>
-
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True" Margin="0"/>
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
     <Style x:Key="DefaultTreeViewItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="Background" Value="Transparent" />
@@ -139,6 +116,28 @@
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TreeView}">
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"></Setter>
+        <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultTreeViewItem}"></Setter>
+        <Setter Property="Padding" Value="0"/>
+
+        <!--类似于SolidWorks选择框的效果-->
+        <!--<Setter Property="Background" Value="#FFCFE4F7"/>-->
+        <Setter Property="BorderBrush" Value="#FF53A9FF"></Setter>
+        <Setter Property="BorderThickness" Value="2"></Setter>
+
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" Margin="0"/>
+                </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
     </Style>

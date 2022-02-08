@@ -16,6 +16,7 @@ namespace RvtLookupWpf.ViewModel
         private PropertyList _propertyList;
         private ListCollectionView _dataSource;
         private ObservableCollection<InstanceNode> _roots;
+        private LookupViewModel _lookupData;
 
         public ObservableCollection<InstanceNode> Roots
         {
@@ -40,7 +41,12 @@ namespace RvtLookupWpf.ViewModel
 
         public InstanceNode GetSelectedNode()
         {
-            foreach (var root in Roots)
+            if (LookupData?.Roots == null)
+            {
+                return null;
+            }
+
+            foreach (var root in LookupData.Roots)
             {
                 if (root.IsSelected)
                     return root;
@@ -65,7 +71,11 @@ namespace RvtLookupWpf.ViewModel
                 }
 
                 Set(ref _propertyList, value);
-                DataSource = new ListCollectionView(_propertyList);
+
+                if (_propertyList != null)
+                {
+                    DataSource = new ListCollectionView(_propertyList);
+                }
             }
         }
 
@@ -85,5 +95,14 @@ namespace RvtLookupWpf.ViewModel
         public string Name { get; set; }
 
         public string NaviName { get; set; }
+
+        public LookupViewModel LookupData
+        {
+            get => _lookupData; set
+            {
+                Set(ref _lookupData, value);
+                RaisePropertyChanged(() => LookupData.DataSource);
+            }
+        }
     }
 }

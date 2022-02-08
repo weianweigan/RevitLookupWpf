@@ -22,7 +22,6 @@ namespace RvtLookupWpf.ViewModel
         private RelayCommand _closeCommand;
 
         private RelayCommand _selectedItemChangedCommand;
-        private LookupViewModel _lookupData;
         private List<LookupViewModel> _items;
         #endregion
 
@@ -43,15 +42,6 @@ namespace RvtLookupWpf.ViewModel
         public Action CloseAction { get; set; }
 
         public ICommand CloseCommand => _closeCommand ?? (_closeCommand = new RelayCommand(CloseAction));
-
-        public LookupViewModel LookupData
-        {
-            get => _lookupData; set
-            {
-                Set(ref _lookupData, value);
-                RaisePropertyChanged(() => LookupData.DataSource);
-            }
-        }
 
         public List<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
         #endregion
@@ -100,7 +90,13 @@ namespace RvtLookupWpf.ViewModel
                 return;
             }
 
-            PropertyList = GetSelectedNode()?.PropertyList;
+            var selectedNode = GetSelectedNode();
+            if (selectedNode != null)
+            {
+                selectedNode.Snoop();
+                LookupData.PropertyList = selectedNode.PropertyList;
+            }
+
         }
 
         private void OnNavigation(RvtObjectMessage objectMessage)
@@ -108,7 +104,6 @@ namespace RvtLookupWpf.ViewModel
             var vm = new LookupViewModel();
 
             var root = InstanceNode.Create(objectMessage.RvtObject);
-            root.IsSelected = true;
 
             vm.Roots = new ObservableCollection<InstanceNode>() { root };
 
@@ -121,6 +116,9 @@ namespace RvtLookupWpf.ViewModel
                 LookupData = vm;
                 Items = GetAllSnoopItems().ToList();
             }
+
+            root.IsSelected = true;
+            root.IsExpanded = true;
         }
 
         #endregion

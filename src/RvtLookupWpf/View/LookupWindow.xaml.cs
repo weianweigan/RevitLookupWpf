@@ -58,5 +58,10 @@ namespace RvtLookupWpf.View
 
             Messenger.Default.Unregister(_viewModel);
         }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            _viewModel.SelectedItemChangedCommand?.Execute(null);
+        }
     }
 }

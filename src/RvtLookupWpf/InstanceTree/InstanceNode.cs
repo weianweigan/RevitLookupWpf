@@ -21,7 +21,7 @@ namespace RvtLookupWpf
 
         public TRvtObject RvtObject { get; set; }
 
-        protected override void Snoop()
+        public override void Snoop()
         {
             if (PropertyList == null && RvtObject != null)
             {
@@ -34,6 +34,32 @@ namespace RvtLookupWpf
     {
         public ElementIdInstanceNode(Element rvtObjcet) : base(rvtObjcet)
         {
+        }
+    }
+
+    public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
+    {
+        private readonly IEnumerable _rvtObjcet;
+
+        public IEnumerableInstanceNode(IEnumerable rvtObjcet):base(rvtObjcet)
+        {
+            _rvtObjcet = rvtObjcet;
+
+            Name = rvtObjcet?.GetType().Name;
+            GetChild();
+        }
+
+        private void GetChild()
+        {
+            if (Children == null)
+            {
+                Children = new ObservableCollection<InstanceNode>();
+            }
+            foreach (var item in _rvtObjcet)
+            {
+                var node = new InstanceNode<object>(item);
+                Children.Add(node);
+            }
         }
     }
 
@@ -52,17 +78,27 @@ namespace RvtLookupWpf
                 return null;
             }
 
-            var typeName = obj.GetType().Name;
-            var node = default(InstanceNode); 
-            switch (typeName)
+            var type = obj.GetType();
+            var typeName = type.Name;
+            var node = default(InstanceNode);
+            
+            if (obj is IEnumerable enumble)
             {
-                case "Document":
-                    node = new DocumentInstanceNode(obj as Document);
-                    break;                    
-                default:
-                    node = new InstanceNode<object>(obj);
-                    break;
+                node = new IEnumerableInstanceNode(enumble);
             }
+            else
+            {
+                switch (typeName)
+                {
+                    case "Document":
+                        node = new DocumentInstanceNode(obj as Document);
+                        break;
+                    default:
+                        node = new InstanceNode<object>(obj);
+                        break;
+                }
+            }
+
             return node;
         }
 
@@ -75,8 +111,8 @@ namespace RvtLookupWpf
         {
             get => _isSelected; set
             {
-                Set(ref _isSelected, value);
                 Snoop();
+                Set(ref _isSelected, value);
             }
         }
 
@@ -87,7 +123,7 @@ namespace RvtLookupWpf
         public PropertyList PropertyList { get => _properties; set => Set(ref _properties, value); }
         #endregion
 
-        protected abstract void Snoop();
+        public abstract void Snoop();
 
         #region Public Methods
 

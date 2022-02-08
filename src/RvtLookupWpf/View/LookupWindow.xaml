@@ -55,12 +55,13 @@
         </ListBox>
         <TreeView  
             Grid.Row="1"
-            ItemsSource="{Binding LookupData.Roots}">
-            <i:Interaction.Triggers>
+            ItemsSource="{Binding LookupData.Roots}"
+            SelectedItemChanged="TreeView_SelectedItemChanged">
+            <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
                     <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
+            </i:Interaction.Triggers>-->
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <Grid Height="23">

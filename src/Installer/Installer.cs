@@ -10,7 +10,7 @@ using WixSharp.CommonTasks;
 using WixSharp.Controls;
 
 const string installationDir = @"%AppDataFolder%\Autodesk\Revit\Addins\";
-const string projectName = "RevitLookup";
+const string projectName = "RevitLookupWpf";
 const string outputName = "RevitLookup";
 const string outputDir = "output";
 
@@ -27,13 +27,13 @@ var project = new Project
     OutFileName = fileName.ToString(),
     InstallScope = InstallScope.perUser,
     MajorUpgrade = MajorUpgrade.Default,
-    GUID = new Guid("2179ECCB-0ED3-4FFF-907D-01C9D57AD20D"),
+    GUID = new Guid("302CB16E-2DA9-4B1E-A038-C23EBCEE8B60"),
     BackgroundImage = @"Installer\Resources\Icons\BackgroundImage.png",
     BannerImage = @"Installer\Resources\Icons\BannerImage.png",
     ControlPanelInfo =
     {
-        Manufacturer = "Autodesk",
-        HelpLink = "https://github.com/jeremytammik/RevitLookup/issues",
+        Manufacturer = "weianweigan",
+        HelpLink = "https://github.com/weianweigan/RevitLookupWpf/issues",
         ProductIcon = @"Installer\Resources\Icons\ShellIcon.ico"
     },
     Dirs = new Dir[]

@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:controls="clr-namespace:RevitLookupWpf.Controls"
+        xmlns:viewModel="clr-namespace:RevitLookupWpf.ViewModel"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewModel:LookupWindowViewModel}"
         Height="450" Width="600"
@@ -14,7 +14,7 @@
         <KeyBinding Gesture="Alt+C" Command="{Binding CloseCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
-        <ResourceDictionary Source="../Themes/Generic.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Generic.xaml" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

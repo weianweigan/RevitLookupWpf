@@ -7,7 +7,7 @@
                     xmlns:methodType="clr-namespace:RevitLookupWpf.PropertySys.BaseProperty.MethodType"
                     xmlns:propertySys1="clr-namespace:RevitLookupWpf.PropertySys">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/Icons.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Icons.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="controls:PropertyDataGrid">

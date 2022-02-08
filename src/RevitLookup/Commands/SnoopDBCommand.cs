@@ -22,7 +22,7 @@ namespace RevitLookupWpf.Commands
             var uiDoc = commandData.Application.ActiveUIDocument;
             if (uiDoc == null)
             {
-                message = "没有活动文档";
+                message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
 

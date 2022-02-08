@@ -18,7 +18,7 @@ namespace RevitLookupWpf.Commands
         {
             if (commandData.Application.ActiveUIDocument == null)
             {
-                message = "没有活动文档";
+                message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
 

@@ -61,6 +61,24 @@ namespace RevitLookupWpf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No activity document.
+        /// </summary>
+        public static string NoActiveDocument {
+            get {
+                return ResourceManager.GetString("NoActiveDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not any current element !.
+        /// </summary>
+        public static string NoCurrentElement {
+            get {
+                return ResourceManager.GetString("NoCurrentElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap search {

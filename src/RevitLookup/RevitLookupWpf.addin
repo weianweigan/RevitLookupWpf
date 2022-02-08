@@ -3,7 +3,7 @@
 	<AddIn Type="Application">
 		<Assembly>RevitLookupWpf/RevitLookupWpf.dll</Assembly>
 		<AddInId>8EFD64B2-279C-4963-A75B-BA66FDFD8D14</AddInId>
-		<FullClassName>RevitLookup.RvtAddin</FullClassName>
+		<FullClassName>RevitLookupWpf.RvtAddin</FullClassName>
 		<Name>RevitWpfLookup</Name>
 		<VendorId>ADSK</VendorId>
 		<VendorDescription>Autodesk, www.autodesk.com</VendorDescription>

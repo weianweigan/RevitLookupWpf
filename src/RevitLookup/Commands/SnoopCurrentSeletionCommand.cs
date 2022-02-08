@@ -6,9 +6,9 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using RevitLookup.View;
+using RevitLookupWpf.View;
 
-namespace RevitLookup.Commands
+namespace RevitLookupWpf.Commands
 {
     [Transaction(TransactionMode.Manual)]
     [RvtCommandInfo(Name ="Snoop\nSelection", Image = "search.png")]

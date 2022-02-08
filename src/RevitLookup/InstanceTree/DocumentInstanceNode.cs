@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 
-namespace RevitLookup.InstanceTree
+namespace RevitLookupWpf.InstanceTree
 {
     public class DocumentInstanceNode : InstanceNode<Document>
     {

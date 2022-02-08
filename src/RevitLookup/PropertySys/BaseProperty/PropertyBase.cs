@@ -1,4 +1,4 @@
-﻿namespace RevitLookup.PropertySys.BaseProperty
+﻿namespace RevitLookupWpf.PropertySys.BaseProperty
 {
     public abstract class PropertyBase
     {

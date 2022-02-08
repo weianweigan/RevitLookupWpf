@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Data;
 using GalaSoft.MvvmLight;
-using RevitLookup.InstanceTree;
-using RevitLookup.PropertySys;
+using RevitLookupWpf.InstanceTree;
+using RevitLookupWpf.PropertySys;
 
-namespace RevitLookup.ViewModel
+namespace RevitLookupWpf.ViewModel
 {
     public class LookupViewModel:ViewModelBase
     {

@@ -6,7 +6,7 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
-namespace RevitLookup.Commands
+namespace RevitLookupWpf.Commands
 {
     public abstract class RvtCommandBase : IExternalCommand
     {

@@ -1,4 +1,4 @@
-﻿namespace RevitLookup
+﻿namespace RevitLookupWpf
 {
     public class SnoopOption
     {

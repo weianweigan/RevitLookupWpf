@@ -7,9 +7,9 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI;
-using RevitLookup.Commands;
+using RevitLookupWpf.Commands;
 
-namespace RevitLookup
+namespace RevitLookupWpf
 {
     public abstract class RvtAddinBase : IExternalApplication
     {

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Installer", "Installer\Inst
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "Build\Build.csproj", "{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RevitLookup", "RevitLookup\RevitLookup.csproj", "{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RevitLookupWpf", "RevitLookup\RevitLookupWpf.csproj", "{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

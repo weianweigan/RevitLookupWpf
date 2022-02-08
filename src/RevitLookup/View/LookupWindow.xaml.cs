@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Interop;
 using GalaSoft.MvvmLight.Messaging;
-using RevitLookup.ViewModel;
+using RevitLookupWpf.ViewModel;
 
-namespace RevitLookup.View
+namespace RevitLookupWpf.View
 {
     /// <summary>
     /// Interaction logic for LookupWindow.xaml

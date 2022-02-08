@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:converter="clr-namespace:RevitLookup.Converter">
+                    xmlns:converter="clr-namespace:RevitLookupWpf.Converter">
     <Style x:Key="DefaultTreeViewItem" TargetType="{x:Type TreeViewItem}">
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="Background" Value="Transparent" />

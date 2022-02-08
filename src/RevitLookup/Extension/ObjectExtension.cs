@@ -4,13 +4,13 @@
  */
 
 using System.Reflection;
-using RevitLookup.PropertySys;
-using RevitLookup.PropertySys.BaseProperty;
-using RevitLookup.PropertySys.BaseProperty.MethodType;
-using RevitLookup.PropertySys.BaseProperty.ReferenceType;
-using RevitLookup.PropertySys.BaseProperty.ValueType;
+using RevitLookupWpf.PropertySys;
+using RevitLookupWpf.PropertySys.BaseProperty;
+using RevitLookupWpf.PropertySys.BaseProperty.MethodType;
+using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
+using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
 
-namespace RevitLookup.Extension
+namespace RevitLookupWpf.Extension
 {
     public static class ObjectExtension
     {

@@ -7,10 +7,10 @@ using System.Reflection;
 using System.Windows.Input;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight.CommandWpf;
-using RevitLookup.PropertySys.BaseProperty.ReferenceType;
-using RevitLookup.View;
+using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
+using RevitLookupWpf.View;
 
-namespace RevitLookup.PropertySys.BaseProperty.MethodType
+namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
 {
     public class MethodProperty : ObjectProperty<MethodInfo>
     {

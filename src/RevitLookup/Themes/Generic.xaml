@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/Button.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/PropertyDataGrid.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/RvtExpander.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/TreeList.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/Image.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/BreadCrumNavigation.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookup;component/Themes/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookup;component/Themes/PropertyDataGrid.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookup;component/Themes/RvtExpander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookup;component/Themes/TreeList.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookup;component/Themes/Image.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookup;component/Themes/BreadCrumNavigation.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

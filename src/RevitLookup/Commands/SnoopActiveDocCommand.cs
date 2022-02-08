@@ -6,9 +6,9 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using RevitLookup.View;
+using RevitLookupWpf.View;
 
-namespace RevitLookup.Commands
+namespace RevitLookupWpf.Commands
 {
     [RvtCommandInfo(Name = "Snoop\nActiveDoc", Image = "search.png")]
     [Transaction(TransactionMode.Manual)]

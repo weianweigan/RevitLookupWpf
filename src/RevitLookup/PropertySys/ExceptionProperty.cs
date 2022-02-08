@@ -1,6 +1,6 @@
-﻿using RevitLookup.PropertySys.BaseProperty.ReferenceType;
+﻿using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
 
-namespace RevitLookup.PropertySys
+namespace RevitLookupWpf.PropertySys
 {
     public class ExceptionProperty:ObjectProperty<Exception>
     {

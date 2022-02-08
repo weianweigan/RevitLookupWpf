@@ -15,6 +15,6 @@ partial class Build
 
     readonly string[] Projects =
     {
-        "RevitLookup"
+        "RevitLookupWpf"
     };
 }

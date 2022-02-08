@@ -1,4 +1,4 @@
-﻿namespace RevitLookup.Commands
+﻿namespace RevitLookupWpf.Commands
 {
     public class RvtCommandInfoAttribute : Attribute
     {

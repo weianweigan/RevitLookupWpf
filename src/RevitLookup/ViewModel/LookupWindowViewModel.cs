@@ -2,10 +2,10 @@
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using RevitLookup.InstanceTree;
-using RevitLookup.PropertySys;
+using RevitLookupWpf.InstanceTree;
+using RevitLookupWpf.PropertySys;
 
-namespace RevitLookup.ViewModel
+namespace RevitLookupWpf.ViewModel
 {
     public class LookupWindowViewModel : LookupViewModel
     {

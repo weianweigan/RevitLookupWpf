@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace RevitLookup.Converter
+namespace RevitLookupWpf.Converter
 {
     public class IndentConverter:IValueConverter
     {

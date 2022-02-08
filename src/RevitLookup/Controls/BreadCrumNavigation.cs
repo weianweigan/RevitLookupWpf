@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using RevitLookup.ViewModel;
+using RevitLookupWpf.ViewModel;
 
-namespace RevitLookup.Controls
+namespace RevitLookupWpf.Controls
 {
     public class BreadCrumNavigation:StackPanel
     {

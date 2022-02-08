@@ -1,4 +1,4 @@
-﻿namespace RevitLookup.PropertySys.BaseProperty.ReferenceType
+﻿namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
 {
     public class NullObjectProperty : ObjectProperty<object>
     {

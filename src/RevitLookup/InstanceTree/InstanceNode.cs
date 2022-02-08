@@ -2,10 +2,10 @@
 using System.Collections.ObjectModel;
 using Autodesk.Revit.DB;
 using GalaSoft.MvvmLight;
-using RevitLookup.Extension;
-using RevitLookup.PropertySys;
+using RevitLookupWpf.Extension;
+using RevitLookupWpf.PropertySys;
 
-namespace RevitLookup.InstanceTree
+namespace RevitLookupWpf.InstanceTree
 {
     public class InstanceNode<TRvtObject> : InstanceNode
     {

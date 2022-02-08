@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                    xmlns:controls="clr-namespace:RevitLookup.Controls"
-                    xmlns:propertySys="clr-namespace:RevitLookup.PropertySys.BaseProperty.ValueType"
-                    xmlns:referenceType="clr-namespace:RevitLookup.PropertySys.BaseProperty.ReferenceType"
-                    xmlns:methodType="clr-namespace:RevitLookup.PropertySys.BaseProperty.MethodType"
-                    xmlns:propertySys1="clr-namespace:RevitLookup.PropertySys">
+                    xmlns:controls="clr-namespace:RevitLookupWpf.Controls"
+                    xmlns:propertySys="clr-namespace:RevitLookupWpf.PropertySys.BaseProperty.ValueType"
+                    xmlns:referenceType="clr-namespace:RevitLookupWpf.PropertySys.BaseProperty.ReferenceType"
+                    xmlns:methodType="clr-namespace:RevitLookupWpf.PropertySys.BaseProperty.MethodType"
+                    xmlns:propertySys1="clr-namespace:RevitLookupWpf.PropertySys">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/RvtLookupWpf;component/Themes/Icons.xaml"/>
     </ResourceDictionary.MergedDictionaries>

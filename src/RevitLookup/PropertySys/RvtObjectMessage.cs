@@ -3,7 +3,7 @@
  * a message class for snoop next revit object
  */
 
-namespace RevitLookup.PropertySys
+namespace RevitLookupWpf.PropertySys
 {
     internal class RvtObjectMessage
     {

@@ -1,4 +1,4 @@
-﻿namespace RevitLookup.PropertySys.BaseProperty.ValueType
+﻿namespace RevitLookupWpf.PropertySys.BaseProperty.ValueType
 {
     public class DoubleProperty : PropertyBase<double>
     {

@@ -3,9 +3,9 @@
  * 属性列表
  */
 
-using RevitLookup.PropertySys.BaseProperty;
+using RevitLookupWpf.PropertySys.BaseProperty;
 
-namespace RevitLookup.PropertySys
+namespace RevitLookupWpf.PropertySys
 {
     public class PropertyList : List<PropertyBase>
     {

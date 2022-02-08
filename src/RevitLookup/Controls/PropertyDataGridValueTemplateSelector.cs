@@ -5,12 +5,12 @@
 
 using System.Windows;
 using System.Windows.Controls;
-using RevitLookup.PropertySys;
-using RevitLookup.PropertySys.BaseProperty.MethodType;
-using RevitLookup.PropertySys.BaseProperty.ReferenceType;
-using RevitLookup.PropertySys.BaseProperty.ValueType;
+using RevitLookupWpf.PropertySys;
+using RevitLookupWpf.PropertySys.BaseProperty.MethodType;
+using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
+using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
 
-namespace RevitLookup.Controls
+namespace RevitLookupWpf.Controls
 {
     public class PropertyDataGridValueTemplateSelector : DataTemplateSelector
     {

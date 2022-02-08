@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 
-namespace RevitLookup.PropertySys.BaseProperty.ReferenceType
+namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
 {
     //public delegate void NaviRequest(object obj);
 

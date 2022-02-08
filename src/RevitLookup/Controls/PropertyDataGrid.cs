@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace RevitLookup.Controls
+namespace RevitLookupWpf.Controls
 {
     public class PropertyDataGrid:DataGrid
     {

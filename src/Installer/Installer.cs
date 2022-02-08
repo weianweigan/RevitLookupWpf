@@ -11,7 +11,7 @@ using WixSharp.Controls;
 
 const string installationDir = @"%AppDataFolder%\Autodesk\Revit\Addins\";
 const string projectName = "RevitLookupWpf";
-const string outputName = "RevitLookup";
+const string outputName = "RevitLookupWpf";
 const string outputDir = "output";
 
 var version = GetAssemblyVersion(out var dllVersion);
@@ -71,9 +71,10 @@ WixEntity[] GenerateWixEntities()
 
 string GetAssemblyVersion(out string originalVersion)
 {
+    string assemblyName = @"RevitLookupWpf.dll";
     foreach (var directory in args)
     {
-        var assemblies = Directory.GetFiles(directory, @"RevitLookup.dll", SearchOption.AllDirectories);
+        var assemblies = Directory.GetFiles(directory, assemblyName, SearchOption.AllDirectories);
         if (assemblies.Length == 0) continue;
         var fileVersionInfo = FileVersionInfo.GetVersionInfo(assemblies[0]);
         var versionGroups = fileVersionInfo.ProductVersion.Split('.');
@@ -85,5 +86,5 @@ string GetAssemblyVersion(out string originalVersion)
         return wixVersion;
     }
 
-    throw new Exception("Cant find RevitLookup.dll file");
+    throw new Exception("Cant find RevitLookupWpf.dll file");
 }

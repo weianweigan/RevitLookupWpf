@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.UI;
 
-namespace RevitLookup
+namespace RevitLookupWpf
 {
     public class SnoopingContext
     {

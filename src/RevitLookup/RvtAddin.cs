@@ -4,9 +4,9 @@
  */
 
 using Autodesk.Revit.UI;
-using RevitLookup.Commands;
+using RevitLookupWpf.Commands;
 
-namespace RevitLookup
+namespace RevitLookupWpf
 {
     public class RvtAddin : RvtAddinBase
     {

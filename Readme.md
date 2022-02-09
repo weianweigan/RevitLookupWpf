@@ -27,7 +27,7 @@ Interactive Revit RFA and RVT project database exploration tool to view and navi
 
 ## Installation
 
-Please follow last release at section [Release](https://github.com/chuongmep/RevitAddInManager/releases/latest)
+Please follow last release at section [Release](https://github.com/weianweigan/RevitLookupWpf/releases/latest)
 
 ---
 ## Build

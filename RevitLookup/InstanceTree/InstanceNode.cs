@@ -75,6 +75,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new RibbonPanelInstanceNode(ribbonPanel);
                         Children.Add(node);
                         break;
+                    case Document document:
+                        node = new DocumentInstanceNode(document);
+                        Children.Add(node);
+                        break;
                     case PaperSize paperSize:
                         node = new PaperSizeInstanceNode(paperSize);
                         Children.Add(node);

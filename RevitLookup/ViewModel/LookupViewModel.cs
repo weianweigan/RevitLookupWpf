@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Data;
 using GalaSoft.MvvmLight;
 using RevitLookupWpf.InstanceTree;
@@ -82,6 +83,8 @@ namespace RevitLookupWpf.ViewModel
             {
                 _dataSource = value;
                 _dataSource.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
+                _dataSource.SortDescriptions.Add(new SortDescription("Category",ListSortDirection.Descending));
+                _dataSource.SortDescriptions.Add(new SortDescription("Name",ListSortDirection.Ascending));
                 RaisePropertyChanged(nameof(DataSource));
             }
         }

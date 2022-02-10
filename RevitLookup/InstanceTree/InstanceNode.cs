@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
+using System.Windows;
 using Autodesk.Revit.DB;
 using GalaSoft.MvvmLight;
 using RevitLookupWpf.Extension;
@@ -53,8 +54,19 @@ namespace RevitLookupWpf.InstanceTree
             }
             foreach (var item in _rvtObjcet)
             {
-                var node = new InstanceNode<object>(item);
-                Children.Add(node);
+                InstanceNode node;
+                switch (item)
+                {
+                    case Parameter parameter:
+                        node = new ParameterInstanceNode(parameter);
+                        Children.Add(node);
+                        break;
+                    default:
+                        node = new InstanceNode<object>(item);
+                        Children.Add(node);
+                        break;
+                }
+
             }
         }
     }
@@ -77,7 +89,6 @@ namespace RevitLookupWpf.InstanceTree
             var type = obj.GetType();
             var typeName = type.Name;
             var node = default(InstanceNode);
-            
             if (obj is IEnumerable enumble)
             {
                 node = new IEnumerableInstanceNode(enumble);

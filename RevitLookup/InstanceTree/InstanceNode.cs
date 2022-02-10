@@ -29,12 +29,7 @@ namespace RevitLookupWpf.InstanceTree
         }
     }
 
-    public class ElementIdInstanceNode : InstanceNode<Element>
-    {
-        public ElementIdInstanceNode(Element rvtObjcet) : base(rvtObjcet)
-        {
-        }
-    }
+    
 
     public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
     {
@@ -63,6 +58,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new ElementInstanceNode(element);
                         Children.Add(node);
                         break;
+                    case ElementId elementId:
+                        node = new ElementIdInstanceNode(elementId);
+                        Children.Add(node);
+                        break;
                     case InstanceBinding instanceBinding:
                         node = new InstanceBindingInstanceNode(instanceBinding);
                         Children.Add(node);
@@ -77,6 +76,10 @@ namespace RevitLookupWpf.InstanceTree
                         break;
                     case DefinitionGroup definitionGroup:
                         node = new DefinitionGroupInstanceNode(definitionGroup);
+                        Children.Add(node);
+                        break;
+                    case FailureMessage failureMessage:
+                        node = new FailureMessageInstanceNode(failureMessage);
                         Children.Add(node);
                         break;
                     case ExternalDefinition externalDefinition:

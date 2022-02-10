@@ -79,6 +79,15 @@ namespace RevitLookupWpf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please Pick Elements to Snoop !.
+        /// </summary>
+        public static string PickElements {
+            get {
+                return ResourceManager.GetString("PickElements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap search {

@@ -6,7 +6,9 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using Autodesk.Revit.UI.Selection;
 using RevitLookupWpf.View;
+using OperationCanceledException = Autodesk.Revit.Exceptions.OperationCanceledException;
 
 namespace RevitLookupWpf.Commands
 {
@@ -35,8 +37,12 @@ namespace RevitLookupWpf.Commands
 
                 if (!selections.Any())
                 {
-                    message = Resource.NoCurrentElement;
-                    return Result.Cancelled;
+                    selections = new List<Element>();
+                    IList<Reference> references = uiDoc.Selection.PickObjects(ObjectType.Element,Resource.PickElements);
+                    foreach (Reference r in references)
+                    {
+                        selections.Add(uiDoc.Document.GetElement(r));
+                    }
                 }
 
                 if (selections.Count == 1)
@@ -49,6 +55,10 @@ namespace RevitLookupWpf.Commands
                 }
 
                 lookupWindow.ShowDialog();
+            }
+            catch (OperationCanceledException)
+            {
+                //ignore user press esc
             }
             catch (Exception)
             {

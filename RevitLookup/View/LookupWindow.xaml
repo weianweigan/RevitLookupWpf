@@ -111,7 +111,7 @@
                 Grid.Row="1"
                 Margin="2,0,0,0"
                 EnableColumnVirtualization="True"
-                FontSize="10"
+                FontSize="11"
                 ItemsSource="{Binding LookupData.DataSource}">
                 <controls:PropertyDataGrid.GroupStyle>
                     <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" />

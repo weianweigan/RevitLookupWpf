@@ -85,27 +85,23 @@ namespace RevitLookupWpf.InstanceTree
             {
                 return null;
             }
-
-            var type = obj.GetType();
-            var typeName = type.Name;
-            var node = default(InstanceNode);
+            InstanceNode node;
             if (obj is IEnumerable enumble)
             {
                 node = new IEnumerableInstanceNode(enumble);
             }
             else
             {
-                switch (typeName)
+                switch (obj)
                 {
-                    case "Document":
-                        node = new DocumentInstanceNode(obj as Document);
+                    case Document doc:
+                        node = new DocumentInstanceNode(doc);
                         break;
                     default:
                         node = new InstanceNode<object>(obj);
                         break;
                 }
             }
-
             return node;
         }
 

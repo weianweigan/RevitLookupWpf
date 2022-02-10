@@ -4,6 +4,7 @@ using System.Windows;
 using Autodesk.Revit.DB;
 using GalaSoft.MvvmLight;
 using RevitLookupWpf.Extension;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
 
 namespace RevitLookupWpf.InstanceTree
@@ -61,6 +62,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new ParameterInstanceNode(parameter);
                         Children.Add(node);
                         break;
+                    case PaperSize paperSize:
+                        node = new PaperSizeInstanceNode(paperSize);
+                        Children.Add(node);
+                        break;
                     default:
                         node = new InstanceNode<object>(item);
                         Children.Add(node);
@@ -68,6 +73,7 @@ namespace RevitLookupWpf.InstanceTree
                 }
 
             }
+            if (Children.Any()) Children = Children.OrderBy(x => x.Name).ToObservableCollection();
         }
     }
 

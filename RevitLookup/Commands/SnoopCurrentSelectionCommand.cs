@@ -60,9 +60,9 @@ namespace RevitLookupWpf.Commands
             {
                 //ignore user press esc
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw;
+                throw new ArgumentException(exception.ToString());
             }
 
             return Result.Succeeded;

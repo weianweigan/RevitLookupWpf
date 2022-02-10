@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using RevitLookupWpf.View;
 
@@ -25,7 +26,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
 
         public string ValueType { get; set; }
 
-        public ICommand SelectedCommand => _selectedCommand ?? (_selectedCommand = new RelayCommand(Selected));
+        public ICommand SelectedCommand => _selectedCommand ??= new RelayCommand(Selected);
 
         private void Selected()
         {

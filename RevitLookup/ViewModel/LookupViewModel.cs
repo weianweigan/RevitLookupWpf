@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Data;
 using GalaSoft.MvvmLight;
 using RevitLookupWpf.InstanceTree;
@@ -72,6 +73,9 @@ namespace RevitLookupWpf.ViewModel
                 if (_propertyList != null)
                 {
                     DataSource = new ListCollectionView(_propertyList);
+                    DataSource.SortDescriptions.Add(new SortDescription("Category",ListSortDirection.Descending));
+                    DataSource.SortDescriptions.Add(new SortDescription("Name",ListSortDirection.Ascending));
+                    DataSource.GroupDescriptions?.Add(new PropertyGroupDescription("Category"));
                 }
             }
         }
@@ -81,10 +85,8 @@ namespace RevitLookupWpf.ViewModel
             get { return _dataSource; }
             set
             {
+
                 _dataSource = value;
-                _dataSource.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
-                _dataSource.SortDescriptions.Add(new SortDescription("Category",ListSortDirection.Descending));
-                _dataSource.SortDescriptions.Add(new SortDescription("Name",ListSortDirection.Ascending));
                 RaisePropertyChanged(nameof(DataSource));
             }
         }

@@ -4,7 +4,9 @@
  */
 
 using Autodesk.Revit.DB;
+using Autodesk.Revit.Exceptions;
 using Autodesk.Revit.UI;
+using ArgumentException = System.ArgumentException;
 
 namespace RevitLookupWpf.Commands
 {
@@ -18,10 +20,10 @@ namespace RevitLookupWpf.Commands
                 SnoopingContext.Init(commandData);
                 result = SnoopClick(commandData, ref message, elements);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 result = Result.Failed;
-                throw;
+                throw new  ArgumentException(e.ToString());
             }
             finally
             {

@@ -110,6 +110,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new PaperSizeInstanceNode(paperSize);
                         Children.Add(node);
                         break;
+                    case XYZ xyz:
+                        node = new XYZInstanceNode(xyz);
+                        Children.Add(node);
+                        break;
                     default:
                         node = new InstanceNode<object>(item);
                         Children.Add(node);

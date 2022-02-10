@@ -67,6 +67,14 @@ namespace RevitLookupWpf.InstanceTree
                         node = new CategoryInstanceNode(category);
                         Children.Add(node);
                         break;
+                    case DefinitionGroup definitionGroup:
+                        node = new DefinitionGroupInstanceNode(definitionGroup);
+                        Children.Add(node);
+                        break;
+                    case ExternalDefinition externalDefinition:
+                        node = new ExternalDefinitionInstanceNode(externalDefinition);
+                        Children.Add(node);
+                        break;
                     case City city:
                         node = new CityInstanceNode(city);
                         Children.Add(node);

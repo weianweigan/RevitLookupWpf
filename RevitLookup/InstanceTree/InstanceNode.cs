@@ -29,13 +29,13 @@ namespace RevitLookupWpf.InstanceTree
         }
     }
 
-    
+
 
     public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
     {
         private readonly IEnumerable _rvtObjcet;
 
-        public IEnumerableInstanceNode(IEnumerable rvtObjcet):base(rvtObjcet)
+        public IEnumerableInstanceNode(IEnumerable rvtObjcet) : base(rvtObjcet)
         {
             _rvtObjcet = rvtObjcet;
 
@@ -84,6 +84,10 @@ namespace RevitLookupWpf.InstanceTree
                         break;
                     case FailureMessage failureMessage:
                         node = new FailureMessageInstanceNode(failureMessage);
+                        Children.Add(node);
+                        break;
+                    case FailureDefinitionAccessor failureDefinitionAccessor:
+                        node = new FailureDefinitionAccessorInstanceNode(failureDefinitionAccessor);
                         Children.Add(node);
                         break;
                     case ExternalDefinition externalDefinition:

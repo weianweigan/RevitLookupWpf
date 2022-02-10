@@ -62,6 +62,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new ParameterInstanceNode(parameter);
                         Children.Add(node);
                         break;
+                    case Category category:
+                        node = new CategoryInstanceNode(category);
+                        Children.Add(node);
+                        break;
                     case PaperSize paperSize:
                         node = new PaperSizeInstanceNode(paperSize);
                         Children.Add(node);

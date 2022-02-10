@@ -59,6 +59,14 @@ namespace RevitLookupWpf.InstanceTree
                 InstanceNode node;
                 switch (item)
                 {
+                    case Element element:
+                        node = new ElementInstanceNode(element);
+                        Children.Add(node);
+                        break;
+                    case InstanceBinding instanceBinding:
+                        node = new InstanceBindingInstanceNode(instanceBinding);
+                        Children.Add(node);
+                        break;
                     case Parameter parameter:
                         node = new ParameterInstanceNode(parameter);
                         Children.Add(node);

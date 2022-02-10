@@ -8,7 +8,8 @@ namespace RevitLookupWpf.InstanceTree
         {
             if (rvtObjcet != null)
             {
-                Name += $"({rvtObjcet.GetSeverity()+" "+rvtObjcet.GetDescriptionText()})";
+                string content = rvtObjcet.GetDescriptionText().Replace("\n", "").Replace("\r", "");
+                Name += $"({rvtObjcet.GetSeverity()+" "+ content})";
             }
         }
     }

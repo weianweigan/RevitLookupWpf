@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight;
 using RevitLookupWpf.Extension;
 using RevitLookupWpf.Helpers;
@@ -68,6 +69,10 @@ namespace RevitLookupWpf.InstanceTree
                         break;
                     case City city:
                         node = new CityInstanceNode(city);
+                        Children.Add(node);
+                        break;
+                    case RibbonPanel ribbonPanel:
+                        node = new RibbonPanelInstanceNode(ribbonPanel);
                         Children.Add(node);
                         break;
                     case PaperSize paperSize:

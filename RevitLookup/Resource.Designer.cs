@@ -88,6 +88,15 @@ namespace RevitLookupWpf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please pick an element in the linked model.
+        /// </summary>
+        public static string PickLinkElements {
+            get {
+                return ResourceManager.GetString("PickLinkElements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap search {

@@ -55,7 +55,8 @@ namespace RevitLookupWpf
             AddPushButton(pulldownButton, typeof(SnoopDBCommand), "Snoop DB...");
             AddPushButton(pulldownButton, typeof(SnoopActiveDocCommand), "Snoop Active Document...");
             AddPushButton(pulldownButton, typeof(SnoopCurrentSelectionCommand), "Snoop Current Selection...");
-            AddPushButton(pulldownButton, typeof(SnoopApplicationCommand), "Snoop Application..");
+            AddPushButton(pulldownButton, typeof(SnoopLinkedElementCommand), "Snoop Linked Element...");
+            AddPushButton(pulldownButton, typeof(SnoopApplicationCommand), "Snoop Application...");
         }
 
         private static PushButton AddPushButton(PulldownButton pullDownButton, Type command, string buttonText)

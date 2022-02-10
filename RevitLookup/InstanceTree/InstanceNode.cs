@@ -136,6 +136,12 @@ namespace RevitLookupWpf.InstanceTree
             {
                 switch (obj)
                 {
+                    case Element element:
+                        node = new ElementInstanceNode(element);
+                        break;
+                    case ElementId elementId:
+                        node = new ElementIdInstanceNode(elementId);
+                        break;
                     case Document doc:
                         node = new DocumentInstanceNode(doc);
                         break;

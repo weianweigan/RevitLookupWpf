@@ -34,7 +34,7 @@ namespace RevitLookupWpf.Commands
                 var idoc = uiDoc.Document;
 
                 lookupWindow.SetRvtInstance(idoc);
-                lookupWindow.ShowDialog();
+                lookupWindow.Show();
 
             }
             catch (Exception)

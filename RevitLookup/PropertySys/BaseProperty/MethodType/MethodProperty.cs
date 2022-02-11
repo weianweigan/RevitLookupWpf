@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows.Input;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight.CommandWpf;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
 using RevitLookupWpf.View;
 
@@ -27,14 +28,16 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             _parent = parent;
 
             var parameters = value.GetParameters();
-            MethodValue = $"{value.ReturnType?.Name} {name}({AggregateParameters(parameters)})";
+            SolvedValue = TrySolveValue(name, value, parameters);
 
-            CanExecute = GetCanExexute(parameters);
+            if (!SolvedValue)
+                CanExecute = GetCanExexute(parameters);
         }
+
         #endregion
 
         #region Properties
-        public string MethodValue { get; set; }
+        public object MethodValue { get; set; }
 
         /// <summary>
         /// User Click this object to Snoop
@@ -42,6 +45,11 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         //public event NaviRequest OnNaviRequest;
 
         public bool CanExecute { get; set; }
+
+        /// <summary>
+        /// Invoked the method and get a value;
+        /// </summary>
+        public bool SolvedValue { get; set; }
 
         public ICommand SelectedCommand
         {
@@ -94,9 +102,50 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Try to solve value if it's return type is value type and it has no parameter
+        /// </summary>
+        private bool TrySolveValue(string name, MethodInfo value, ParameterInfo[] parameters)
+        {
+            bool solvedValue;
+
+            ToolTip = $"{value.ReturnType?.Name} {name}({AggregateParameters(parameters)})";
+            solvedValue = false;
+
+            if (parameters?.Any() != true)
+            {
+                if (value.ReturnType.IsValueTypeOrString())
+                {
+                    //Solve Value
+                    MethodValue = value.Invoke(_parent, null)?.ToString() ?? "<Null>";
+                    solvedValue = true;
+                }
+                else
+                {
+                    var tempValue = value.Invoke(_parent, null);
+                    if (tempValue == null)
+                    {
+                        MethodValue = "<Null>";
+                        solvedValue = true;
+                    }
+                    else
+                    {
+                        MethodValue = ToolTip;
+                    }
+                }
+            }
+            else
+            {
+                MethodValue = ToolTip;
+            }
+
+            return solvedValue;
+        }
+
         private void Selected()
         {
-            if (!CanExecute)
+            if (!CanExecute || SolvedValue)
             {
                 return;
             }
@@ -118,7 +167,6 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                 {
                     TaskDialog.Show("Error", $"Exception When Call {MethodValue}：{ex.Message}");
                 }
-
             }
         }
 

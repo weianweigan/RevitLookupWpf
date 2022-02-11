@@ -1,4 +1,8 @@
-﻿namespace RevitLookupWpf.PropertySys.BaseProperty
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using RevitLookupWpf.View;
+using System.Windows.Input;
+
+namespace RevitLookupWpf.PropertySys.BaseProperty
 {
     public abstract class PropertyBase
     {
@@ -11,6 +15,8 @@
         public bool IsReadOnly { get;set; }
 
         public bool IsMethod { get; set; }
+
+        public string ToolTip { get; set; }
     }
 
     public abstract class PropertyBase<T> : PropertyBase

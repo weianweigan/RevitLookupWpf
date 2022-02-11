@@ -104,7 +104,7 @@ namespace RevitLookupWpf.ViewModel
             //导航到下一个对象
             if (vm.Roots.Any())
             {
-                this.Next = vm;
+                LookupData.Next = vm;
                 LookupData = vm;
                 Items = GetAllSnoopItems().ToList();
             }

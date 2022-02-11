@@ -2,19 +2,27 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.InstanceTree;
 using RevitLookupWpf.PropertySys;
+using RevitLookupWpf.PropertySys.BaseProperty;
+using RevitLookupWpf.PropertySys.BaseProperty.MethodType;
+using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
+using RevitLookupWpf.View;
 
 namespace RevitLookupWpf.ViewModel
 {
-    public class LookupViewModel:ViewModelBase
+    public class LookupViewModel : ViewModelBase
     {
 
         private PropertyList _propertyList;
         private ListCollectionView _dataSource;
         private ObservableCollection<InstanceNode> _roots;
         private LookupViewModel _lookupData;
+        private PropertyBase _selectedProperty;
+        private RelayCommand _openInNewWindowCommand;
 
         public ObservableCollection<InstanceNode> Roots
         {
@@ -73,8 +81,8 @@ namespace RevitLookupWpf.ViewModel
                 if (_propertyList != null)
                 {
                     DataSource = new ListCollectionView(_propertyList);
-                    DataSource.SortDescriptions.Add(new SortDescription("Category",ListSortDirection.Descending));
-                    DataSource.SortDescriptions.Add(new SortDescription("Name",ListSortDirection.Ascending));
+                    DataSource.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Descending));
+                    DataSource.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
                     DataSource.GroupDescriptions?.Add(new PropertyGroupDescription("Category"));
                 }
             }
@@ -97,12 +105,52 @@ namespace RevitLookupWpf.ViewModel
 
         public string NaviName { get; set; }
 
+        public PropertyBase SelectedProperty
+        {
+            get => _selectedProperty;
+            set
+            {
+                Set(ref _selectedProperty, value);
+                OpenInNewWindowCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??(_openInNewWindowCommand = new RelayCommand(OpenInNewWindow, CanOpenInNewWindow));
+
+        private void OpenInNewWindow()
+        {
+            var lookupWindow = new LookupWindow();
+            if (SelectedProperty is DefaultObjectProperty objectProperty)
+            {
+                lookupWindow.SetRvtInstance(objectProperty.Value);
+            }
+            else if (SelectedProperty is MethodProperty methodProperty)
+            {
+                lookupWindow.SetRvtInstance(methodProperty.MethodValue);
+            }
+            lookupWindow.ShowDialog();
+        }
+
+        private bool CanOpenInNewWindow()
+        {
+            if (SelectedProperty is DefaultObjectProperty objectProperty)
+            {
+                return objectProperty.Value != null && !objectProperty.IsReadOnly;
+            }else if(SelectedProperty is MethodProperty methodProperty)
+            {
+                return methodProperty.MethodValue != null && methodProperty.CanExecute;
+            }
+            
+            return false;
+        }
+
         public LookupViewModel LookupData
         {
             get => _lookupData; set
             {
                 Set(ref _lookupData, value);
                 RaisePropertyChanged(() => LookupData.DataSource);
+                RaisePropertyChanged(() => LookupData.OpenInNewWindowCommand);
             }
         }
     }

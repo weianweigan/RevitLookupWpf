@@ -72,7 +72,8 @@
         <!--Method-->
         <controls:PropertyDataGridValueTemplateSelector.MethodDataTemplate>
             <DataTemplate DataType="{x:Type methodType:MethodProperty}">
-                <TextBlock Text="{Binding MethodValue}">
+                <TextBlock Text="{Binding MethodValue}"
+                           ToolTip="{Binding ToolTip}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding SelectedCommand}"/>
@@ -83,6 +84,9 @@
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding CanExecute}" Value="True">
                                     <Setter Property="FontWeight" Value="Black"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SolvedValue}" Value="True">
+                                    <Setter Property="Foreground" Value="#FF09861A"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

@@ -58,23 +58,23 @@ namespace RevitLookupWpf.Extension
 
             var methodPropeties = new PropertyBase[methodInfos.Count];
 
-            Parallel.For(0, methodInfos.Count, i =>
-              {
-                  var property = default(PropertyBase);
-                  try
-                  {
-                      property = new MethodProperty(methodInfos[i].Name, methodInfos[i], rvtObject);
-                  }
-                  catch (Exception ex)
-                  {
-                      property = new ExceptionProperty(methodInfos[i].Name, ex);
-                  }
-                  if (property != null)
-                  {
-                      property.Category = "Methods";
-                      methodPropeties[i]=property;
-                  }
-              });
+            for (int i = 0; i < methodInfos.Count; i++)
+            {
+                var property = default(PropertyBase);
+                try
+                {
+                    property = new MethodProperty(methodInfos[i].Name, methodInfos[i], rvtObject);
+                }
+                catch (Exception ex)
+                {
+                    property = new ExceptionProperty(methodInfos[i].Name, ex);
+                }
+                if (property != null)
+                {
+                    property.Category = "Methods";
+                    methodPropeties[i] = property;
+                }
+            };
 
             list.AddRange(methodPropeties);
             //list.Sort((p1,p2) => p1.Name.CompareTo(p2.Name));

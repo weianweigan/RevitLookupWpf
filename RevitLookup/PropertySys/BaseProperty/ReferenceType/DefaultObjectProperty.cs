@@ -9,7 +9,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
     {
         private RelayCommand _selectedCommand;
 
-        public DefaultObjectProperty(string name,object value) : base(name)
+        public DefaultObjectProperty(string name, object value) : base(name)
         {
             Value = value;
 

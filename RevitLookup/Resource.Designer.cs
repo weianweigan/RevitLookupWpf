@@ -61,6 +61,15 @@ namespace RevitLookupWpf {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Revit Lookup.
+        /// </summary>
+        public static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No activity document.
         /// </summary>
         public static string NoActiveDocument {
@@ -75,6 +84,15 @@ namespace RevitLookupWpf {
         public static string NoCurrentElement {
             get {
                 return ResourceManager.GetString("NoCurrentElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Element does not exist geometry !.
+        /// </summary>
+        public static string NoGeometry {
+            get {
+                return ResourceManager.GetString("NoGeometry", resourceCulture);
             }
         }
         

@@ -25,12 +25,17 @@ namespace RevitLookupWpf.Commands
             }
 
             try
-            {                
+            {
                 var windowHandle = commandData.Application.MainWindowHandle;
                 var lookupWindow = new LookupWindow(windowHandle);
                 var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Element);
-                lookupWindow.SetRvtInstance(commandData.Application.ActiveUIDocument.Document.GetElement(refElem).get_Geometry(new Options()));
+                lookupWindow.SetRvtInstance(commandData.Application.ActiveUIDocument.Document.GetElement(refElem)
+                    .get_Geometry(new Options()));
                 lookupWindow.Show();
+            }
+            catch (NullReferenceException)
+            {
+                TaskDialog.Show(Resource.AppName, Resource.NoGeometry, TaskDialogCommonButtons.Ok);
             }
             catch (OperationCanceledException)
             {

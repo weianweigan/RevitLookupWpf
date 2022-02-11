@@ -158,6 +158,7 @@
             HorizontalAlignment="Right"
             Command="{Binding CloseCommand}"
             Content="Close(C)"
+            IsCancel="True"
             FontSize="10" />
     </Grid>
 </Window>

@@ -29,7 +29,7 @@ namespace RevitLookupWpf.View
             var windowInteropHelper = new WindowInteropHelper(this);
             windowInteropHelper.Owner = parentHandle;
 
-            _viewModel.CloseAction = new Action(() => Close());
+            _viewModel.CloseAction = new Action(Close);
             DataContext = _viewModel;
         }
 

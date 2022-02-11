@@ -101,7 +101,7 @@ namespace RevitLookupWpf.ViewModel
 
             vm.PropertyList = vm.GetSelectedNode()?.PropertyList;
 
-            //导航到下一个对象
+            //Navigate to the next object
             if (vm.Roots.Any())
             {
                 LookupData.Next = vm;

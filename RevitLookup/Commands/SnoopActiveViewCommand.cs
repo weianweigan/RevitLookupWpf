@@ -21,7 +21,7 @@ namespace RevitLookupWpf.Commands
                 var windowHandle = commandData.Application.MainWindowHandle;
                 var lookupWindow = new LookupWindow(windowHandle);
                 lookupWindow.SetRvtInstance(commandData.Application.ActiveUIDocument.Document.ActiveView);
-                lookupWindow.ShowDialog();
+                lookupWindow.Show();
             }
             catch (Exception e)
             {

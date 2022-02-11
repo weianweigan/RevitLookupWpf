@@ -6,13 +6,15 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using Autodesk.Revit.UI.Selection;
 using RevitLookupWpf.View;
+using OperationCanceledException = Autodesk.Revit.Exceptions.OperationCanceledException;
 
 namespace RevitLookupWpf.Commands
 {
-    [RvtCommandInfo(Name = "Snoop\nActiveDoc", Image = "search.png")]
+    [RvtCommandInfo(Name = "Snoop Face", Image = "search.png")]
     [Transaction(TransactionMode.Manual)]
-    public class SnoopActiveDocCommand : RvtCommandBase
+    public class SnoopFaceCommand : RvtCommandBase
     {
         public override Result SnoopClick(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -23,15 +25,22 @@ namespace RevitLookupWpf.Commands
             }
 
             try
-            {                
+            {
                 var windowHandle = commandData.Application.MainWindowHandle;
                 var lookupWindow = new LookupWindow(windowHandle);
-                lookupWindow.SetRvtInstance(commandData.Application.ActiveUIDocument.Document);
+                var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Face);
+                var geometryObject = commandData.Application.ActiveUIDocument.Document.GetElement(refElem)
+                    .GetGeometryObjectFromReference(refElem);
+                lookupWindow.SetRvtInstance(geometryObject);
                 lookupWindow.Show();
             }
-            catch (Exception)
+            catch (OperationCanceledException)
             {
-                throw;
+                //ignore user press esc
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(e.ToString());
             }
 
             return Result.Succeeded;

@@ -30,16 +30,18 @@ namespace RevitLookupWpf.Commands
             {
                 var windowHandle = commandData.Application.MainWindowHandle;
                 var lookupWindow = new LookupWindow(windowHandle);
-
-                var idoc = uiDoc.Document;
-
-                lookupWindow.SetRvtInstance(idoc);
-                lookupWindow.ShowDialog();
+                var document = commandData.Application.ActiveUIDocument.Document;
+                var elementTypes = new FilteredElementCollector(document).WhereElementIsElementType();
+                var elementInstances = new FilteredElementCollector(document).WhereElementIsNotElementType();
+                var elementsCollector = elementTypes.UnionWith(elementInstances);
+                var seElements = elementsCollector.ToElements();
+                lookupWindow.SetRvtInstance(seElements);
+                lookupWindow.Show();
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw new ArgumentException(e.ToString());
             }
 
             return Result.Succeeded;

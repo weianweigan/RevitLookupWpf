@@ -55,7 +55,7 @@ namespace RevitLookupWpf.Commands
                     lookupWindow.SetRvtInstance(selections);
                 }
 
-                lookupWindow.ShowDialog();
+                lookupWindow.Show();
             }
             catch (OperationCanceledException)
             {

@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>Revit Lookup</value>
+  </data>
   <data name="NoActiveDocument" xml:space="preserve">
     <value>No activity document</value>
   </data>
   <data name="NoCurrentElement" xml:space="preserve">
     <value>Not any current element !</value>
+  </data>
+  <data name="NoGeometry" xml:space="preserve">
+    <value>Element does not exist geometry !</value>
   </data>
   <data name="PickElements" xml:space="preserve">
     <value>Please Pick Elements to Snoop !</value>

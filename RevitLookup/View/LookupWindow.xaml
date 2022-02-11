@@ -70,6 +70,8 @@
             Grid.Row="1"
             FontSize="10"
             ItemsSource="{Binding LookupData.Roots}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Visible"
             SelectedItemChanged="TreeView_SelectedItemChanged">
             <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectedItemChanged">
@@ -165,6 +167,7 @@
             HorizontalAlignment="Right"
             Command="{Binding CloseCommand}"
             Content="Close(C)"
-            FontSize="10" />
+            FontSize="10"
+            IsCancel="True" />
     </Grid>
 </Window>

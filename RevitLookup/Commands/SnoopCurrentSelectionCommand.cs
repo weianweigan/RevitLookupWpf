@@ -44,7 +44,6 @@ namespace RevitLookupWpf.Commands
                         selections.Add(uiDoc.Document.GetElement(r));
                     }
                 }
-
                 if (selections.Count == 1)
                 {
                     lookupWindow.SetRvtInstance(selections.First());

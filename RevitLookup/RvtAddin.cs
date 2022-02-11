@@ -54,6 +54,7 @@ namespace RevitLookupWpf
             pulldownButton.LargeImage = BitmapSourceConverter.ToImageSource(Resource.search, BitmapSourceConverter.ImageType.Large);
             AddPushButton(pulldownButton, typeof(SnoopDBCommand), "Snoop DB...");
             AddPushButton(pulldownButton, typeof(SnoopActiveDocCommand), "Snoop Active Document...");
+            AddPushButton(pulldownButton, typeof(SnoopActiveViewCommand), "Snoop Active View...");
             AddPushButton(pulldownButton, typeof(SnoopCurrentSelectionCommand), "Snoop Current Selection...");
             AddPushButton(pulldownButton, typeof(SnoopLinkedElementCommand), "Snoop Linked Element...");
             AddPushButton(pulldownButton, typeof(SnoopApplicationCommand), "Snoop Application...");

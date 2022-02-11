@@ -86,7 +86,7 @@
                                     <Setter Property="FontWeight" Value="Black"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding SolvedValue}" Value="True">
-                                    <Setter Property="Foreground" Value="#FF09861A"/>
+                                    <Setter Property="Foreground" Value="Blue"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>

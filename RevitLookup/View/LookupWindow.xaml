@@ -21,146 +21,148 @@
     <Window.Resources>
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Generic.xaml" />
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="23" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="30" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="7*" />
-        </Grid.ColumnDefinitions>
-        <ListBox
-            Grid.ColumnSpan="2"
-            ItemsSource="{Binding Items}"
-            ScrollViewer.VerticalScrollBarVisibility="Disabled"
-            SelectedItem="{Binding LookupData}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="7" />
-                            <ColumnDefinition Width="10" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding NaviName}" />
-                        <Border
+    <DockPanel>
+        <ScrollViewer DockPanel.Dock="Top"
+                      VerticalScrollBarVisibility="Disabled"                      
+                      >
+            <ListBox Height="25"
+                     ItemsSource="{Binding Items}"
+                     SelectedItem="{Binding LookupData}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="7" />
+                                <ColumnDefinition Width="10" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding NaviName}" />
+                            <Border
                             Grid.Column="1"
                             Width="1"
                             HorizontalAlignment="Center"
                             Background="LightBlue"
                             BorderThickness="0" />
-                        <TextBlock
+                            <TextBlock
                             Grid.Column="2"
                             FontWeight="Black"
                             Foreground="Black">
                             &gt;
-                        </TextBlock>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <TreeView
-            Grid.Row="1"
-            FontSize="10"
-            ItemsSource="{Binding LookupData.Roots}"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ScrollViewer.VerticalScrollBarVisibility="Visible"
-            SelectedItemChanged="TreeView_SelectedItemChanged">
-            <!--<i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectedItemChanged">
-                    <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>-->
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                    <Grid Height="23">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="28" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Image Margin="2" Source="{StaticResource Class_16xDrawingImage}" />
-                        <TextBlock
-                            Grid.Column="1"
-                            VerticalAlignment="Center"
-                            Text="{Binding Name}" />
-                    </Grid>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-        <GridSplitter
-            Grid.Row="1"
-            Grid.Column="1"
-            Width="2"
-            HorizontalAlignment="Left"
-            Background="Gray" />
-        <Grid Grid.Row="1" Grid.Column="1">
+                            </TextBlock>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+        <Grid DockPanel.Dock="Bottom">
             <Grid.RowDefinitions>
-                <RowDefinition Height="15" />
-                <RowDefinition />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
-            <TextBlock
-                Margin="2,0,0,0"
-                Background="LightBlue"
-                Text="{Binding LookupData.PropertyList.Deri}" />
-            <controls:PropertyDataGrid
-                Grid.Row="1"
-                Margin="2,0,0,0"
-                EnableColumnVirtualization="True"
-                FontSize="11"
-                SelectedItem="{Binding LookupData.SelectedProperty}"
-                ItemsSource="{Binding LookupData.DataSource}">
-                <DataGrid.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Open In New Window"
-                                              Command="{Binding LookupData.OpenInNewWindowCommand}"/>
-                    </ContextMenu>
-                </DataGrid.ContextMenu>
-                <controls:PropertyDataGrid.GroupStyle>
-                    <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" />
-                </controls:PropertyDataGrid.GroupStyle>
-                <controls:PropertyDataGrid.Columns>
-                    <DataGridTemplateColumn
-                        Width="200"
-                        Header="Name"
-                        IsReadOnly="True">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="25" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Image Height="15" Style="{StaticResource ObjectImage}" />
-                                    <TextBlock
-                                        Grid.Column="1"
-                                        VerticalAlignment="Center"
-                                        Text="{Binding Name}" />
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn
-                        Width="*"
-                        CellTemplateSelector="{StaticResource PropertyDataGridValueTemplateSelector}"
-                        Header="Value" />
-                    <!--<DataGridTemplateColumn Width="2">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                </controls:PropertyDataGrid.Columns>
-            </controls:PropertyDataGrid>
-        </Grid>
-        <Button
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="7*" />
+            </Grid.ColumnDefinitions>
+            <TreeView
+                Grid.Row="0"
+                FontSize="10"
+                ItemsSource="{Binding LookupData.Roots}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                SelectedItemChanged="TreeView_SelectedItemChanged">
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedItemChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <Grid Height="23">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="28" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Image Margin="2" Source="{StaticResource Class_16xDrawingImage}" />
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Text="{Binding Name}" />
+                        </Grid>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <GridSplitter
+                Grid.Row="0"
+                Grid.Column="1"
+                Width="2"
+                HorizontalAlignment="Left"
+                Background="Gray" />
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Margin="2,0,0,0"
+                    Background="LightBlue"
+                    Text="{Binding LookupData.PropertyList.Deri}" />
+                <controls:PropertyDataGrid
+                    Grid.Row="1"
+                    Margin="2,0,0,0"
+                    EnableColumnVirtualization="True"
+                    FontSize="11"
+                    SelectedItem="{Binding LookupData.SelectedProperty}"
+                    ItemsSource="{Binding LookupData.DataSource}">
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Open In New Window"
+                                                  Command="{Binding LookupData.OpenInNewWindowCommand}"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                    <controls:PropertyDataGrid.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource GroupHeaderStyle}" />
+                    </controls:PropertyDataGrid.GroupStyle>
+                    <controls:PropertyDataGrid.Columns>
+                        <DataGridTemplateColumn
+                            Width="200"
+                            Header="Name"
+                            IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="25" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Height="15" Style="{StaticResource ObjectImage}" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding Name}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn
+                            Width="*"
+                            CellTemplateSelector="{StaticResource PropertyDataGridValueTemplateSelector}"
+                            Header="Value" />
+                        <!--<DataGridTemplateColumn Width="2">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>-->
+                    </controls:PropertyDataGrid.Columns>
+                </controls:PropertyDataGrid>
+            </Grid>
+            <Button
             Grid.Row="2"
             Grid.Column="1"
             Margin="0,0,15,0"
@@ -170,4 +172,5 @@
             FontSize="10"
             IsCancel="True" />
     </Grid>
+    </DockPanel>
 </Window>

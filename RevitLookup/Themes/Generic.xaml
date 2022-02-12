@@ -6,5 +6,6 @@
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/TreeList.xaml" />
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Image.xaml" />
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/BreadCrumNavigation.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

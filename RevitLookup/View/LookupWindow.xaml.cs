@@ -10,12 +10,13 @@ namespace RevitLookupWpf.View
     /// </summary>
     public partial class LookupWindow : Window
     {
-        private LookupWindowViewModel _viewModel = new LookupWindowViewModel();
+        private LookupWindowViewModel _viewModel;
 
         public LookupWindow()
         {
             InitializeComponent();
 
+            _viewModel = new LookupWindowViewModel(this);
             _viewModel.CloseAction = new Action(() => Close());
             this.Closed += LookupWindow_Closed;
             DataContext = _viewModel;
@@ -24,7 +25,8 @@ namespace RevitLookupWpf.View
         public LookupWindow(IntPtr parentHandle)
         {
             InitializeComponent();
-
+            
+            _viewModel = new LookupWindowViewModel(this);
             //设置父窗口为Revit
             var windowInteropHelper = new WindowInteropHelper(this);
             windowInteropHelper.Owner = parentHandle;

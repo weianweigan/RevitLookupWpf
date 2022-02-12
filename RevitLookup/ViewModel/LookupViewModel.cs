@@ -20,7 +20,7 @@ namespace RevitLookupWpf.ViewModel
         private PropertyList _propertyList;
         private ListCollectionView _dataSource;
         private ObservableCollection<InstanceNode> _roots;
-        private LookupViewModel _lookupData;
+        protected LookupViewModel _lookupData;
         private PropertyBase _selectedProperty;
         private RelayCommand _openInNewWindowCommand;
 
@@ -128,7 +128,7 @@ namespace RevitLookupWpf.ViewModel
             {
                 lookupWindow.SetRvtInstance(methodProperty.MethodValue);
             }
-            lookupWindow.ShowDialog();
+            lookupWindow.Show();
         }
 
         private bool CanOpenInNewWindow()
@@ -151,7 +151,17 @@ namespace RevitLookupWpf.ViewModel
                 Set(ref _lookupData, value);
                 RaisePropertyChanged(() => LookupData.DataSource);
                 RaisePropertyChanged(() => LookupData.OpenInNewWindowCommand);
+                //Remove back items
+                if (LookupData?.Next !=null)
+                {
+                    LookupData.Next = null;
+                    LookupDataChanged();
+                }
             }
+        }
+
+        protected virtual void LookupDataChanged()
+        {
         }
     }
 }

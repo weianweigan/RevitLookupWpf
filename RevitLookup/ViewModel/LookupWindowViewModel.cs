@@ -4,6 +4,8 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.InstanceTree;
 using RevitLookupWpf.PropertySys;
+using System.Linq;
+using RevitLookupWpf.View;
 
 namespace RevitLookupWpf.ViewModel
 {
@@ -14,17 +16,19 @@ namespace RevitLookupWpf.ViewModel
         private RelayCommand _closeCommand;
 
         private RelayCommand _selectedItemChangedCommand;
-        private List<LookupViewModel> _items;
+        private ObservableCollection<LookupViewModel> _items;
+        private readonly LookupWindow _lookupWindow;
         #endregion
 
         #region Ctor
 
-        public LookupWindowViewModel()
+        public LookupWindowViewModel(LookupWindow lookupWindow)
         {
             LookupData = this;
-            Items = GetAllSnoopItems().ToList();
+            Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
 
             Messenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
+            _lookupWindow = lookupWindow;
         }
         #endregion
 
@@ -35,7 +39,7 @@ namespace RevitLookupWpf.ViewModel
 
         public ICommand CloseCommand => _closeCommand ?? (_closeCommand = new RelayCommand(CloseAction));
 
-        public List<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
+        public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
         #endregion
 
         #region Public Methods
@@ -64,7 +68,7 @@ namespace RevitLookupWpf.ViewModel
             }
         }
 
-        private IEnumerable<LookupViewModel> GetAllSnoopItems()
+        protected IEnumerable<LookupViewModel> GetAllSnoopItems()
         {
             LookupViewModel current = this;
             yield return current;
@@ -93,6 +97,11 @@ namespace RevitLookupWpf.ViewModel
 
         private void OnNavigation(RvtObjectMessage objectMessage)
         {
+            if (!_lookupWindow.IsActive)
+            {
+                return;
+            }
+
             var vm = new LookupViewModel();
 
             var root = InstanceNode.Create(objectMessage.RvtObject);
@@ -106,7 +115,7 @@ namespace RevitLookupWpf.ViewModel
             {
                 LookupData.Next = vm;
                 LookupData = vm;
-                Items = GetAllSnoopItems().ToList();
+                Items = new ObservableCollection<LookupViewModel>( GetAllSnoopItems());
             }
 
             root.IsSelected = true;
@@ -114,5 +123,18 @@ namespace RevitLookupWpf.ViewModel
         }
 
         #endregion
+
+        protected override void LookupDataChanged()
+        {
+            Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
+            //if (Items?.Any() != true)
+            //    return;
+
+            //var startIndex = Items.IndexOf(LookupData)+1;
+            //for (int i = startIndex; i < Items.Count; i++)
+            //{
+            //    Items.RemoveAt(i);
+            //}
+        }
     }
 }

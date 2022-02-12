@@ -1,4 +1,22 @@
 # Changelog
+- 2022-02-11 **2022.0.2**
+  - Support Snoop Active View
+  - Add Support Snoop Face, Edge Element
+  - Add Support Snoop Geometry Element
+  - Remove item duplicate not use
+  - Change info geometry detail with geometry instance general by id
+  - Fix Snoop DB Application Revit #7
+  - Improve Scroll Viewer Tree View
+  - Support user press esc to exit window
+  - Add City Node see detail in tree view
+  - Add ribbon panel see detail in tree view
+  - Add documentset see detail in tree view
+  - Add Definition see detail in tree view
+  - Add Warning, ElementId Detail in treeview
+  - Add element, ElementId Detail in treeview
+  - Add Detail connector MEPModel
+  - Add FailureDefinitionAccessor Treeview detail
+  - Add ElementNode.BindingInstance see detail in tree view
 - 2022-02-10 **2022.0.1**
   - Improve show tree view name with parameter, categories, paper size.
   - Fix sort method and properties alphabetical

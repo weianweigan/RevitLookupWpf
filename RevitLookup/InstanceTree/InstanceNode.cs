@@ -110,28 +110,16 @@ namespace RevitLookupWpf.InstanceTree
                         node = new PaperSizeInstanceNode(paperSize);
                         Children.Add(node);
                         break;
+                    case GeometryObject geometryObject:
+                        node = new GeometryObjectInstanceNode(geometryObject);
+                        Children.Add(node);
+                        break;
                     case XYZ xyz:
                         node = new XYZInstanceNode(xyz);
                         Children.Add(node);
                         break;
-                    case PlanarFace planarFace:
-                        node = new PlanarFaceInstanceNode(planarFace);
-                        Children.Add(node);
-                        break;
-                    case Line line:
-                        node = new LineInstanceNode(line);
-                        Children.Add(node);
-                        break;
-                    case Edge edge:
-                        node = new EdgeInstanceNode(edge);
-                        Children.Add(node);
-                        break;
                     case EdgeArray edgeArray:
                         node = new EdgeArrayInstanceNode(edgeArray);
-                        Children.Add(node);
-                        break;
-                    case Solid solid:
-                        node = new SolidInstanceNode(solid);
                         Children.Add(node);
                         break;
                     default:

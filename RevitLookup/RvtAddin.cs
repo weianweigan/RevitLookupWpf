@@ -56,9 +56,9 @@ namespace RevitLookupWpf
             AddPushButton(pulldownButton, typeof(SnoopActiveDocCommand), "Snoop Active Document...");
             AddPushButton(pulldownButton, typeof(SnoopActiveViewCommand), "Snoop Active View...");
             AddPushButton(pulldownButton, typeof(SnoopCurrentSelectionCommand), "Snoop Current Selections...");
-            AddPushButton(pulldownButton, typeof(SnoopPointCommand), "Snoop Points...");
-            AddPushButton(pulldownButton, typeof(SnoopFaceCommand), "Snoop Faces...");
-            AddPushButton(pulldownButton, typeof(SnoopEdgeCommand), "Snoop Edges...");
+            AddPushButton(pulldownButton, typeof(SnoopPointsCommand), "Snoop Points...");
+            AddPushButton(pulldownButton, typeof(SnoopFacesCommand), "Snoop Faces...");
+            AddPushButton(pulldownButton, typeof(SnoopEdgesCommand), "Snoop Edges...");
             AddPushButton(pulldownButton, typeof(SnoopPointOnEleCommand), "Snoop Points On Elements...");
             AddPushButton(pulldownButton, typeof(SnoopGeometryCommand), "Snoop Geometry Element...");
             AddPushButton(pulldownButton, typeof(SnoopLinkedElementCommand), "Snoop Linked Element...");

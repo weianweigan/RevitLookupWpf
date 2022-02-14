@@ -14,7 +14,7 @@ namespace RevitLookupWpf.Commands
 {
     [RvtCommandInfo(Name = "Snoop Edge", Image = "search.png")]
     [Transaction(TransactionMode.Manual)]
-    public class SnoopEdgeCommand : RvtCommandBase
+    public class SnoopEdgesCommand : RvtCommandBase
     {
         public override Result SnoopClick(ExternalCommandData commandData, ref string message, ElementSet elements)
         {

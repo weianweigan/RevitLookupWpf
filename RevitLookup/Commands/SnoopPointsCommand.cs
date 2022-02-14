@@ -14,7 +14,7 @@ namespace RevitLookupWpf.Commands
 {
     [RvtCommandInfo(Name = "Snoop Point", Image = "search.png")]
     [Transaction(TransactionMode.Manual)]
-    public class SnoopPointCommand : RvtCommandBase
+    public class SnoopPointsCommand : RvtCommandBase
     {
         public override Result SnoopClick(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -30,9 +30,12 @@ namespace RevitLookupWpf.Commands
             using (Transaction transaction = new Transaction(doc, "sn"))
             {
                 transaction.Start();
-                Plane plane = Plane.CreateByNormalAndOrigin(doc.ActiveView.ViewDirection, doc.ActiveView.Origin);
-                doc.ActiveView.SketchPlane = SketchPlane.Create(doc, plane);
-                doc.ActiveView.ShowActiveWorkPlane();
+                if (doc.ActiveView is not View3D)
+                {
+                    Plane plane = Plane.CreateByNormalAndOrigin(doc.ActiveView.ViewDirection, doc.ActiveView.Origin);
+                    doc.ActiveView.SketchPlane = SketchPlane.Create(doc, plane);
+                    doc.ActiveView.ShowActiveWorkPlane();
+                }
                 List<XYZ> xyzs = new List<XYZ>();
                 TaskDialog.Show(Resource.AppName, "Select Ordered Points,Press Esc To Finish", TaskDialogCommonButtons.Ok);
                 while (true)

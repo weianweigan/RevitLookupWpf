@@ -23,32 +23,45 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-
-            try
+            var windowHandle = commandData.Application.MainWindowHandle;
+            Document doc = commandData.Application.ActiveUIDocument.Document;
+            var lookupWindow = new LookupWindow(windowHandle);
+            // Setting work plane
+            using (Transaction transaction = new Transaction(doc, "sn"))
             {
-                var windowHandle = commandData.Application.MainWindowHandle;
-                Document doc = commandData.Application.ActiveUIDocument.Document;
-                var lookupWindow = new LookupWindow(windowHandle);
-                // Setting work plane
-                using (Transaction transaction = new Transaction(doc, "sn"))
+                transaction.Start();
+                Plane plane = Plane.CreateByNormalAndOrigin(doc.ActiveView.ViewDirection, doc.ActiveView.Origin);
+                doc.ActiveView.SketchPlane = SketchPlane.Create(doc, plane);
+                doc.ActiveView.ShowActiveWorkPlane();
+                List<XYZ> xyzs = new List<XYZ>();
+                TaskDialog.Show(Resource.AppName, "Select Ordered Element,Press Esc to Cancel", TaskDialogCommonButtons.Ok);
+                while (true)
                 {
-                    transaction.Start();
-                    Plane plane = Plane.CreateByNormalAndOrigin(doc.ActiveView.ViewDirection, doc.ActiveView.Origin);
-                    doc.ActiveView.SketchPlane = SketchPlane.Create(doc, plane);
-                    doc.ActiveView.ShowActiveWorkPlane();
-                    var xyz = commandData.Application.ActiveUIDocument.Selection.PickPoint();
-                    lookupWindow.SetRvtInstance(xyz);
-                    lookupWindow.Show();
-                    transaction.RollBack();
+                    try
+                    {
+                        XYZ xyz = commandData.Application.ActiveUIDocument.Selection.PickPoint(
+                            "Select Ordered Point,Press Esc to Cancel :D");
+                      xyzs.Add(xyz);
+                    }
+                    catch (Exception)
+                    {
+                        //user press esc
+                        break;
+                    }
                 }
-            }
-            catch (OperationCanceledException)
-            {
-                //ignore user press esc
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException(e.ToString());
+
+                if (xyzs.Count == 0)
+                {
+                    transaction.RollBack();
+                    return Result.Succeeded;
+                }
+                if (xyzs.Count == 1) lookupWindow.SetRvtInstance(xyzs.First());
+                else if(xyzs.Any())
+                {
+                    lookupWindow.SetRvtInstance(xyzs);
+                }
+                lookupWindow.Show();
+                transaction.RollBack();
             }
 
             return Result.Succeeded;

@@ -1,15 +1,15 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <ListBox x:Key="BreadCrumNavi" 
-             Padding="0"
-             MinWidth="300" 
-             Background="Transparent" 
-             BorderThickness="0" 
-       ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
-       ScrollViewer.VerticalScrollBarVisibility="Hidden">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ListBox
+        x:Key="BreadCrumNavi"
+        MinWidth="300"
+        Padding="0"
+        Background="Transparent"
+        BorderThickness="0"
+        ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+        ScrollViewer.VerticalScrollBarVisibility="Hidden">
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel Margin="8,0,0,0" Orientation="Horizontal"></StackPanel>
+                <StackPanel Margin="8,0,0,0" Orientation="Horizontal" />
             </ItemsPanelTemplate>
         </ListBox.ItemsPanel>
         <!--<ListBox.ItemContainerStyle>
@@ -29,18 +29,20 @@
                                 <Path DockPanel.Dock="Right" Stroke="{DynamicResource LXBarButtonBorderNormal}" Fill="{DynamicResource LXBarButtonBackgroundNormal}" Data="F1 M 168,144L 176,160L 168,176" Stretch="Fill" Height="32" Width="8" />
                                 <Border Name="Border" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" BorderThickness="0,1" VerticalAlignment="Center">
                                     <ContentPresenter />
-                                    --><!-- 
-                <ControlTemplate.Triggers> 
-                 <Trigger Property="IsSelected" Value="true"> 
-                 <Setter TargetName="Border" Property="Background" 
-                   Value="Blue"/> 
-                 </Trigger> 
-                 <Trigger Property="IsEnabled" Value="false"> 
-                 <Setter Property="Foreground" 
-                   Value="Red"/> 
-                 </Trigger> 
-                </ControlTemplate.Triggers> 
-                --><!--
+        -->
+        <!--
+                <ControlTemplate.Triggers>
+                 <Trigger Property="IsSelected" Value="true">
+                 <Setter TargetName="Border" Property="Background"
+                   Value="Blue"/>
+                 </Trigger>
+                 <Trigger Property="IsEnabled" Value="false">
+                 <Setter Property="Foreground"
+                   Value="Red"/>
+                 </Trigger>
+                </ControlTemplate.Triggers>
+        -->
+        <!--
                                 </Border>
                             </DockPanel>
 
@@ -51,14 +53,14 @@
         </ListBox.ItemContainerStyle>-->
         <ListBox.ItemTemplate>
             <DataTemplate>
-                <TextBlock Text="{Binding Name}"/>
+                <TextBlock Text="{Binding Name}" />
                 <!--<DockPanel VerticalAlignment="Center" Height="30">
-                    <local:LXImageButton BorderThickness="0" Style="{DynamicResource LXBarImageButton}" Padding="0" DockPanel.Dock="Right" Background="Transparent" Command="{Binding RemoveTagBtn}" Height="16" Width="16" 
-             NormalImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_normal.png" 
-             ActiveImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_active.png" 
-             HoverImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_hover.png" 
-             PressedImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_hover.png" 
-             DisabledImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_passive.png" 
+                    <local:LXImageButton BorderThickness="0" Style="{DynamicResource LXBarImageButton}" Padding="0" DockPanel.Dock="Right" Background="Transparent" Command="{Binding RemoveTagBtn}" Height="16" Width="16"
+             NormalImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_normal.png"
+             ActiveImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_active.png"
+             HoverImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_hover.png"
+             PressedImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_hover.png"
+             DisabledImage="/com.example.Views;component/Resources/Icons/Buttons/btnCloseXS_passive.png"
              />
                     <Label DockPanel.Dock="Left" FontSize="12" Content="{Binding Content, FallbackValue=Tagname n/a}" VerticalAlignment="Center"/>
                 </DockPanel>-->

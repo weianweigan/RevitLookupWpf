@@ -34,7 +34,7 @@ namespace RevitLookupWpf.Commands
                 doc.ActiveView.SketchPlane = SketchPlane.Create(doc, plane);
                 doc.ActiveView.ShowActiveWorkPlane();
                 List<XYZ> xyzs = new List<XYZ>();
-                TaskDialog.Show(Resource.AppName, "Select Ordered Points,Press Esc to Cancel", TaskDialogCommonButtons.Ok);
+                TaskDialog.Show(Resource.AppName, "Select Ordered Points,Press Esc To Finish", TaskDialogCommonButtons.Ok);
                 while (true)
                 {
                     try
@@ -55,7 +55,7 @@ namespace RevitLookupWpf.Commands
                     transaction.RollBack();
                     return Result.Succeeded;
                 }
-                if (xyzs.Count == 1) lookupWindow.SetRvtInstance(xyzs.First());
+                if (xyzs.Count == 1) lookupWindow.SetRvtInstance(xyzs.FirstOrDefault());
                 else if(xyzs.Any())
                 {
                     lookupWindow.SetRvtInstance(xyzs);

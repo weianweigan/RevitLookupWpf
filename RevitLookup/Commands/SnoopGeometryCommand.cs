@@ -29,8 +29,9 @@ namespace RevitLookupWpf.Commands
                 var windowHandle = commandData.Application.MainWindowHandle;
                 var lookupWindow = new LookupWindow(windowHandle);
                 var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Element);
-                lookupWindow.SetRvtInstance(commandData.Application.ActiveUIDocument.Document.GetElement(refElem)
-                    .get_Geometry(new Options()));
+                GeometryElement geometryElement = commandData.Application.ActiveUIDocument.Document.GetElement(refElem)
+                    .get_Geometry(new Options());
+                lookupWindow.SetRvtInstance(geometryElement);
                 lookupWindow.Show();
             }
             catch (NullReferenceException)

@@ -28,10 +28,25 @@ namespace RevitLookupWpf.Commands
             {
                 var windowHandle = commandData.Application.MainWindowHandle;
                 var lookupWindow = new LookupWindow(windowHandle);
-                var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Face);
-                var geometryObject = commandData.Application.ActiveUIDocument.Document.GetElement(refElem)
-                    .GetGeometryObjectFromReference(refElem);
-                lookupWindow.SetRvtInstance(geometryObject);
+                List<GeometryObject> geos = new List<GeometryObject>();
+                TaskDialog.Show(Resource.AppName, "Select Ordered Faces,Press Esc To Finish", TaskDialogCommonButtons.Ok);
+                while (true)
+                {
+                    try
+                    {
+                        var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Face);
+                        var geometryObject = commandData.Application.ActiveUIDocument.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
+                        geos.Add(geometryObject);
+                    }
+                    catch (Exception)
+                    {
+                        //user press esc
+                        break;
+                    }
+                }
+                if (geos.Count == 0) return Result.Cancelled;
+                if (geos.Count == 1) lookupWindow.SetRvtInstance(geos.FirstOrDefault());
+                else lookupWindow.SetRvtInstance(geos);
                 lookupWindow.Show();
             }
             catch (OperationCanceledException)

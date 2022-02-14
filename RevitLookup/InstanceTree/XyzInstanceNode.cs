@@ -8,7 +8,7 @@ namespace RevitLookupWpf.InstanceTree
         {
             if (rvtObjcet != null)
             {
-                Name += $"({rvtObjcet.X},{rvtObjcet.Y},{rvtObjcet.Z})";
+                Name += $"({rvtObjcet})";
             }
         }
     }

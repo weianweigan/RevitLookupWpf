@@ -34,7 +34,7 @@ namespace RevitLookupWpf.Commands
                 doc.ActiveView.SketchPlane = SketchPlane.Create(doc, plane);
                 doc.ActiveView.ShowActiveWorkPlane();
                 List<XYZ> xyzs = new List<XYZ>();
-                TaskDialog.Show(Resource.AppName, "Select Ordered Element,Press Esc to Cancel", TaskDialogCommonButtons.Ok);
+                TaskDialog.Show(Resource.AppName, "Select Ordered Points,Press Esc to Cancel", TaskDialogCommonButtons.Ok);
                 while (true)
                 {
                     try

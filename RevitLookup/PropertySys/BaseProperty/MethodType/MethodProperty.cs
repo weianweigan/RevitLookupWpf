@@ -4,6 +4,7 @@
  */
 
 using System.Reflection;
+using System.Windows;
 using System.Windows.Input;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -29,7 +30,6 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
 
             var parameters = value.GetParameters();
             SolvedValue = TrySolveValue(name, value, parameters);
-
             if (!SolvedValue)
                 CanExecute = GetCanExexute(parameters);
         }
@@ -113,9 +113,9 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             ToolTip = $"{value.ReturnType?.Name} {name}({AggregateParameters(parameters)})";
             solvedValue = false;
 
-            if (parameters?.Any() != true)
+            if (parameters?.Any() != true && !IsExcept(value))
             {
-                if (value.ReturnType.IsValueTypeOrString())
+                if (value.ReturnType.IsValueTypeOrString() )
                 {
                     //Solve Value
                     MethodValue = value.Invoke(_parent, null)?.ToString() ?? "<Null>";
@@ -141,6 +141,20 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             }
 
             return solvedValue;
+        }
+
+        /// <summary>
+        /// Except some method don't want invoke
+        /// </summary>
+        /// <param name="methodInfo"></param>
+        /// <returns></returns>
+        bool IsExcept(MethodInfo methodInfo)
+        {
+            if (methodInfo.Name.Equals("Save",StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Print",StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("SubmitPrint",StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Set",StringComparison.InvariantCultureIgnoreCase)) return true;
+            return false;
         }
 
         private void Selected()

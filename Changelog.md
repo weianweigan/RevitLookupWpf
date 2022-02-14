@@ -1,4 +1,9 @@
 # Changelog
+- 2022-02-14 **2022.0.3**
+  - Fix scrollviewer target snoop
+  - Add feature snoop open new window by context menu
+  - Improve show result of method
+  - Add feature snoop by search ElementId or UniqueId
 - 2022-02-11 **2022.0.2**
   - Support Snoop Active View
   - Add Support Snoop Face, Edge Element

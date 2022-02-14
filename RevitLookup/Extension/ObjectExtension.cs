@@ -4,6 +4,7 @@
  */
 
 using System.Reflection;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
 using RevitLookupWpf.PropertySys.BaseProperty.MethodType;
@@ -26,7 +27,7 @@ namespace RevitLookupWpf.Extension
             var list = new PropertyList(rvtObject);
             var type = rvtObject.GetType();
 
-            list.Deri = GetBaseChain(type);
+            list.Inheri = GetBaseChain(type);
 
             //properties
             var propertyInfos = type.GetProperties();
@@ -64,7 +65,15 @@ namespace RevitLookupWpf.Extension
                 var property = default(PropertyBase);
                 try
                 {
-                    property = new MethodProperty(methodInfos[i].Name, methodInfos[i], rvtObject);
+                    if (methodInfos[i].GetParameters().IsAllInputable())
+                    {
+                        property = new InputableMethodProperty(methodInfos[i].Name, rvtObject, methodInfos[i]);
+                    }
+                    else
+                    {
+                        //Default Method Properties
+                        property = new MethodProperty(methodInfos[i].Name, methodInfos[i], rvtObject);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -99,10 +108,33 @@ namespace RevitLookupWpf.Extension
             return name;
         }
 
-        private static PropertyBase GetProperty(PropertyInfo propertyInfo, object element)
+        private static PropertyBase GetProperty(PropertyInfo propertyInfo, object rvtObject)
         {
             var property = default(PropertyBase);
 
+            if (propertyInfo.GetMethod != null)
+            {
+                if (propertyInfo.GetMethod.GetParameters().IsAllInputable())
+                {
+                    property = new GetIndexerProperty(propertyInfo.Name, rvtObject, propertyInfo);
+                }
+                else
+                {
+                    property = GetNormalProperty(propertyInfo, rvtObject);
+                }
+            }
+            else
+            {
+                //Only Set
+                property = new SetOnlyProperty(propertyInfo.Name, rvtObject, propertyInfo);
+            }
+
+            return property;
+        }
+
+        private static PropertyBase GetNormalProperty(PropertyInfo propertyInfo, object element)
+        {
+            PropertyBase property;
             bool isClass = propertyInfo.PropertyType.IsClass;
 
             var value = propertyInfo.GetValue(element);
@@ -116,7 +148,7 @@ namespace RevitLookupWpf.Extension
                         break;
 
                     default:
-                        if (value ==null)
+                        if (value == null)
                         {
                             property = new NullObjectProperty(propertyInfo.Name);
                         }

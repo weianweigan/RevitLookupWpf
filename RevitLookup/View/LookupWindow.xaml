@@ -122,6 +122,7 @@
                         <ContextMenu>
                             <MenuItem Header="Open In New Window"
                                                   Command="{Binding LookupData.OpenInNewWindowCommand}"/>
+                            <MenuItem Header="Search Online..." Command="{Binding LookupData.SearchOnlineCommand}"></MenuItem>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                     <controls:PropertyDataGrid.GroupStyle>

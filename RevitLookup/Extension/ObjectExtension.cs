@@ -61,7 +61,7 @@ namespace RevitLookupWpf.Extension
 
             for (int i = 0; i < methodInfos.Count; i++)
             {
-                var property = default(PropertyBase);
+                PropertyBase property;
                 try
                 {
                     property = new MethodProperty(methodInfos[i].Name, methodInfos[i], rvtObject);

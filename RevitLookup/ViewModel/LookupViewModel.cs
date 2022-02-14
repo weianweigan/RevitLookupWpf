@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -23,6 +24,7 @@ namespace RevitLookupWpf.ViewModel
         protected LookupViewModel _lookupData;
         private PropertyBase _selectedProperty;
         private RelayCommand _openInNewWindowCommand;
+        private RelayCommand _searchOnlineCommand;
 
         public ObservableCollection<InstanceNode> Roots
         {
@@ -115,8 +117,15 @@ namespace RevitLookupWpf.ViewModel
             }
         }
 
-        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??(_openInNewWindowCommand = new RelayCommand(OpenInNewWindow, CanOpenInNewWindow));
+        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ?? new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
+        public RelayCommand SearchOnlineCommand => _searchOnlineCommand ?? new RelayCommand(SearchOnlineClick);
 
+        void SearchOnlineClick()
+        {
+            if (SelectedProperty == null) throw new ArgumentException(nameof(SelectedProperty));
+            string query = $"https://www.revitapidocs.com/2022/?query={SelectedProperty.Name}";
+            Process.Start(query);
+        }
         private void OpenInNewWindow()
         {
             var lookupWindow = new LookupWindow();

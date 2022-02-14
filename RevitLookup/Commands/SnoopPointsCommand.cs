@@ -5,9 +5,11 @@
 
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.Exceptions;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using RevitLookupWpf.View;
+using ArgumentException = System.ArgumentException;
 using OperationCanceledException = Autodesk.Revit.Exceptions.OperationCanceledException;
 
 namespace RevitLookupWpf.Commands
@@ -23,18 +25,17 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-            var windowHandle = commandData.Application.MainWindowHandle;
+            
             Document doc = commandData.Application.ActiveUIDocument.Document;
-            var lookupWindow = new LookupWindow(windowHandle);
+          
             // Setting work plane
             using (Transaction transaction = new Transaction(doc, "sn"))
             {
                 transaction.Start();
-                if (doc.ActiveView is not View3D)
+                if (doc.ActiveView is Autodesk.Revit.DB.ViewSection or View3D)
                 {
                     Plane plane = Plane.CreateByNormalAndOrigin(doc.ActiveView.ViewDirection, doc.ActiveView.Origin);
                     doc.ActiveView.SketchPlane = SketchPlane.Create(doc, plane);
-                    doc.ActiveView.ShowActiveWorkPlane();
                 }
                 List<XYZ> xyzs = new List<XYZ>();
                 TaskDialog.Show(Resource.AppName, "Select Ordered Points,Press Esc To Finish", TaskDialogCommonButtons.Ok);
@@ -44,12 +45,16 @@ namespace RevitLookupWpf.Commands
                     {
                         XYZ xyz = commandData.Application.ActiveUIDocument.Selection.PickPoint(
                             "Select Ordered Point,Press Esc to Cancel :D");
-                      xyzs.Add(xyz);
+                        xyzs.Add(xyz);
                     }
-                    catch (Exception)
+                    catch (OperationCanceledException)
                     {
                         //user press esc
                         break;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new ArgumentException(e.ToString());
                     }
                 }
 
@@ -58,6 +63,8 @@ namespace RevitLookupWpf.Commands
                     transaction.RollBack();
                     return Result.Succeeded;
                 }
+                var windowHandle = commandData.Application.MainWindowHandle;
+                var lookupWindow = new LookupWindow(windowHandle);
                 if (xyzs.Count == 1) lookupWindow.SetRvtInstance(xyzs.FirstOrDefault());
                 else if(xyzs.Any())
                 {

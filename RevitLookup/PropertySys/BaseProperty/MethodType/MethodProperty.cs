@@ -177,6 +177,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("TrimExcess", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ZoomSheetSize", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ZoomToFit", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Launch", StringComparison.InvariantCultureIgnoreCase)) return true;
             return false;
         }
 

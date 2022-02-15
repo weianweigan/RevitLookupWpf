@@ -9,7 +9,7 @@
     <TargetFramework>net48</TargetFramework>
     <RevitVersion>2022</RevitVersion>
     <Nullable>disable</Nullable>
-    <Version>$(RevitVersion).0.3</Version>
+    <Version>$(RevitVersion).0.4</Version>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
     <DebugSymbols>true</DebugSymbols>

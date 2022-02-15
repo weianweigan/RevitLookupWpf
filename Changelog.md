@@ -1,4 +1,10 @@
 # Changelog
+- 2022-02-15 **2022.0.4**
+  - Support Snoop Point on element
+  - Support Snoop Points
+  - Improve Snoop Multiple Faces,Edges
+  - Fix problem with some invoke method
+  
 - 2022-02-14 **2022.0.3**
   - Fix scrollviewer target snoop
   - Add feature snoop open new window by context menu

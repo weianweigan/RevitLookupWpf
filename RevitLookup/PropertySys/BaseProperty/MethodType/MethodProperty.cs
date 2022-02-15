@@ -156,6 +156,8 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("SubmitPrint",StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Set",StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Revert",StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ToggleToIsometric", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ToggleToPerspective", StringComparison.InvariantCultureIgnoreCase)) return true;
             return false;
         }
 

@@ -155,6 +155,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("SaveAs", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("UpdateAllOpenViews", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("RefreshActiveView", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Maximize3DExtents", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("OpenSharedParameterFile", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("PurgeReleasedAPIObjects", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("UpdateRenderAppearanceLibrary", StringComparison.OrdinalIgnoreCase)) return true;
@@ -168,7 +169,14 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("EnableRevealHiddenMode", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("HideActiveWorkPlane", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ShowActiveWorkPlane", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("PickIMXFileToImport", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Unlock", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Clear", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Sort", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Reverse", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("TrimExcess", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ZoomSheetSize", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ZoomToFit", StringComparison.InvariantCultureIgnoreCase)) return true;
             return false;
         }
 

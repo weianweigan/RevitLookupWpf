@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Interop;
 using GalaSoft.MvvmLight.Messaging;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.ViewModel;
 
 namespace RevitLookupWpf.View
@@ -50,6 +52,11 @@ namespace RevitLookupWpf.View
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             _viewModel.SelectedItemChangedCommand?.Execute(null);
+        }
+
+        private void LookupWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            ProcessManager.SetActivateWindow();
         }
     }
 }

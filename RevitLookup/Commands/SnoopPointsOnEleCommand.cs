@@ -7,6 +7,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 using OperationCanceledException = Autodesk.Revit.Exceptions.OperationCanceledException;
 
@@ -30,8 +31,7 @@ namespace RevitLookupWpf.Commands
 
             try
             {
-                var windowHandle = commandData.Application.MainWindowHandle;
-                var lookupWindow = new LookupWindow(windowHandle);
+                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
 
                 var selections = uiDoc.Selection.GetElementIds().Select(p => uiDoc.Document.GetElement(p)).ToList();
 

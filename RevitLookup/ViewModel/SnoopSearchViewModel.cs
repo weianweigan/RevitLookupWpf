@@ -10,6 +10,7 @@ using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 
 namespace RevitLookupWpf.ViewModel
@@ -56,8 +57,7 @@ namespace RevitLookupWpf.ViewModel
                     }
                 }
                 SearchWindow.Close();
-                var windowHandle = Data.Application.MainWindowHandle;
-                var lookupWindow = new LookupWindow(windowHandle);
+                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
                 lookupWindow.SetRvtInstance(element);
                 lookupWindow.Show();
             }

@@ -8,6 +8,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.Exceptions;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 using ArgumentException = System.ArgumentException;
 using OperationCanceledException = Autodesk.Revit.Exceptions.OperationCanceledException;
@@ -63,8 +64,7 @@ namespace RevitLookupWpf.Commands
                     transaction.RollBack();
                     return Result.Succeeded;
                 }
-                var windowHandle = commandData.Application.MainWindowHandle;
-                var lookupWindow = new LookupWindow(windowHandle);
+                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
                 if (xyzs.Count == 1) lookupWindow.SetRvtInstance(xyzs.FirstOrDefault());
                 else if(xyzs.Any())
                 {

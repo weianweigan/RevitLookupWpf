@@ -6,6 +6,7 @@
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 
 namespace RevitLookupWpf.Commands
@@ -18,8 +19,7 @@ namespace RevitLookupWpf.Commands
         {
             try
             {
-                var windowHandle = commandData.Application.MainWindowHandle;
-                var lookupWindow = new LookupWindow(windowHandle);
+                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
                 lookupWindow.SetRvtInstance(commandData.Application);
                 lookupWindow.Show();
             }

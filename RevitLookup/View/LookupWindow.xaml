@@ -13,6 +13,7 @@
     MinHeight="400"
     d:DataContext="{d:DesignInstance Type=viewModel:LookupWindowViewModel}"
     ResizeMode="CanResize"
+    Closing="LookupWindow_OnClosing"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
     <Window.InputBindings>

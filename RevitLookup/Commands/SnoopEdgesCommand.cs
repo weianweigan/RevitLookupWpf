@@ -7,6 +7,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 using OperationCanceledException = Autodesk.Revit.Exceptions.OperationCanceledException;
 
@@ -23,8 +24,7 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-            var windowHandle = commandData.Application.MainWindowHandle;
-            var lookupWindow = new LookupWindow(windowHandle);
+            var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
             List<GeometryObject> geos = new List<GeometryObject>();
             TaskDialog.Show(Resource.AppName, "Select Ordered Edges,Press Esc To Finish", TaskDialogCommonButtons.Ok);
             while (true)

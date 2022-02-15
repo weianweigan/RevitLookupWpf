@@ -24,11 +24,6 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Resources\search.png" />
-    <None Remove="RevitLookupWpf.addin" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="RevitLookupWpf.addin" />
   </ItemGroup>
 

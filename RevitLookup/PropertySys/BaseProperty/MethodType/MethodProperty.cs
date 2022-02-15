@@ -189,6 +189,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("ResetPartShape", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Reset", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("MakeUnbound", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("DissociateFromGlobalParameter ", StringComparison.InvariantCultureIgnoreCase)) return true;
             return false;
         }
 

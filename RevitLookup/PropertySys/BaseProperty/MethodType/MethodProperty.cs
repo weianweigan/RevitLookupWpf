@@ -154,6 +154,9 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("SaveAs", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("UpdateAllOpenViews", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("RefreshActiveView", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("OpenSharedParameterFile", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("PurgeReleasedAPIObjects", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("UpdateRenderAppearanceLibrary", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("SaveCloudModel", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Print",StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("SubmitPrint",StringComparison.InvariantCultureIgnoreCase)) return true;

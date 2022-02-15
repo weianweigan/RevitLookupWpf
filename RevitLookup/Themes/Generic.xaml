@@ -7,5 +7,8 @@
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Image.xaml" />
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/BreadCrumNavigation.xaml" />
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/ScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/GroupBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/SplitDropDownItem.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/ParameterGrid.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

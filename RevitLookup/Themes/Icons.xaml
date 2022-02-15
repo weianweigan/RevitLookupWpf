@@ -85,4 +85,12 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
+    <DrawingImage x:Key="dropdownDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V1024 H2048 V0 H0 Z">
+                <GeometryDrawing Brush="#FF000000" Geometry="F1 M2048,1024z M0,0z M1024,1024L0,0 2048,0z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
 </ResourceDictionary>

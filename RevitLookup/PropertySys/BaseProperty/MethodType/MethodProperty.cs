@@ -151,6 +151,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         bool IsExcept(MethodInfo methodInfo)
         {
             if (methodInfo.Name.Equals("Save",StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Regenerate", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("SaveAs", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("UpdateAllOpenViews", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("RefreshActiveView", StringComparison.OrdinalIgnoreCase)) return true;

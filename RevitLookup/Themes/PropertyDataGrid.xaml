@@ -145,5 +145,27 @@
                 </Grid>
             </DataTemplate>
         </controls:PropertyDataGridValueTemplateSelector.NullObjectDataTemplate>
+        <!--Parameters-->
+        <controls:PropertyDataGridValueTemplateSelector.ParameterDataTemplate>
+            <DataTemplate>
+                <controls:SplitDropDownItem Text="{Binding ValueType}" ToolTip="{Binding ToolTip}">
+                    <controls:SplitDropDownItem.Style>
+                        <Style TargetType="controls:SplitDropDownItem">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CanExecute}" Value="True">
+                                    <Setter Property="FontWeight" Value="Black"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SolvedValue}" Value="True">
+                                    <Setter Property="Foreground" Value="Blue"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding HasError}" Value="True">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </controls:SplitDropDownItem.Style>
+                </controls:SplitDropDownItem>
+            </DataTemplate>
+        </controls:PropertyDataGridValueTemplateSelector.ParameterDataTemplate>
     </controls:PropertyDataGridValueTemplateSelector>
 </ResourceDictionary>

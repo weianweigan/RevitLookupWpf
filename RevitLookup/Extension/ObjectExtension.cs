@@ -77,7 +77,10 @@ namespace RevitLookupWpf.Extension
                 }
                 catch (Exception ex)
                 {
-                    property = new ExceptionProperty(methodInfos[i].Name, ex);
+                    property = new ExceptionProperty(methodInfos[i].Name, ex)
+                    {
+                        IsMethod = true
+                    };
                 }
                 if (property != null)
                 {
@@ -114,9 +117,13 @@ namespace RevitLookupWpf.Extension
 
             if (propertyInfo.GetMethod != null)
             {
-                if (propertyInfo.GetMethod.GetParameters().IsAllInputable())
+                var parameters = propertyInfo.GetMethod.GetParameters();
+                if (parameters.IsAllInputable())
                 {
                     property = new GetIndexerProperty(propertyInfo.Name, rvtObject, propertyInfo);
+                }else if (parameters?.Any() == true)
+                {
+                    throw new ArgumentException($"Parameter({parameters.AggregateParameters()}) cannot Input");
                 }
                 else
                 {

@@ -8,6 +8,8 @@ namespace RevitLookupWpf.PropertySys
         {
             Value = exception;
             Msg = Value.Message;
+
+            ToolTip = Value.ToString();
         }
 
         public string Msg { get; set; }

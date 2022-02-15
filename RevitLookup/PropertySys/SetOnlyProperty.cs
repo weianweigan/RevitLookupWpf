@@ -1,4 +1,5 @@
-﻿using RevitLookupWpf.PropertySys.BaseProperty;
+﻿using RevitLookupWpf.Helpers;
+using RevitLookupWpf.PropertySys.BaseProperty;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,26 @@ namespace RevitLookupWpf.PropertySys
 {
     public class SetOnlyProperty : ParametersProperty
     {
-        public SetOnlyProperty(string name,object parent, PropertyInfo property) : base(name,parent)
+        private readonly PropertyInfo _propertyInfo;
+
+        public SetOnlyProperty(string name,object parent, PropertyInfo propertyInfo) : base(name,parent)
         {
+            _propertyInfo = propertyInfo;
+
+            Parameters = propertyInfo.SetMethod
+                .GetParameters()
+                .ToParameterSyss()
+                .ToList();
+
+            ValueType = $"Set({propertyInfo.SetMethod.GetParameters().AggregateParameters()})";
+            ToolTip = ValueType;
+
+            DetermainReturnInfo(null);
+        }
+
+        protected override object Invoke()
+        {
+            return _propertyInfo.SetMethod.Invoke(_parent, Parameters.Select(p => p.GetValue()).ToArray());
         }
     }
 }

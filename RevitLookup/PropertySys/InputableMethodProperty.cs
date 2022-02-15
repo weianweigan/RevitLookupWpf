@@ -1,4 +1,5 @@
-﻿using RevitLookupWpf.PropertySys.BaseProperty;
+﻿using RevitLookupWpf.Helpers;
+using RevitLookupWpf.PropertySys.BaseProperty;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,26 @@ namespace RevitLookupWpf.PropertySys
     {
         private readonly MethodInfo _methodInfo;
 
-        public InputableMethodProperty(string name, object parent,MethodInfo methodInfo) : base(name, parent)
+        public InputableMethodProperty(string name, object parent,MethodInfo methodInfo) : base(methodInfo.Name, parent)
         {
             _methodInfo = methodInfo;
+            IsMethod = true;
+
+            ToolTip = $"{methodInfo.ReturnType?.Name} {name}({methodInfo.GetParameters().AggregateParameters()})";
+
+            Parameters = methodInfo
+                .GetParameters()
+                .ToParameterSyss()
+                .ToList();
+
+            ValueType = ToolTip;
+
+            DetermainReturnInfo(methodInfo.ReturnType);
+        }
+
+        protected override object Invoke()
+        {
+            return _methodInfo.Invoke(_parent, Parameters.Select(p => p.GetValue()).ToArray());
         }
     }
 }

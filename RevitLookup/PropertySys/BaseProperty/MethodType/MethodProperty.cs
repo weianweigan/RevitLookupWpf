@@ -151,6 +151,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         bool IsExcept(MethodInfo methodInfo)
         {
             if (methodInfo.Name.Equals("Save",StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("SaveCloudModel", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Print",StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("SubmitPrint",StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Set",StringComparison.InvariantCultureIgnoreCase)) return true;

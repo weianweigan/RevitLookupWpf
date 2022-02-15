@@ -186,6 +186,8 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("GetAnalyticalModel", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Activate", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("FitToModel", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ResetPartShape", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Reset", StringComparison.InvariantCultureIgnoreCase)) return true;
             return false;
         }
 

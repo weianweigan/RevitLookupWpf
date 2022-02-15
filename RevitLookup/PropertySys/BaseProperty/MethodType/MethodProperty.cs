@@ -158,6 +158,10 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("Revert",StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ToggleToIsometric", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ToggleToPerspective", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("EnableRevealHiddenMode", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("HideActiveWorkPlane", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ShowActiveWorkPlane", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Unlock", StringComparison.InvariantCultureIgnoreCase)) return true;
             return false;
         }
 

@@ -152,8 +152,11 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         {
             if (methodInfo.Name.Equals("Save",StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Regenerate", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ConvertTemporaryHideIsolateToPermanent", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("SaveAs", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("UpdateAllOpenViews", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("DeactivateAllModes", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("RemoveCustomization", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("RefreshActiveView", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Maximize3DExtents", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("OpenSharedParameterFile", StringComparison.OrdinalIgnoreCase)) return true;
@@ -178,6 +181,15 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("ZoomSheetSize", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ZoomToFit", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Launch", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ResetLinks", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ResetManualAdjustment", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("GetAnalyticalModel", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Activate", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("FitToModel", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ResetPartShape", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Reset", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("MakeUnbound", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("DissociateFromGlobalParameter ", StringComparison.InvariantCultureIgnoreCase)) return true;
             return false;
         }
 

@@ -6,6 +6,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.InstanceTree;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
@@ -128,7 +129,7 @@ namespace RevitLookupWpf.ViewModel
         }
         private void OpenInNewWindow()
         {
-            var lookupWindow = new LookupWindow();
+            var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
                 lookupWindow.SetRvtInstance(objectProperty.Value);

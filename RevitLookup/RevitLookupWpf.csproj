@@ -7,27 +7,41 @@
     <ImplicitUsings>true</ImplicitUsings>
     <UseWindowsForms>false</UseWindowsForms>
     <TargetFramework>net48</TargetFramework>
-    <RevitVersion>2022</RevitVersion>
     <Nullable>disable</Nullable>
-    <Version>$(RevitVersion).0.4</Version>
+    <Configurations>Debug R22</Configurations>
+    <Configurations>$(Configurations);Release R19;Release R20;Release R21;Release R22</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('Release'))">
     <Optimize>true</Optimize>
     <DebugType>none</DebugType>
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('R19'))">
+    <RevitVersion>2019</RevitVersion>
+    <DefineConstants>$(DefineConstants);R19</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('R20'))">
+    <RevitVersion>2020</RevitVersion>
+    <DefineConstants>$(DefineConstants);R20</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('R21'))">
+    <RevitVersion>2021</RevitVersion>
+    <DefineConstants>$(DefineConstants);R21</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.Contains('R22'))">
+    <RevitVersion>2022</RevitVersion>
+    <DefineConstants>$(DefineConstants);R22</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
+    <Version>$(RevitVersion).0.4</Version>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Resources\search.png" />
-    <None Remove="RevitLookupWpf.addin" />
-  </ItemGroup>
-
   <ItemGroup>
     <Content Include="RevitLookupWpf.addin" />
   </ItemGroup>

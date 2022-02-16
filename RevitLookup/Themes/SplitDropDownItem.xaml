@@ -30,31 +30,30 @@
                             <Image Source="{StaticResource dropdownDrawingImage}"/>
                         </Button>
                         <Popup x:Name="PART_Popup"
-               Placement="Bottom" PlacementTarget="{Binding ElementName=_parameterGroup}"
-           Width="{Binding ActualWidth,ElementName=_parameterGroup}"
-                       StaysOpen="False">
-                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                               Placement="Bottom" 
+                               PopupAnimation="Scroll"
+                               PlacementTarget="{Binding ElementName=_parameterGroup}"
+                               Width="{Binding ActualWidth,ElementName=_parameterGroup}"
+                               StaysOpen="False">
+                            <Border BorderThickness="1"
+                        BorderBrush="Black" Background="White">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <ItemsControl Style="{StaticResource ParmeterGrid}"
+                                      ItemsSource="{Binding Parameters}">
+                                    </ItemsControl>
+                                    <Button Width="75" Height="23"
+                                            Grid.Row="1" 
+                                            x:Name="PART_ApplyBtn"
+                                            Command="{TemplateBinding ApplyCommand}">Apply</Button>
+                                </Grid>
+                            </Border>
                         </Popup>
                     </Grid>
                 </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Content">
-            <Setter.Value>
-                <Border BorderThickness="1"
-                        BorderBrush="Black" Background="White">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <ItemsControl Style="{StaticResource ParmeterGrid}"
-                                      ItemsSource="{Binding Parameters}">
-                        </ItemsControl>
-                        <Button Width="75" Height="23" Grid.Row="1" 
-                                Command="{Binding ApplyCommand}">Apply</Button>
-                    </Grid>
-                </Border>
             </Setter.Value>
         </Setter>
     </Style>

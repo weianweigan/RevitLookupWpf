@@ -72,7 +72,9 @@
                            Foreground="Black"
                            FontWeight="Black"/>
                     </GroupBox.Header>
-                    <ComboBox SelectedItem="{Binding Value}" ItemsSource="{Binding Views}"/>
+                    <ComboBox SelectedItem="{Binding Value}" 
+                              DisplayMemberPath="Name"
+                              ItemsSource="{Binding AllViews}"/>
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.ViewDataTemplate>

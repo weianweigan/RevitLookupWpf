@@ -47,13 +47,31 @@ namespace RevitLookupWpf.Controls
         public static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("Text", typeof(string), typeof(SplitDropDownItem), new PropertyMetadata(null));
 
+        public ICommand ApplyCommand
+        {
+            get { return (ICommand)GetValue(ApplyCommandProperty); }
+            set { SetValue(ApplyCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty ApplyCommandProperty =
+            DependencyProperty.Register("ApplyCommand", typeof(ICommand), typeof(SplitDropDownItem), new PropertyMetadata(null));
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             var btn = GetTemplateChild("PART_Btn") as Button;
-
             btn.Click += Btn_Click;
+
+            var aplyBtn = GetTemplateChild("PART_ApplyBtn") as Button;
+            aplyBtn.Click += AplyBtn_Click;
+        }
+
+        private void AplyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var popUp = GetTemplateChild("PART_Popup") as Popup;
+
+            popUp.IsOpen = false;
         }
 
         private void Btn_Click(object sender, RoutedEventArgs e)

@@ -27,7 +27,7 @@ namespace RevitLookupWpf.Commands
             }
             finally
             {
-                SnoopingContext.Dispose();
+                //SnoopingContext.Dispose();
             }
 
             return result;

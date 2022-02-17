@@ -8,6 +8,7 @@
     <UseWindowsForms>false</UseWindowsForms>
     <TargetFramework>net48</TargetFramework>
     <Nullable>disable</Nullable>
+    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
     <Configurations>Debug R22</Configurations>
     <Configurations>$(Configurations);Release R19;Release R20;Release R21;Release R22</Configurations>
   </PropertyGroup>
@@ -41,21 +42,6 @@
     <Version>$(RevitVersion).0.5</Version>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug R22|AnyCPU'">
-    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release R19|AnyCPU'">
-    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release R20|AnyCPU'">
-    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release R21|AnyCPU'">
-    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release R22|AnyCPU'">
-    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="RevitLookupWpf.addin" />

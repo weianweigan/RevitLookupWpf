@@ -92,6 +92,21 @@
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.EnumDataTemplate>
+        <controls:ParameterGridTemplateSelector.BuiltInParameterDataTemplate>
+            <DataTemplate>
+                <GroupBox>
+                    <GroupBox.Header>
+                        <Hyperlink NavigateUri="https://www.revitapidocs.com/2022/fb011c91-be7e-f737-28c7-3f1e1917a0e0.htm"
+                                   Command="{Binding OpenUrlCommand}">
+                            <TextBlock Text="{Binding Name}"
+                                       FontWeight="Black"/>
+                        </Hyperlink>
+                    </GroupBox.Header>
+                    <TextBox Text="{Binding SelectedItem}"
+                             MaxHeight="80"/>
+                </GroupBox>
+            </DataTemplate>
+        </controls:ParameterGridTemplateSelector.BuiltInParameterDataTemplate>
         <controls:ParameterGridTemplateSelector.GuidDataTemplate>
             <DataTemplate>
                 <GroupBox>

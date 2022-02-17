@@ -75,6 +75,11 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
 
             foreach (var parameter in Parameters)
             {
+                if (!parameter.IsLegal())
+                {
+                    return;
+                }
+
                 if (parameter.GetValue() == null)
                 {
                     var res = TaskDialog.Show("Warining", $"Parameter{parameter.Name} is null,Continue?", TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No);

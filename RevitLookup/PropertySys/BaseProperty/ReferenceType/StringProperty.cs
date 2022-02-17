@@ -4,8 +4,7 @@
     {
         public StringProperty(string name, string value):base(name)
         {
-            Value = value;
-
+            Value = value.Replace("\n"," ").Replace("\r"," ");
             IsClass = true;
         }
     }

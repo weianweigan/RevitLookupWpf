@@ -25,39 +25,27 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-
-            try
+            var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+            List<GeometryObject> geos = new List<GeometryObject>();
+            TaskDialog.Show(Resource.AppName, "Select Ordered Faces,Press Esc To Finish", TaskDialogCommonButtons.Ok);
+            while (true)
             {
-                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
-                List<GeometryObject> geos = new List<GeometryObject>();
-                TaskDialog.Show(Resource.AppName, "Select Ordered Faces,Press Esc To Finish", TaskDialogCommonButtons.Ok);
-                while (true)
+                try
                 {
-                    try
-                    {
-                        var refElem = uidoc.Selection.PickObject(ObjectType.Face);
-                        var geometryObject = uidoc.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
-                        geos.Add(geometryObject);
-                    }
-                    catch (Exception)
-                    {
-                        //user press esc
-                        break;
-                    }
+                    var refElem = uidoc.Selection.PickObject(ObjectType.Face);
+                    var geometryObject = uidoc.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
+                    geos.Add(geometryObject);
                 }
-                if (geos.Count == 0) return Result.Cancelled;
-                if (geos.Count == 1) lookupWindow.SetRvtInstance(geos.FirstOrDefault());
-                else lookupWindow.SetRvtInstance(geos);
-                lookupWindow.Show();
+                catch (Exception)
+                {
+                    //user press esc
+                    break;
+                }
             }
-            catch (OperationCanceledException)
-            {
-                //ignore user press esc
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException(e.ToString());
-            }
+            if (geos.Count == 0) return Result.Cancelled;
+            if (geos.Count == 1) lookupWindow.SetRvtInstance(geos.FirstOrDefault());
+            else lookupWindow.SetRvtInstance(geos);
+            lookupWindow.Show();
 
             return Result.Succeeded;
         }

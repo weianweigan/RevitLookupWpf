@@ -19,7 +19,8 @@ namespace RevitLookupWpf.Commands
     {
         public override Result SnoopClick(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            if (commandData.Application.ActiveUIDocument == null)
+            UIDocument uidoc = commandData.Application.ActiveUIDocument;
+            if (uidoc == null)
             {
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
@@ -34,8 +35,9 @@ namespace RevitLookupWpf.Commands
                 {
                     try
                     {
-                        var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Face);
-                        var geometryObject = commandData.Application.ActiveUIDocument.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
+                        var refElem = uidoc.Selection.PickObject(ObjectType.Face);
+                        var geometryObject = uidoc.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
+                        uidoc.Selection.SetElementIds(new List<ElementId>(geometryObject.Id));
                         geos.Add(geometryObject);
                     }
                     catch (Exception)

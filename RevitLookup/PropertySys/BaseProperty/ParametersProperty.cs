@@ -77,7 +77,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
             {
                 if (parameter.GetValue() == null)
                 {
-                    var res = TaskDialog.Show("Warining", $"Parameter{parameter.Name} is null,Continue?", TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No);
+                    var res = TaskDialog.Show("Warning", $"Parameter{parameter.Name} is null,Continue?", TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No);
 
                     if (res == TaskDialogResult.No)
                     {

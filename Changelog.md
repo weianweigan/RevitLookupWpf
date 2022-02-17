@@ -1,4 +1,10 @@
 # Changelog
+- 2022-02-17 **2022.0.5**
+  - Fix some method automatic invoke
+  - Add Parameter input feature show value window
+  - Support Snoop boudingbox #9
+  - Support maintain and build msi for 4 version from Revit 2019 to Revit 2022
+
 - 2022-02-15 **2022.0.4**
   - Support Snoop Point on element
   - Support Snoop Points

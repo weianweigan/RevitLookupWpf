@@ -42,6 +42,21 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug R22|AnyCPU'">
+    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release R19|AnyCPU'">
+    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release R20|AnyCPU'">
+    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release R21|AnyCPU'">
+    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release R22|AnyCPU'">
+    <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="RevitLookupWpf.addin" />
   </ItemGroup>

@@ -45,7 +45,7 @@ Creating a package:
 
 For more information on building, see the [**RevitTemplates**](https://github.com/Nice3point/RevitTemplates) Wiki page.
 
-**Note:** The project currently supports the version Revit Current.
+**Note:** The project currently supports 4 version nearest with current year.
 
 Please refer to the [CHANGELOG](CHANGELOG.md) for details.
 

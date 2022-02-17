@@ -37,7 +37,6 @@ namespace RevitLookupWpf.Commands
                     {
                         var refElem = uidoc.Selection.PickObject(ObjectType.Face);
                         var geometryObject = uidoc.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
-                        uidoc.Selection.SetElementIds(new List<ElementId>(geometryObject.Id));
                         geos.Add(geometryObject);
                     }
                     catch (Exception)

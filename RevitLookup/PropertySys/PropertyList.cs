@@ -17,8 +17,8 @@ namespace RevitLookupWpf.PropertySys
         public object RvtObject { get; }
 
         /// <summary>
-        /// 继承层次
+        /// Inheritance 
         /// </summary>
-        public string Deri { get; set; }
+        public string Inheri { get; set; }
     }
 }

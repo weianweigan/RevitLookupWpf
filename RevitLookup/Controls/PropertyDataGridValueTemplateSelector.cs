@@ -30,6 +30,8 @@ namespace RevitLookupWpf.Controls
         public DataTemplate DefaultObjectDataTemplate {  get; set; }
 
         public DataTemplate NullObjectDataTemplate { get; set; }
+
+        public DataTemplate ParameterDataTemplate { get; set; }
         #endregion
 
         #region Public Methods
@@ -70,8 +72,15 @@ namespace RevitLookupWpf.Controls
                 case nameof(NullObjectProperty):
                         dataTemplate = NullObjectDataTemplate;
                     break;
+                case nameof(GetIndexerProperty):
+                case nameof(InputableMethodProperty):
+                case nameof(SetOnlyProperty):
+                    dataTemplate = ParameterDataTemplate;
+                    break;
                 default:
-                    throw new NotImplementedException(type.Name);
+                    //dataTemplate = DefaultObjectDataTemplate;
+                    //break;
+                    throw new NotImplementedException(type.Name+"don't have a matched control template");
             }
 
             if (dataTemplate == null)

@@ -137,7 +137,10 @@ namespace RevitLookupWpf.ViewModel
             else if (SelectedProperty is MethodProperty methodProperty)
             {
                 lookupWindow.SetRvtInstance(methodProperty.MethodValue);
-            }
+            }else if(SelectedProperty is ParametersProperty parametersProperty)
+            {
+                lookupWindow.SetRvtInstance(parametersProperty.Value);
+            }    
             lookupWindow.Show();
         }
 
@@ -150,7 +153,11 @@ namespace RevitLookupWpf.ViewModel
             {
                 return methodProperty.MethodValue != null && methodProperty.CanExecute;
             }
-            
+            else if (SelectedProperty is ParametersProperty parametersProperty)
+            {
+                return parametersProperty.Value != null && !parametersProperty.IsReturnValueType;
+            }
+
             return false;
         }
 

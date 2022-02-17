@@ -3,4 +3,41 @@
         <Setter Property="Width" Value="75" />
         <Setter Property="Height" Value="23" />
     </Style>
+
+    <Style x:Key="RvtButton" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource RvtButtonBackGround}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RvtGray}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style x:Key="CornerRadiusButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="_border"
+                        BorderBrush="{TemplateBinding Control.BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5,5,5,5">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFFCFCFC" Offset="0.0" />
+                                <GradientStop Color="#FFF0F0F0" Offset="0.2" />
+                                <GradientStop Color="#FFE2E2E2" Offset="0.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!--触发器：按钮不可用用时的响应-->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="_border" Property="Background" Value="{DynamicResource RevitBlue}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

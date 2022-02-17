@@ -1,10 +1,11 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using RevitLookupWpf.View;
 using System.Windows.Input;
 
 namespace RevitLookupWpf.PropertySys.BaseProperty
 {
-    public abstract class PropertyBase
+    public abstract class PropertyBase:ObservableObject
     {
         public string Name { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using RevitLookupWpf.Helpers;
+﻿using RevitLookupWpf.Extension;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys.BaseProperty;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace RevitLookupWpf.PropertySys
     {
         private readonly PropertyInfo _propertyInfo;
 
-        public SetOnlyProperty(string name,object parent, PropertyInfo propertyInfo) : base(name,parent)
+        public SetOnlyProperty(string name, object parent, PropertyInfo propertyInfo) : base(name,propertyInfo.GetFullName(),parent)
         {
             _propertyInfo = propertyInfo;
 

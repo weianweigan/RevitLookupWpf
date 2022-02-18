@@ -44,16 +44,23 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\RevitAPI2022.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="RevitLookupWpf.addin" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\RevitAPI2022.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\search.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

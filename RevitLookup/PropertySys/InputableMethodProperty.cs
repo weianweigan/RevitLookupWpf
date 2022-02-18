@@ -1,4 +1,5 @@
-﻿using RevitLookupWpf.Helpers;
+﻿using RevitLookupWpf.Extension;
+using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys.BaseProperty;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace RevitLookupWpf.PropertySys
     {
         private readonly MethodInfo _methodInfo;
 
-        public InputableMethodProperty(string name, object parent,MethodInfo methodInfo) : base(methodInfo.Name, parent)
+        public InputableMethodProperty(string name, object parent,MethodInfo methodInfo) : base(methodInfo.Name, methodInfo.GetFullName(),parent)
         {
             _methodInfo = methodInfo;
             IsMethod = true;

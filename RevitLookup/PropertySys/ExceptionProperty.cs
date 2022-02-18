@@ -4,7 +4,7 @@ namespace RevitLookupWpf.PropertySys
 {
     public class ExceptionProperty:ObjectProperty<Exception>
     {
-        public ExceptionProperty(string name,Exception exception):base(name)
+        public ExceptionProperty(string name, string fullName, Exception exception):base(name,fullName)
         {
             Value = exception;
             Msg = Value.Message;

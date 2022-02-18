@@ -26,7 +26,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
         private string _valueType;
         private bool _hasError;
 
-        public ParametersProperty(string name, object parent) : base(name)
+        public ParametersProperty(string name,string fullName ,object parent) : base(name,fullName)
         {
             _parent = parent;
         }

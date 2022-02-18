@@ -27,7 +27,7 @@ namespace RevitLookupWpf.Commands
 
             try
             {
-                var lookupWindow = new LookupWindow();
+                var lookupWindow = new LookupWindow(commandData);
                 var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Element);
                 GeometryElement geometryElement = commandData.Application.ActiveUIDocument.Document.GetElement(refElem)
                     .get_Geometry(new Options());

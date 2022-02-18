@@ -19,7 +19,7 @@ namespace RevitLookupWpf.Commands
         {
             try
             {
-                var lookupWindow = new LookupWindow();
+                var lookupWindow = new LookupWindow(commandData);
                 lookupWindow.SetRvtInstance(commandData.Application);
                 lookupWindow.Show();
             }

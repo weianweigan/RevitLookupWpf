@@ -24,7 +24,7 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-            var lookupWindow = new LookupWindow();
+            var lookupWindow = new LookupWindow(commandData);
             List<GeometryObject> geos = new List<GeometryObject>();
             TaskDialog.Show(Resource.AppName, "Select Ordered Edges,Press Esc To Finish", TaskDialogCommonButtons.Ok);
             while (true)

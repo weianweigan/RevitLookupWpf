@@ -141,7 +141,7 @@ namespace RevitLookupWpf.InstanceTree
         #endregion
 
         #region Ctor
-        public static InstanceNode Create<TRvtObjcet>(TRvtObjcet obj)
+        public static InstanceNode Create<TRvtObjcet>(TRvtObjcet obj,ExternalCommandData data)
         {
             if (obj == null)
             {
@@ -160,7 +160,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new ElementInstanceNode(element);
                         break;
                     case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId);
+                        Document document = data.Application.ActiveUIDocument.Document;
+                        Element e = document.GetElement(elementId);
+                        if (e != null) node = new ElementInstanceNode(e);
+                        else node = new ElementIdInstanceNode(elementId);
                         break;
                     case Document doc:
                         node = new DocumentInstanceNode(doc);

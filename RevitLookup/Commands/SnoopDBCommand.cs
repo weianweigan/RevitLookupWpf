@@ -29,7 +29,7 @@ namespace RevitLookupWpf.Commands
 
             try
             {
-                var lookupWindow = new LookupWindow();
+                var lookupWindow = new LookupWindow(commandData);
                 var document = commandData.Application.ActiveUIDocument.Document;
                 var elementTypes = new FilteredElementCollector(document).WhereElementIsElementType();
                 var elementInstances = new FilteredElementCollector(document).WhereElementIsNotElementType();

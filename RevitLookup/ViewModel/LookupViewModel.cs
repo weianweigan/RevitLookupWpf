@@ -28,6 +28,12 @@ namespace RevitLookupWpf.ViewModel
         private RelayCommand _openInNewWindowCommand;
         private RelayCommand _helpCommand;
         public LookupWindow _lookupWindow;
+
+        public LookupViewModel(LookupWindow lookupWindow)
+        {
+            _lookupWindow = lookupWindow;
+        }
+
         public ObservableCollection<InstanceNode> Roots
         {
             get => _roots; set

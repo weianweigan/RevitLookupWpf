@@ -26,7 +26,7 @@ namespace RevitLookupWpf.Extension
                         .Select(p => p.ParameterType.FullName)
                         .Aggregate((p1, p2) => $"{p1},{p2}");
 
-                return $"{methodInfo.DeclaringType.FullName}.{methodInfo.Name}.{parameterStr}";
+                return $"{methodInfo.DeclaringType.FullName}.{methodInfo.Name}({parameterStr})";
             }
         }
 

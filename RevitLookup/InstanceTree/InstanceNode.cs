@@ -59,13 +59,9 @@ namespace RevitLookupWpf.InstanceTree
                         Children.Add(node);
                         break;
                     case ElementId elementId:
-                        Document doc = Data.Application.ActiveUIDocument.Document;
-                        Element e = doc.GetElement(elementId);
-                        if (e != null) node = new ElementInstanceNode(e);
-                        else node = new ElementIdInstanceNode(elementId);
+                        node = new ElementIdInstanceNode(elementId, Data).ToElementInstanceNode();
                         Children.Add(node);
                         break;
-                    
                     case InstanceBinding instanceBinding:
                         node = new InstanceBindingInstanceNode(instanceBinding);
                         Children.Add(node);
@@ -135,6 +131,7 @@ namespace RevitLookupWpf.InstanceTree
             }
             if (Children.Any()) Children = Children.OrderBy(x => x.Name).ToObservableCollection();
         }
+
     }
 
     public abstract class InstanceNode : ObservableObject
@@ -164,10 +161,7 @@ namespace RevitLookupWpf.InstanceTree
                         node = new ElementInstanceNode(element);
                         break;
                     case ElementId elementId:
-                        Document document = data.Application.ActiveUIDocument.Document;
-                        Element e = document.GetElement(elementId);
-                        if (e != null) node = new ElementInstanceNode(e);
-                        else node = new ElementIdInstanceNode(elementId);
+                        node = new ElementIdInstanceNode(elementId, data).ToElementInstanceNode();
                         break;
                     case Document doc:
                         node = new DocumentInstanceNode(doc);

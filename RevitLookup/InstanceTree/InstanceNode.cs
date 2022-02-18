@@ -2,11 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.Exceptions;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight;
 using RevitLookupWpf.Extension;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
+using ArgumentNullException = System.ArgumentNullException;
 
 namespace RevitLookupWpf.InstanceTree
 {
@@ -56,6 +58,10 @@ namespace RevitLookupWpf.InstanceTree
                 {
                     case Element element:
                         node = new ElementInstanceNode(element);
+                        Children.Add(node);
+                        break;
+                    case WorksetId worksetId:
+                        node = new WorksetIdInstanceNode(worksetId, Data).ToWorksetInstanceNode();
                         Children.Add(node);
                         break;
                     case ElementId elementId:
@@ -160,6 +166,9 @@ namespace RevitLookupWpf.InstanceTree
                     case Element element:
                         node = new ElementInstanceNode(element);
                         break;
+                    case WorksetId worksetId:
+                        node = new WorksetIdInstanceNode(worksetId, data).ToWorksetInstanceNode();
+                        break;
                     case ElementId elementId:
                         node = new ElementIdInstanceNode(elementId, data).ToElementInstanceNode();
                         break;
@@ -171,6 +180,8 @@ namespace RevitLookupWpf.InstanceTree
                         break;
                 }
             }
+
+            if (node == null) throw new ArgumentNullException(nameof(obj));
             return node;
         }
 

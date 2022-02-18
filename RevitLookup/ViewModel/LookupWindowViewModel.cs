@@ -17,7 +17,7 @@ namespace RevitLookupWpf.ViewModel
 
         private RelayCommand _selectedItemChangedCommand;
         private ObservableCollection<LookupViewModel> _items;
-        private readonly LookupWindow _lookupWindow;
+       
         #endregion
 
         #region Ctor

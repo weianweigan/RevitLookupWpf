@@ -22,11 +22,13 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
 
         public string ToolTip { get; set; }
 
-        public string APIName => IsMethod ? $"M:{FullName}" : $"P:{FullName}";
+        //Not use because we can't use or P to check,still more method, properties other,
+        //so we will change to search result relative
+        //public string APIName => IsMethod ? $"M:{FullName}" : $"P:{FullName}";
 
         public RevitInfo GetRevitInfo()
         {
-            return RevitInfoManager.Find(APIName);
+            return RevitInfoManager.Find(FullName);
         }
     }
 

@@ -123,7 +123,7 @@
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Command="{Binding LookupData.OpenInNewWindowCommand}" Header="Open In New Window" />
-                            <MenuItem Command="{Binding LookupData.SearchOnlineCommand}" Header="Search Online..." />
+                            <MenuItem Command="{Binding LookupData.HelpCommand}" Header="Help..." />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                     <controls:PropertyDataGrid.GroupStyle>

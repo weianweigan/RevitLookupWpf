@@ -52,8 +52,7 @@ namespace RevitLookupWpf.Helpers
         public static RevitInfo Find(string apiName)
         {
             Init();
-            return deserializeObject
-                .FirstOrDefault(x => x.APIName == apiName);
+            return deserializeObject.FirstOrDefault(x => x.APIName.Contains(apiName));
         }
 
         public static string FindLink(string apiName)

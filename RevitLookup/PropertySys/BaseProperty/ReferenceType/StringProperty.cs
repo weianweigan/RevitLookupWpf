@@ -2,7 +2,7 @@
 {
     public class StringProperty : PropertyBase<string>
     {
-        public StringProperty(string name, string value):base(name)
+        public StringProperty(string name,string fullName ,string value):base(name,fullName)
         {
             Value = value.Replace("\n"," ").Replace("\r"," ");
             IsClass = true;

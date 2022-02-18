@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Interop;
+using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.Helpers;
@@ -18,15 +20,14 @@ namespace RevitLookupWpf.ViewModel
 {
     public class LookupViewModel : ViewModelBase
     {
-
         private PropertyList _propertyList;
         private ListCollectionView _dataSource;
         private ObservableCollection<InstanceNode> _roots;
         protected LookupViewModel _lookupData;
         private PropertyBase _selectedProperty;
         private RelayCommand _openInNewWindowCommand;
-        private RelayCommand _searchOnlineCommand;
-
+        private RelayCommand _helpCommand;
+        public LookupWindow _lookupWindow;
         public ObservableCollection<InstanceNode> Roots
         {
             get => _roots; set
@@ -103,7 +104,6 @@ namespace RevitLookupWpf.ViewModel
         }
 
         public LookupViewModel Next { get; set; }
-
         public string Name { get; set; }
 
         public string NaviName { get; set; }
@@ -119,14 +119,37 @@ namespace RevitLookupWpf.ViewModel
         }
 
         public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ?? new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
-        public RelayCommand SearchOnlineCommand => _searchOnlineCommand ?? new RelayCommand(SearchOnlineClick);
+        public RelayCommand HelpCommand => _helpCommand ?? new RelayCommand(HelpClick);
 
-        void SearchOnlineClick()
+        void HelpClick()
         {
-            if (SelectedProperty == null) throw new ArgumentException(nameof(SelectedProperty));
+            try
+            {
+                if (SelectedProperty == null) throw new ArgumentException(nameof(SelectedProperty));
+
+                var revitInfo = SelectedProperty.GetRevitInfo();
+                if (revitInfo == null)
+                {
+                    GotoSearchOnline();
+                    return;
+                }
+                var helpWindow = new HelpWindow(revitInfo);
+                helpWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                helpWindow.Owner = _lookupWindow;
+                helpWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                TaskDialog.Show("Error",ex.Message);
+            }
+        }
+
+        void GotoSearchOnline()
+        {
             string query = $"https://www.revitapidocs.com/2022/?query={SelectedProperty.Name}";
             Process.Start(query);
         }
+
         private void OpenInNewWindow()
         {
             var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());

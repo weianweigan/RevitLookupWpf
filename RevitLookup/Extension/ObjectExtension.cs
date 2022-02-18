@@ -42,7 +42,7 @@ namespace RevitLookupWpf.Extension
                 }
                 catch (Exception ex)
                 {
-                    property = new ExceptionProperty(propertyInfo.Name,ex);
+                    property = new ExceptionProperty(propertyInfo.Name,$"{type.FullName}.{propertyInfo.Name}",ex);
                 }
                 if (property != null)
                 {
@@ -72,12 +72,12 @@ namespace RevitLookupWpf.Extension
                     else
                     {
                         //Default Method Properties
-                        property = new MethodProperty(methodInfos[i].Name, methodInfos[i], rvtObject);
+                        property = new MethodProperty(methodInfos[i].Name,methodInfos[i], rvtObject);
                     }
                 }
                 catch (Exception ex)
                 {
-                    property = new ExceptionProperty(methodInfos[i].Name, ex)
+                    property = new ExceptionProperty(methodInfos[i].Name,methodInfos[i].GetFullName() ,ex)
                     {
                         IsMethod = true
                     };
@@ -151,17 +151,17 @@ namespace RevitLookupWpf.Extension
                 switch (propertyInfo.PropertyType.FullName)
                 {
                     case "System.String":
-                        property = new StringProperty(propertyInfo.Name, value as string);
+                        property = new StringProperty(propertyInfo.Name,propertyInfo.GetFullName() ,value as string);
                         break;
 
                     default:
                         if (value == null)
                         {
-                            property = new NullObjectProperty(propertyInfo.Name);
+                            property = new NullObjectProperty(propertyInfo.Name, propertyInfo.GetFullName());
                         }
                         else
                         {
-                            property = new DefaultObjectProperty(propertyInfo.Name, value);
+                            property = new DefaultObjectProperty(propertyInfo.Name, propertyInfo.GetFullName(), value);
                         }
                         break;
                 }
@@ -172,13 +172,13 @@ namespace RevitLookupWpf.Extension
                 switch (propertyInfo.PropertyType.FullName)
                 {
                     case "System.Int32":
-                        property = new IntProperty(propertyInfo.Name, (int)value);
+                        property = new IntProperty(propertyInfo.Name, propertyInfo.GetFullName(), (int)value);
                         break;
                     case "System.Boolean":
-                        property = new BooleanProperty(propertyInfo.Name, (bool)value);
+                        property = new BooleanProperty(propertyInfo.Name, propertyInfo.GetFullName(), (bool)value);
                         break;
                     case "System.Double":
-                        property = new DoubleProperty(propertyInfo.Name, (double)value);
+                        property = new DoubleProperty(propertyInfo.Name, propertyInfo.GetFullName(), (double)value);
                         break;
                     default:
                         throw new NotSupportedException(propertyInfo.PropertyType.FullName);

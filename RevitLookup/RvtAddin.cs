@@ -4,6 +4,7 @@
  */
 
 using System.Reflection;
+using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.UI;
 using RevitLookupWpf.Commands;
 using RevitLookupWpf.Helpers;
@@ -15,6 +16,7 @@ namespace RevitLookupWpf
         #region Public Methods
         public Result OnStartup(UIControlledApplication application)
         {
+            RevitInfoManager.Version = GetRevitVersion(application.ControlledApplication);
             //InitUI(application);
             CreateRibbonPanel(application);
             return Result.Succeeded;
@@ -27,6 +29,16 @@ namespace RevitLookupWpf
         #endregion
 
         #region Private Methods
+
+        private RevitVersion GetRevitVersion(ControlledApplication controlledApplication)
+        {
+            return new RevitVersion(
+                controlledApplication.VersionName,
+                controlledApplication.VersionNumber,
+                controlledApplication.VersionBuild,
+                controlledApplication.SubVersionNumber);
+        }
+
         //private void InitUI(UIControlledApplication application)
         //{
         //    string panelName = "RvtWpfLookup";

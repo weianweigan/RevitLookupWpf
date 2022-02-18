@@ -2,7 +2,7 @@
 {
     public class NullObjectProperty : ObjectProperty<object>
     {
-        public NullObjectProperty(string name) : base(name)
+        public NullObjectProperty(string name,string fullName) : base(name,fullName)
         {
         }
     }

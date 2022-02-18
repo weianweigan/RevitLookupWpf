@@ -7,7 +7,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
     public class ObjectProperty<TObject> : PropertyBase<TObject>
         where TObject : class
     {
-        public ObjectProperty(string name) : base(name)
+        public ObjectProperty(string name,string fullName) : base(name, fullName)
         {
             IsClass = true;
         }

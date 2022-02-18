@@ -33,7 +33,7 @@
                         </Border>
                         <Border x:Name="Header" Grid.Column="0" 
                                 Grid.ColumnSpan="4"
-                                Background="{DynamicResource RvtGray}"
+                                Background="{DynamicResource MainColorHeader}"
                                 Padding="3,1,3,0" Grid.Row="1" 
                                 Grid.RowSpan="1"
                                 HorizontalAlignment="Stretch" 
@@ -48,7 +48,7 @@
                                           Grid.Row="2" 
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           Grid.RowSpan="1"/>
-                        <Border BorderBrush="Black"
+                        <Border BorderBrush="{DynamicResource gr}"
                                 BorderThickness="0,0,0,1" 
                                 Grid.ColumnSpan="4"
                                 Grid.Row="1" 

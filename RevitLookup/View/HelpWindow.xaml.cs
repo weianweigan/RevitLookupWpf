@@ -25,5 +25,10 @@ namespace RevitLookupWpf.View
                 _revitInfo.GetUrl(RevitInfoManager.Version?.VersionNumber)
                 );
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

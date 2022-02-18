@@ -25,7 +25,7 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-            var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+            var lookupWindow = new LookupWindow();
             List<GeometryObject> geos = new List<GeometryObject>();
             TaskDialog.Show(Resource.AppName, "Select Ordered Faces,Press Esc To Finish", TaskDialogCommonButtons.Ok);
             while (true)

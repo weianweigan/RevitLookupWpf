@@ -17,24 +17,11 @@ namespace RevitLookupWpf.View
         public LookupWindow()
         {
             InitializeComponent();
-
             _viewModel = new LookupWindowViewModel(this);
-            _viewModel.CloseAction = new Action(() => Close());
+            _viewModel.CloseAction = Close;
             this.Closed += LookupWindow_Closed;
             DataContext = _viewModel;
-        }
-
-        public LookupWindow(IntPtr parentHandle)
-        {
-            InitializeComponent();
-            
-            _viewModel = new LookupWindowViewModel(this);
-            //设置父窗口为Revit
-            var windowInteropHelper = new WindowInteropHelper(this);
-            windowInteropHelper.Owner = parentHandle;
-
-            _viewModel.CloseAction = new Action(Close);
-            DataContext = _viewModel;
+            this.SetOwnerWindow();
         }
 
         public bool SetRvtInstance<TRvtObject>(TRvtObject rvtObject)

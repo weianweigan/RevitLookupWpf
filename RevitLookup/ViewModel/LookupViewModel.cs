@@ -152,7 +152,7 @@ namespace RevitLookupWpf.ViewModel
 
         private void OpenInNewWindow()
         {
-            var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+            var lookupWindow = new LookupWindow();
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
                 lookupWindow.SetRvtInstance(objectProperty.Value);
@@ -172,11 +172,13 @@ namespace RevitLookupWpf.ViewModel
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
                 return objectProperty.Value != null && !objectProperty.IsReadOnly;
-            }else if(SelectedProperty is MethodProperty methodProperty)
+            }
+            if(SelectedProperty is MethodProperty methodProperty)
             {
                 return methodProperty.MethodValue != null && methodProperty.CanExecute;
             }
-            else if (SelectedProperty is ParametersProperty parametersProperty)
+
+            if (SelectedProperty is ParametersProperty parametersProperty)
             {
                 return parametersProperty.Value != null && !parametersProperty.IsReturnValueType;
             }

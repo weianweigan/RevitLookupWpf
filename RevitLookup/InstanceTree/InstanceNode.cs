@@ -34,12 +34,12 @@ namespace RevitLookupWpf.InstanceTree
     public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
     {
         private readonly IEnumerable _rvtObjcet;
-
-        public IEnumerableInstanceNode(IEnumerable rvtObjcet) : base(rvtObjcet)
+        private ExternalCommandData Data;
+        public IEnumerableInstanceNode(IEnumerable rvtObjcet,ExternalCommandData data) : base(rvtObjcet)
         {
             _rvtObjcet = rvtObjcet;
-
             Name = rvtObjcet?.GetType().Name;
+            Data = data;
             GetChild();
         }
 
@@ -59,9 +59,13 @@ namespace RevitLookupWpf.InstanceTree
                         Children.Add(node);
                         break;
                     case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId);
+                        Document doc = Data.Application.ActiveUIDocument.Document;
+                        Element e = doc.GetElement(elementId);
+                        if (e != null) node = new ElementInstanceNode(e);
+                        else node = new ElementIdInstanceNode(elementId);
                         Children.Add(node);
                         break;
+                    
                     case InstanceBinding instanceBinding:
                         node = new InstanceBindingInstanceNode(instanceBinding);
                         Children.Add(node);
@@ -150,7 +154,7 @@ namespace RevitLookupWpf.InstanceTree
             InstanceNode node;
             if (obj is IEnumerable enumble)
             {
-                node = new IEnumerableInstanceNode(enumble);
+                node = new IEnumerableInstanceNode(enumble,data);
             }
             else
             {

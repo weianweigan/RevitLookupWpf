@@ -64,7 +64,7 @@ namespace RevitLookupWpf.Commands
                     transaction.RollBack();
                     return Result.Succeeded;
                 }
-                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+                var lookupWindow = new LookupWindow();
                 if (xyzs.Count == 1) lookupWindow.SetRvtInstance(xyzs.FirstOrDefault());
                 else if(xyzs.Any())
                 {

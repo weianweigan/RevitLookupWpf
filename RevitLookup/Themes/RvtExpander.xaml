@@ -1,7 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="RvtExpanderBlue" Color="#FF99B4D1" />
-
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Icons.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
     <!--  适用于Revit风格的Epander的ToggleButton  -->
     <Style x:Key="RvtExpanderToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Template">
@@ -149,7 +151,7 @@
                             MinHeight="23"
                             Padding="2,0"
                             HorizontalAlignment="Stretch"
-                            Background="{StaticResource RvtExpanderBlue}"
+                            Background="{DynamicResource MainColorHeader}"
                             Content="{TemplateBinding Header}"
                             ContentTemplate="{TemplateBinding HeaderTemplate}"
                             ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
@@ -204,5 +206,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-   
+
 </ResourceDictionary>

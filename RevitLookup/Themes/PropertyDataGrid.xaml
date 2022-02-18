@@ -36,7 +36,16 @@
     <Style TargetType="TextBox">
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-
+    <Style x:Key="AlternateColorStyle" TargetType="{x:Type DataGridRow}">
+        <Style.Triggers>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                <Setter Property="Background" Value="White"/>
+            </Trigger>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                <Setter Property="Background" Value="WhiteSmoke"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     <controls:PropertyDataGridValueTemplateSelector x:Key="PropertyDataGridValueTemplateSelector">
         <!--  Int  -->
         <controls:PropertyDataGridValueTemplateSelector.IntDataTemplate>

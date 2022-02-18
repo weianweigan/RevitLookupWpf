@@ -26,7 +26,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
         private string _valueType;
         private bool _hasError;
 
-        public ParametersProperty(string name, object parent) : base(name)
+        public ParametersProperty(string name,string fullName ,object parent) : base(name,fullName)
         {
             _parent = parent;
         }
@@ -82,7 +82,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
 
                 if (parameter.GetValue() == null)
                 {
-                    var res = TaskDialog.Show("Warining", $"Parameter{parameter.Name} is null,Continue?", TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No);
+                    var res = TaskDialog.Show("Warning", $"Parameter{parameter.Name} is null,Continue?", TaskDialogCommonButtons.Yes | TaskDialogCommonButtons.No);
 
                     if (res == TaskDialogResult.No)
                     {

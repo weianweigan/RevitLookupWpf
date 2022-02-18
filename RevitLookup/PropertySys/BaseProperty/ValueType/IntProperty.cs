@@ -2,7 +2,7 @@
 {
     public class IntProperty : PropertyBase<int>
     {
-        public IntProperty(string name, int value) : base(name)
+        public IntProperty(string name, string fullName, int value) : base(name,fullName)
         {
             Value = value;
         }

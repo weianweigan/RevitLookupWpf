@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.Helpers;
@@ -123,10 +124,22 @@ namespace RevitLookupWpf.ViewModel
 
         void SearchOnlineClick()
         {
-            if (SelectedProperty == null) throw new ArgumentException(nameof(SelectedProperty));
-            string query = $"https://www.revitapidocs.com/2022/?query={SelectedProperty.Name}";
-            Process.Start(query);
+            try
+            {
+                if (SelectedProperty == null) throw new ArgumentException(nameof(SelectedProperty));
+
+                var revitInfo = SelectedProperty.GetRevitInfo();
+                if (revitInfo == null) throw new ArgumentException($"{SelectedProperty.APIName} Not Found");
+
+                var helpWindow = new HelpWindow(revitInfo);
+                helpWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                TaskDialog.Show("Error",ex.Message);
+            }
         }
+
         private void OpenInNewWindow()
         {
             var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());

@@ -2,7 +2,7 @@
 {
     public class DoubleProperty : PropertyBase<double>
     {
-        public DoubleProperty(string name, double value) : base(name)
+        public DoubleProperty(string name, string fullName,double value) : base(name,fullName)
         {
             Value = value;
         }

@@ -94,6 +94,7 @@ StyleCopReport.xml
 *.scc
 *.sln.bak
 *.msi
+*.idea
 # Chutzpah Test files
 _Chutzpah*
 

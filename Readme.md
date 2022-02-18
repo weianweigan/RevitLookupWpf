@@ -29,6 +29,8 @@ Interactive Revit RFA and RVT project database exploration tool to view and navi
 
 Please follow last release at section [Release](https://github.com/weianweigan/RevitLookupWpf/releases/latest)
 
+**Note:** The release currently supports 4 version Revit : 2019, 2020, 2021, 2022
+
 ---
 ## Build
 
@@ -45,7 +47,7 @@ Creating a package:
 
 For more information on building, see the [**RevitTemplates**](https://github.com/Nice3point/RevitTemplates) Wiki page.
 
-**Note:** The project currently supports the version Revit Current.
+**Note:** The project currently supports 4 version nearest with current year.
 
 Please refer to the [CHANGELOG](CHANGELOG.md) for details.
 

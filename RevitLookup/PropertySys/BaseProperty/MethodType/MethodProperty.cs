@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight.CommandWpf;
+using RevitLookupWpf.Extension;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
 using RevitLookupWpf.View;
@@ -22,7 +23,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         #endregion
 
         #region Ctor
-        public MethodProperty(string name, MethodInfo value,object parent) : base(name)
+        public MethodProperty(string name,MethodInfo value,object parent) : base(name,value.GetFullName())
         {
             IsMethod = true;
             Value = value;

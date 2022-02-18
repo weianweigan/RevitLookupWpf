@@ -2,7 +2,7 @@
 {
     public class BooleanProperty : PropertyBase<bool>
     {
-        public BooleanProperty(string name, bool value) : base(name)
+        public BooleanProperty(string name, string fullName,bool value) : base(name,fullName)
         {
             Value = value;
         }

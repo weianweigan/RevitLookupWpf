@@ -118,6 +118,7 @@
                     AlternationCount="2"
                     EnableColumnVirtualization="True"
                     FontSize="11"
+                    SelectionMode="Single"
                     ItemContainerStyle="{StaticResource AlternateColorStyle}"
                     ItemsSource="{Binding LookupData.DataSource}"
                     SelectedItem="{Binding LookupData.SelectedProperty}">

@@ -22,13 +22,12 @@ namespace RevitLookupWpf.ViewModel
 
         #region Ctor
 
-        public LookupWindowViewModel(LookupWindow lookupWindow)
+        public LookupWindowViewModel(LookupWindow lookupWindow):base(lookupWindow)
         {
             LookupData = this;
             Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
 
             Messenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
-            _lookupWindow = lookupWindow;
         }
         #endregion
 
@@ -102,7 +101,7 @@ namespace RevitLookupWpf.ViewModel
                 return;
             }
 
-            var vm = new LookupViewModel();
+            var vm = new LookupViewModel(_lookupWindow);
 
             var root = InstanceNode.Create(objectMessage.RvtObject);
 

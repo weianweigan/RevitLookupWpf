@@ -28,6 +28,12 @@ namespace RevitLookupWpf.ViewModel
         private RelayCommand _openInNewWindowCommand;
         private RelayCommand _helpCommand;
         public LookupWindow _lookupWindow;
+
+        public LookupViewModel(LookupWindow lookupWindow)
+        {
+            _lookupWindow = lookupWindow;
+        }
+
         public ObservableCollection<InstanceNode> Roots
         {
             get => _roots; set
@@ -118,7 +124,7 @@ namespace RevitLookupWpf.ViewModel
             }
         }
 
-        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ?? new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
+        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??= new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
         public RelayCommand HelpCommand => _helpCommand ?? new RelayCommand(HelpClick);
 
         void HelpClick()
@@ -171,9 +177,8 @@ namespace RevitLookupWpf.ViewModel
         {
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
-                return objectProperty.Value != null && !objectProperty.IsReadOnly;
-            }
-            if(SelectedProperty is MethodProperty methodProperty)
+                return objectProperty.Value != null;
+            }else if(SelectedProperty is MethodProperty methodProperty)
             {
                 return methodProperty.MethodValue != null && methodProperty.CanExecute;
             }

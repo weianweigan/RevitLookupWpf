@@ -47,7 +47,7 @@ namespace RevitLookupWpf.ViewModel
         {
             var root = InstanceNode.Create<TRvtObject>(rvtObject);
             root.IsSelected = true;
-
+            root.IsExpanded = true;
             LookupData.Roots = new ObservableCollection<InstanceNode>() { root };
 
             LookupData.PropertyList = GetSelectedNode()?.PropertyList;

@@ -17,6 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RevitLookupWpf", "RevitLook
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug R19|Any CPU = Debug R19|Any CPU
 		Debug R22|Any CPU = Debug R22|Any CPU
 		Installer|Any CPU = Installer|Any CPU
 		Release R19|Any CPU = Release R19|Any CPU
@@ -25,6 +26,7 @@ Global
 		Release R22|Any CPU = Release R22|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Debug R19|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Debug R22|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Installer|Any CPU.ActiveCfg = Release|Any CPU
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Installer|Any CPU.Build.0 = Release|Any CPU
@@ -32,12 +34,15 @@ Global
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Release R20|Any CPU.ActiveCfg = Release|Any CPU
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Release R21|Any CPU.ActiveCfg = Release|Any CPU
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Release R22|Any CPU.ActiveCfg = Release|Any CPU
+		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Debug R19|Any CPU.ActiveCfg = Debug|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Debug R22|Any CPU.ActiveCfg = Debug|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Installer|Any CPU.ActiveCfg = Release|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Release R19|Any CPU.ActiveCfg = Release|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Release R20|Any CPU.ActiveCfg = Release|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Release R21|Any CPU.ActiveCfg = Release|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Release R22|Any CPU.ActiveCfg = Release|Any CPU
+		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R19|Any CPU.ActiveCfg = Debug R19|Any CPU
+		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R19|Any CPU.Build.0 = Debug R19|Any CPU
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R22|Any CPU.ActiveCfg = Debug R22|Any CPU
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R22|Any CPU.Build.0 = Debug R22|Any CPU
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Installer|Any CPU.ActiveCfg = Release R22|Any CPU

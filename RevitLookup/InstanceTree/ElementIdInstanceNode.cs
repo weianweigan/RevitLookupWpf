@@ -29,7 +29,7 @@ namespace RevitLookupWpf.InstanceTree
             InstanceNode node;
             Document doc = Data.Application.ActiveUIDocument.Document;
             Element e = doc.GetElement(elementId);
-            if (e != null) node = new ElementInstanceNode(e);
+            if (e != null) node = new ElementInstanceNode(e,true);
             else node = new ElementIdInstanceNode(elementId);
             return node;
         }

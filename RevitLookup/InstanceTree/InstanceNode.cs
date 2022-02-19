@@ -57,7 +57,7 @@ namespace RevitLookupWpf.InstanceTree
                 switch (item)
                 {
                     case Element element:
-                        node = new ElementInstanceNode(element);
+                        node = new ElementInstanceNode(element,false);
                         Children.Add(node);
                         break;
                     case WorksetId worksetId:
@@ -164,7 +164,7 @@ namespace RevitLookupWpf.InstanceTree
                 switch (obj)
                 {
                     case Element element:
-                        node = new ElementInstanceNode(element);
+                        node = new ElementInstanceNode(element,true);
                         break;
                     case WorksetId worksetId:
                         node = new WorksetIdInstanceNode(worksetId, data).ToWorksetInstanceNode();

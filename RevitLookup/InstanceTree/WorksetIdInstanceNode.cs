@@ -30,7 +30,7 @@ namespace RevitLookupWpf.InstanceTree
             Document doc = Data.Application.ActiveUIDocument.Document;
             WorksetTable worksetTable = doc.GetWorksetTable();
             Workset workset = worksetTable.GetWorkset(elementId);
-            node = new InstanceNode<object>(workset);
+            node = new WorksetInstanceNode(workset);
             return node;
         }
     }

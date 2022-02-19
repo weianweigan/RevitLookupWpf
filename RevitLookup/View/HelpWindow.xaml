@@ -32,6 +32,12 @@
             </GroupBox>
             <GroupBox>
                 <GroupBox.Header>
+                    <TextBlock FontWeight="DemiBold" Text="NameSpace" />
+                </GroupBox.Header>
+                <TextBox Text="{Binding NameSpace}" BorderThickness="0" IsReadOnly="True" TextWrapping="WrapWithOverflow" />
+            </GroupBox>
+            <GroupBox>
+                <GroupBox.Header>
                     <TextBlock FontWeight="DemiBold" Text="Keywords" />
                 </GroupBox.Header>
                 <TextBox Text="{Binding Keywords}" BorderThickness="0" IsReadOnly="True" TextWrapping="WrapWithOverflow" />

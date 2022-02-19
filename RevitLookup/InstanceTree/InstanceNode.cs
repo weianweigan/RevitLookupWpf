@@ -119,7 +119,7 @@ namespace RevitLookupWpf.InstanceTree
                         Children.Add(node);
                         break;
                     case EdgeArray edgeArray:
-                        node = new EdgeArrayInstanceNode(edgeArray);
+                        node = new IEnumerableInstanceNode(edgeArray);
                         Children.Add(node);
                         break;
                     default:

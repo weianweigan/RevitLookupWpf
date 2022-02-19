@@ -65,7 +65,7 @@ namespace RevitLookupWpf.InstanceTree
                         Children.Add(node);
                         break;
                     case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId, Data).ToElementInstanceNode();
+                        node = new ElementIdInstanceNode(elementId, Data).ToElementInstanceNode(false);
                         Children.Add(node);
                         break;
                     case InstanceBinding instanceBinding:
@@ -170,7 +170,7 @@ namespace RevitLookupWpf.InstanceTree
                         node = new WorksetIdInstanceNode(worksetId, data).ToWorksetInstanceNode();
                         break;
                     case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId, data).ToElementInstanceNode();
+                        node = new ElementIdInstanceNode(elementId, data).ToElementInstanceNode(true);
                         break;
                     case Document doc:
                         node = new DocumentInstanceNode(doc);

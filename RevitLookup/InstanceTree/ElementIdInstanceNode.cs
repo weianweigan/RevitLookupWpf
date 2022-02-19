@@ -24,12 +24,12 @@ namespace RevitLookupWpf.InstanceTree
                 Name += $"({rvtObjcet.IntegerValue})";
             }
         }
-        public InstanceNode ToElementInstanceNode()
+        public InstanceNode ToElementInstanceNode(bool isRoot)
         {
             InstanceNode node;
             Document doc = Data.Application.ActiveUIDocument.Document;
             Element e = doc.GetElement(elementId);
-            if (e != null) node = new ElementInstanceNode(e,true);
+            if (e != null) node = new ElementInstanceNode(e,isRoot);
             else node = new ElementIdInstanceNode(elementId);
             return node;
         }

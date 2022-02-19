@@ -12,20 +12,20 @@ using RevitLookupWpf.View;
 namespace RevitLookupWpf.Commands
 {
     [Transaction(TransactionMode.Manual)]
-    [RvtCommandInfo(Name = "Snoop\nApplication", Image = "search.png")]
-    public class SnoopUIApplicationCommand : RvtCommandBase
+    [RvtCommandInfo(Name = "Snoop\nExternal Command Data", Image = "search.png")]
+    public class SnoopExternalCommandData : RvtCommandBase
     {
         public override Result SnoopClick(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             try
             {
                 var lookupWindow = new LookupWindow();
-                lookupWindow.SetRvtInstance(commandData.Application);
+                lookupWindow.SetRvtInstance(commandData);
                 lookupWindow.Show();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw new ArgumentException(e.ToString());
             }
 
             return Result.Succeeded;

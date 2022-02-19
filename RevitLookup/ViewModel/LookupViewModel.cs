@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -15,6 +16,7 @@ using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
 using RevitLookupWpf.PropertySys.BaseProperty.MethodType;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
+using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
 using RevitLookupWpf.View;
 using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
@@ -28,6 +30,7 @@ namespace RevitLookupWpf.ViewModel
         protected LookupViewModel _lookupData;
         private PropertyBase _selectedProperty;
         private RelayCommand _openInNewWindowCommand;
+        private RelayCommand _copy;
         private RelayCommand _helpCommand;
         public LookupWindow _lookupWindow;
         public ExternalCommandData _data;
@@ -128,7 +131,39 @@ namespace RevitLookupWpf.ViewModel
         }
         public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??= new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
         public RelayCommand HelpCommand => _helpCommand ?? new RelayCommand(HelpClick);
+        public RelayCommand CopyCommand => _copy ?? new RelayCommand(CopyClick);
 
+        void CopyClick()
+        {
+            if (SelectedProperty is ExceptionProperty exceptionProperty)
+            {
+                Clipboard.SetText(exceptionProperty.Value.ToString());
+            }
+            else if (SelectedProperty is StringProperty stringProperty)
+            {
+                Clipboard.SetText(stringProperty.Value);
+            }
+            else if (SelectedProperty is IntProperty intProperty)
+            {
+                Clipboard.SetText(intProperty.Value.ToString());
+            }
+            else if (SelectedProperty is DoubleProperty doubleProperty)
+            {
+                Clipboard.SetText(doubleProperty.Value.ToString());
+            }
+            else if (SelectedProperty is DefaultObjectProperty objectProperty)
+            {
+                Clipboard.SetText(objectProperty.Value.ToString());
+            }
+            else if (SelectedProperty is MethodProperty methodProperty)
+            {
+                Clipboard.SetText(methodProperty.MethodValue.ToString());
+            }
+            else if (SelectedProperty is ParametersProperty parametersProperty)
+            {
+                Clipboard.SetText(parametersProperty.Value.ToString());
+            }
+        }
         void HelpClick()
         {
             try
@@ -148,7 +183,7 @@ namespace RevitLookupWpf.ViewModel
             }
             catch (Exception ex)
             {
-                TaskDialog.Show("Error",ex.Message);
+                TaskDialog.Show("Error", ex.Message);
             }
         }
 
@@ -169,10 +204,10 @@ namespace RevitLookupWpf.ViewModel
             {
                 lookupWindow.SetRvtInstance(methodProperty.MethodValue);
             }
-            else if(SelectedProperty is ParametersProperty parametersProperty)
+            else if (SelectedProperty is ParametersProperty parametersProperty)
             {
                 lookupWindow.SetRvtInstance(parametersProperty.Value);
-            }    
+            }
             lookupWindow.Show();
         }
 
@@ -181,7 +216,8 @@ namespace RevitLookupWpf.ViewModel
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
                 return objectProperty.Value != null;
-            }else if(SelectedProperty is MethodProperty methodProperty)
+            }
+            else if (SelectedProperty is MethodProperty methodProperty)
             {
                 return methodProperty.MethodValue != null && methodProperty.CanExecute;
             }
@@ -202,7 +238,7 @@ namespace RevitLookupWpf.ViewModel
                 RaisePropertyChanged(() => LookupData.DataSource);
                 RaisePropertyChanged(() => LookupData.OpenInNewWindowCommand);
                 //Remove back items
-                if (LookupData?.Next !=null)
+                if (LookupData?.Next != null)
                 {
                     LookupData.Next = null;
                     LookupDataChanged();

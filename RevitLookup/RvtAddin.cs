@@ -48,7 +48,7 @@ namespace RevitLookupWpf
         //        typeof(SnoopDBCommand),
         //        typeof(SnoopCurrentSelectionCommand),
         //        typeof(SnoopActiveDocCommand),
-        //        typeof(SnoopUIApplicationCommand))
+        //        typeof(SnoopExternalCommandData))
         //        .ToList();
 
         //    //创建Panel
@@ -74,7 +74,7 @@ namespace RevitLookupWpf
             AddPushButton(pulldownButton, typeof(SnoopPointOnEleCommand), "Snoop Points On Elements...");
             AddPushButton(pulldownButton, typeof(SnoopGeometryCommand), "Snoop Geometry Element...");
             AddPushButton(pulldownButton, typeof(SnoopLinkedElementCommand), "Snoop Linked Element...");
-            AddPushButton(pulldownButton, typeof(SnoopUIApplicationCommand), "Snoop UIApplication...");
+            AddPushButton(pulldownButton, typeof(SnoopExternalCommandData), "Snoop ExternalCommandData...");
             AddPushButton(pulldownButton, typeof(SnoopSearchCommand), "Snoop Search Element...");
         }
 

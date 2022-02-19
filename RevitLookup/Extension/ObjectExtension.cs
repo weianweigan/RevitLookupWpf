@@ -55,6 +55,7 @@ namespace RevitLookupWpf.Extension
             var methodInfos = type.GetMethods()
                 .Where(p => !p.Name.StartsWith("get_") && !p.Name.StartsWith("set_"))
                 .Where(m => !m.Name.StartsWith("add_") && !m.Name.StartsWith("remove_"))
+                .Where(xyz=>!xyz.Name.StartsWith("op_"))
                 .Where(p => p.Name != "Dispose")
                 .ToList();
             //.OrderBy(p => p.Name);

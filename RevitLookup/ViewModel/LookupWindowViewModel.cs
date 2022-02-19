@@ -36,7 +36,7 @@ namespace RevitLookupWpf.ViewModel
 
         public Action CloseAction { get; set; }
 
-        public ICommand CloseCommand => _closeCommand ?? (_closeCommand = new RelayCommand(CloseAction));
+        public ICommand CloseCommand => _closeCommand ??= (_closeCommand = new RelayCommand(CloseAction));
 
         public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
         #endregion

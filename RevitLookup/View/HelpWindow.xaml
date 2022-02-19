@@ -28,19 +28,19 @@
                 <GroupBox.Header>
                     <TextBlock FontWeight="DemiBold" Text="Title" />
                 </GroupBox.Header>
-                <TextBlock Text="{Binding Title}" TextWrapping="WrapWithOverflow" />
+                <TextBox Text="{Binding Title}" BorderThickness="0" IsReadOnly="True" TextWrapping="WrapWithOverflow" />
             </GroupBox>
             <GroupBox>
                 <GroupBox.Header>
                     <TextBlock FontWeight="DemiBold" Text="Keywords" />
                 </GroupBox.Header>
-                <TextBlock Text="{Binding Keywords}" TextWrapping="WrapWithOverflow" />
+                <TextBox Text="{Binding Keywords}" BorderThickness="0" IsReadOnly="True" TextWrapping="WrapWithOverflow" />
             </GroupBox>
             <GroupBox>
                 <GroupBox.Header>
                     <TextBlock FontWeight="DemiBold" Text="Description" />
                 </GroupBox.Header>
-                <TextBlock Text="{Binding Description}" TextWrapping="WrapWithOverflow" />
+                <TextBox Text="{Binding Description}" BorderThickness="0" IsReadOnly="True" TextWrapping="WrapWithOverflow" />
             </GroupBox>
         </StackPanel>
         <TextBlock Grid.Row="1" Margin="2">

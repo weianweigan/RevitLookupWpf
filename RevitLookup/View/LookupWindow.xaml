@@ -125,6 +125,7 @@
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Command="{Binding LookupData.OpenInNewWindowCommand}" Header="Open In New Window" />
+                            <MenuItem Command="{Binding LookupData.CopyCommand}" Header="Copy" />
                             <MenuItem Command="{Binding LookupData.HelpCommand}" Header="Help..." />
                         </ContextMenu>
                     </DataGrid.ContextMenu>

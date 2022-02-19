@@ -148,7 +148,7 @@ namespace RevitLookupWpf.InstanceTree
         #endregion
 
         #region Ctor
-        public static InstanceNode Create<TRvtObjcet>(TRvtObjcet obj,ExternalCommandData data)
+        public static InstanceNode Create<TRvtObject>(TRvtObject obj,ExternalCommandData data)
         {
             if (obj == null)
             {

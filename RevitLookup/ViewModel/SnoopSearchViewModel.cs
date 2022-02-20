@@ -57,7 +57,7 @@ namespace RevitLookupWpf.ViewModel
                     }
                 }
                 SearchWindow.Close();
-                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+                var lookupWindow = new LookupWindow(Data);
                 lookupWindow.SetRvtInstance(element);
                 lookupWindow.Show();
             }

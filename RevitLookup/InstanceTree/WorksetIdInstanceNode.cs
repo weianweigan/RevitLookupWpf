@@ -3,11 +3,11 @@ using Autodesk.Revit.UI;
 
 namespace RevitLookupWpf.InstanceTree
 {
-    public class ElementIdInstanceNode : InstanceNode<ElementId>
+    public class WorksetIdInstanceNode : InstanceNode<WorksetId>
     {
         private ExternalCommandData Data;
-        private ElementId elementId;
-        public ElementIdInstanceNode(ElementId rvtObjcet) : base(rvtObjcet)
+        private WorksetId elementId;
+        public WorksetIdInstanceNode(WorksetId rvtObjcet) : base(rvtObjcet)
         {
             elementId = rvtObjcet;
             if (rvtObjcet != null)
@@ -15,7 +15,7 @@ namespace RevitLookupWpf.InstanceTree
                 Name += $"({rvtObjcet.IntegerValue})";
             }
         }
-        public ElementIdInstanceNode(ElementId rvtObjcet,ExternalCommandData data) : base(rvtObjcet)
+        public WorksetIdInstanceNode(WorksetId rvtObjcet,ExternalCommandData data) : base(rvtObjcet)
         {
             Data = data;
             elementId = rvtObjcet;
@@ -24,13 +24,13 @@ namespace RevitLookupWpf.InstanceTree
                 Name += $"({rvtObjcet.IntegerValue})";
             }
         }
-        public InstanceNode ToElementInstanceNode(bool isRoot)
+        public InstanceNode ToWorksetInstanceNode()
         {
             InstanceNode node;
             Document doc = Data.Application.ActiveUIDocument.Document;
-            Element e = doc.GetElement(elementId);
-            if (e != null) node = new ElementInstanceNode(e,isRoot);
-            else node = new ElementIdInstanceNode(elementId);
+            WorksetTable worksetTable = doc.GetWorksetTable();
+            Workset workset = worksetTable.GetWorkset(elementId);
+            node = new WorksetInstanceNode(workset);
             return node;
         }
     }

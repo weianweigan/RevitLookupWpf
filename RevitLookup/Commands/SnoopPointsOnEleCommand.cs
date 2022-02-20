@@ -31,7 +31,7 @@ namespace RevitLookupWpf.Commands
 
             try
             {
-                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+                var lookupWindow = new LookupWindow(commandData);
 
                 var selections = uiDoc.Selection.GetElementIds().Select(p => uiDoc.Document.GetElement(p)).ToList();
 

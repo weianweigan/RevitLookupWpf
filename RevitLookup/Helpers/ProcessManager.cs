@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Interop;
 
 namespace RevitLookupWpf.Helpers
 {
@@ -30,6 +32,17 @@ namespace RevitLookupWpf.Helpers
         public static IntPtr GetActivateWindow()
         {
             return Process.GetCurrentProcess().MainWindowHandle;
+        }
+
+        /// <summary>
+        /// set owner form show inside revit
+        /// </summary>
+        /// <param name="window"></param>
+        public static void SetOwnerWindow(this Window window)
+        {
+            var windowInteropHelper = new WindowInteropHelper(window);
+            windowInteropHelper.Owner = GetActivateWindow();
+
         }
     }
     

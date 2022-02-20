@@ -25,7 +25,7 @@ namespace RevitLookupWpf.Commands
 
             try
             {                
-                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+                var lookupWindow = new LookupWindow(commandData);
                 lookupWindow.SetRvtInstance(commandData.Application.ActiveUIDocument.Document);
                 lookupWindow.Show();
             }

@@ -1,16 +1,19 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--Revit Colors-->
-    <SolidColorBrush x:Key="RvtGray" Color="#FFD4D4D4"/>
-    <SolidColorBrush x:Key="RevitBlue" Color="#FFBFCDDB"/>
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--  Revit Colors  -->
+    <SolidColorBrush x:Key="MainColorHeader" Color="#FF99B4D1" />
+    <SolidColorBrush x:Key="RvtGray" Color="#FFD4D4D4" />
+    <SolidColorBrush x:Key="RevitBlue" Color="#FFBFCDDB" />
 
-    <SolidColorBrush x:Key="RvtButtonBackGround" Color="#FFE1E1E1"/>
+    <SolidColorBrush x:Key="RvtButtonBackGround" Color="#FFE1E1E1" />
 
-    <SolidColorBrush x:Key="RvtTreeNodeBackGround" Color="#FFFAFBFB"/>
-    <SolidColorBrush x:Key="RvtTreeNodeBoard" Color="#FFA0A0A0"/>
-    <SolidColorBrush x:Key="RvtTreeNodeForeGround" Color="#FF25459E"/>
-    <SolidColorBrush x:Key="TreeNodeDeActiveBackGround" Color="#FFE3E3E3"/>
+    <SolidColorBrush x:Key="RvtTreeNodeBackGround" Color="#FFFAFBFB" />
+    <SolidColorBrush x:Key="RvtTreeNodeBoard" Color="#FFA0A0A0" />
+    <SolidColorBrush x:Key="RvtTreeNodeForeGround" Color="#FF25459E" />
+    <SolidColorBrush x:Key="TreeNodeDeActiveBackGround" Color="#FFE3E3E3" />
 
-    <!--FlatColor-->
-    <SolidColorBrush x:Key="IconFlatEdge" Color="#FFFFFF" Opacity="0.4"/>
+    <!--  FlatColor  -->
+    <SolidColorBrush
+        x:Key="IconFlatEdge"
+        Opacity="0.4"
+        Color="#FFFFFF" />
 </ResourceDictionary>

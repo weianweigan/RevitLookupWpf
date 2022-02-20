@@ -1,4 +1,11 @@
 # Changelog
+- 2022-02-18 **1.0.1**
+  - Improve interface program
+  - Fix problem show string with text note
+  - Add support use rider for project with .NET6 LTS
+  - Improve feature show help document #20 #21
+  - Fix show method help error with form owner
+
 - 2022-02-17 **1.0.0**
   - Fix some method automatic invoke
   - Add Parameter input feature show value window

@@ -2,10 +2,12 @@
 using System.Windows.Input;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using RevitLookupWpf.InstanceTree;
 using RevitLookupWpf.PropertySys;
 using System.Linq;
+using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 using RevitLookupWpf.View;
+using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
 namespace RevitLookupWpf.ViewModel
 {
@@ -17,18 +19,17 @@ namespace RevitLookupWpf.ViewModel
 
         private RelayCommand _selectedItemChangedCommand;
         private ObservableCollection<LookupViewModel> _items;
-        private readonly LookupWindow _lookupWindow;
+       
         #endregion
 
         #region Ctor
 
-        public LookupWindowViewModel(LookupWindow lookupWindow)
+        public LookupWindowViewModel(LookupWindow lookupWindow,ExternalCommandData data):base(lookupWindow,data)
         {
             LookupData = this;
             Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
 
             Messenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
-            _lookupWindow = lookupWindow;
         }
         #endregion
 
@@ -37,7 +38,7 @@ namespace RevitLookupWpf.ViewModel
 
         public Action CloseAction { get; set; }
 
-        public ICommand CloseCommand => _closeCommand ?? (_closeCommand = new RelayCommand(CloseAction));
+        public ICommand CloseCommand => _closeCommand ??= (_closeCommand = new RelayCommand(CloseAction));
 
         public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
         #endregion
@@ -45,7 +46,7 @@ namespace RevitLookupWpf.ViewModel
         #region Public Methods
         public bool SetRvtInstance<TRvtObject>(TRvtObject rvtObject)
         {
-            var root = InstanceNode.Create<TRvtObject>(rvtObject);
+            var root = InstanceNode.Create(rvtObject,_data);
             root.IsSelected = true;
             root.IsExpanded = true;
             LookupData.Roots = new ObservableCollection<InstanceNode>() { root };
@@ -54,7 +55,6 @@ namespace RevitLookupWpf.ViewModel
 
             return LookupData.Roots.Any();
         }
-
         public ICommand SelectedItemChangedCommand
         {
             get
@@ -102,9 +102,9 @@ namespace RevitLookupWpf.ViewModel
                 return;
             }
 
-            var vm = new LookupViewModel();
+            var vm = new LookupViewModel(_lookupWindow,_data);
 
-            var root = InstanceNode.Create(objectMessage.RvtObject);
+            var root = InstanceNode.Create(objectMessage.RvtObject,_data);
 
             vm.Roots = new ObservableCollection<InstanceNode>() { root };
 

@@ -24,21 +24,42 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-            var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+            var lookupWindow = new LookupWindow(commandData);
             List<GeometryObject> geos = new List<GeometryObject>();
-            TaskDialog.Show(Resource.AppName, "Select Ordered Edges,Press Esc To Finish", TaskDialogCommonButtons.Ok);
-            while (true)
+            bool isNormal = MessageUtils.QuestionMsg("Selection Mode:","Normal","Order");
+            if (isNormal)
             {
                 try
                 {
-                    var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Edge);
-                    var geometryObject = commandData.Application.ActiveUIDocument.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
-                    geos.Add(geometryObject);
+                    var refElem = commandData.Application.ActiveUIDocument.Selection.PickObjects(ObjectType.Edge);
+                    foreach (Reference r in refElem)
+                    {
+                        var geometryObject = commandData.Application.ActiveUIDocument.Document.GetElement(r).GetGeometryObjectFromReference(r);
+                        geos.Add(geometryObject);
+                    }
                 }
-                catch (Exception)
+                catch(OperationCanceledException){}
+                catch (Exception e)
                 {
-                    //user press esc
-                    break;
+                    throw new ArgumentException(e.ToString());
+                }
+            }
+            else
+            {
+                TaskDialog.Show(Resource.AppName, "Select Ordered Edges,Press Esc To Finish", TaskDialogCommonButtons.Ok);
+                while (true)
+                {
+                    try
+                    {
+                        var refElem = commandData.Application.ActiveUIDocument.Selection.PickObject(ObjectType.Edge);
+                        var geometryObject = commandData.Application.ActiveUIDocument.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
+                        geos.Add(geometryObject);
+                    }
+                    catch (Exception)
+                    {
+                        //user press esc
+                        break;
+                    }
                 }
             }
             if (geos.Count == 0) return Result.Cancelled;

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Interop;
+using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.ViewModel;
@@ -17,23 +18,13 @@ namespace RevitLookupWpf.View
         public LookupWindow()
         {
             InitializeComponent();
-
-            _viewModel = new LookupWindowViewModel(this);
-            _viewModel.CloseAction = new Action(() => Close());
+            this.SetOwnerWindow();
             this.Closed += LookupWindow_Closed;
-            DataContext = _viewModel;
         }
-
-        public LookupWindow(IntPtr parentHandle)
+        public LookupWindow(ExternalCommandData data) : this()
         {
-            InitializeComponent();
-            
-            _viewModel = new LookupWindowViewModel(this);
-            //设置父窗口为Revit
-            var windowInteropHelper = new WindowInteropHelper(this);
-            windowInteropHelper.Owner = parentHandle;
-
-            _viewModel.CloseAction = new Action(Close);
+            _viewModel = new LookupWindowViewModel(this,data);
+            _viewModel.CloseAction = Close;
             DataContext = _viewModel;
         }
 
@@ -41,7 +32,6 @@ namespace RevitLookupWpf.View
         {
             return _viewModel.SetRvtInstance(rvtObject);
         }
-
         private void LookupWindow_Closed(object sender, EventArgs e)
         {
             this.Closed -= LookupWindow_Closed;

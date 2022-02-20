@@ -1,33 +1,45 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Interop;
+using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.Helpers;
-using RevitLookupWpf.InstanceTree;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
 using RevitLookupWpf.PropertySys.BaseProperty.MethodType;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
+using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
 using RevitLookupWpf.View;
+using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
 namespace RevitLookupWpf.ViewModel
 {
     public class LookupViewModel : ViewModelBase
     {
-
         private PropertyList _propertyList;
         private ListCollectionView _dataSource;
         private ObservableCollection<InstanceNode> _roots;
         protected LookupViewModel _lookupData;
         private PropertyBase _selectedProperty;
         private RelayCommand _openInNewWindowCommand;
-        private RelayCommand _searchOnlineCommand;
+        private RelayCommand _copy;
+        private RelayCommand _helpCommand;
+        public LookupWindow _lookupWindow;
+        public ExternalCommandData _data;
 
+        public LookupViewModel(LookupWindow lookupWindow,ExternalCommandData data)
+        {
+            _lookupWindow = lookupWindow;
+            _data = data;
+        }
         public ObservableCollection<InstanceNode> Roots
         {
             get => _roots; set
@@ -104,7 +116,6 @@ namespace RevitLookupWpf.ViewModel
         }
 
         public LookupViewModel Next { get; set; }
-
         public string Name { get; set; }
 
         public string NaviName { get; set; }
@@ -118,31 +129,73 @@ namespace RevitLookupWpf.ViewModel
                 OpenInNewWindowCommand.RaiseCanExecuteChanged();
             }
         }
+        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??= new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
+        public RelayCommand HelpCommand => _helpCommand ?? new RelayCommand(HelpClick);
+        public RelayCommand CopyCommand => _copy ?? new RelayCommand(CopyClick);
 
-        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ?? new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
-        public RelayCommand SearchOnlineCommand => _searchOnlineCommand ?? new RelayCommand(SearchOnlineClick);
-
-        void SearchOnlineClick()
+        void CopyClick()
+        {
+            if (SelectedProperty is ExceptionProperty exceptionProperty)
+            {
+                Clipboard.SetText(exceptionProperty.Value.ToString());
+            }
+            else if (SelectedProperty is StringProperty stringProperty)
+            {
+                Clipboard.SetText(stringProperty.Value);
+            }
+            else if (SelectedProperty is IntProperty intProperty)
+            {
+                Clipboard.SetText(intProperty.Value.ToString());
+            }
+            else if (SelectedProperty is DoubleProperty doubleProperty)
+            {
+                Clipboard.SetText(doubleProperty.Value.ToString());
+            }
+            else if (SelectedProperty is DefaultObjectProperty objectProperty)
+            {
+                Clipboard.SetText(objectProperty.Value.ToString());
+            }
+            else if (SelectedProperty is MethodProperty methodProperty)
+            {
+                Clipboard.SetText(methodProperty.MethodValue.ToString());
+            }
+            else if (SelectedProperty is ParametersProperty parametersProperty)
+            {
+                Clipboard.SetText(parametersProperty.Value.ToString());
+            }
+        }
+        void HelpClick()
         {
             try
             {
                 if (SelectedProperty == null) throw new ArgumentException(nameof(SelectedProperty));
 
                 var revitInfo = SelectedProperty.GetRevitInfo();
-                if (revitInfo == null) throw new ArgumentException($"{SelectedProperty.APIName} Not Found");
-
+                if (revitInfo == null)
+                {
+                    GotoSearchOnline();
+                    return;
+                }
                 var helpWindow = new HelpWindow(revitInfo);
-                helpWindow.Show();
+                helpWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                helpWindow.Owner = _lookupWindow;
+                helpWindow.ShowDialog();
             }
             catch (Exception ex)
             {
-                TaskDialog.Show("Error",ex.Message);
+                TaskDialog.Show("Error", ex.Message);
             }
+        }
+
+        void GotoSearchOnline()
+        {
+            string query = $"https://www.revitapidocs.com/2022/?query={SelectedProperty.Name}";
+            Process.Start(query);
         }
 
         private void OpenInNewWindow()
         {
-            var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+            var lookupWindow = new LookupWindow(_data);
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
                 lookupWindow.SetRvtInstance(objectProperty.Value);
@@ -150,10 +203,11 @@ namespace RevitLookupWpf.ViewModel
             else if (SelectedProperty is MethodProperty methodProperty)
             {
                 lookupWindow.SetRvtInstance(methodProperty.MethodValue);
-            }else if(SelectedProperty is ParametersProperty parametersProperty)
+            }
+            else if (SelectedProperty is ParametersProperty parametersProperty)
             {
                 lookupWindow.SetRvtInstance(parametersProperty.Value);
-            }    
+            }
             lookupWindow.Show();
         }
 
@@ -161,12 +215,14 @@ namespace RevitLookupWpf.ViewModel
         {
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
-                return objectProperty.Value != null && !objectProperty.IsReadOnly;
-            }else if(SelectedProperty is MethodProperty methodProperty)
+                return objectProperty.Value != null;
+            }
+            else if (SelectedProperty is MethodProperty methodProperty)
             {
                 return methodProperty.MethodValue != null && methodProperty.CanExecute;
             }
-            else if (SelectedProperty is ParametersProperty parametersProperty)
+
+            if (SelectedProperty is ParametersProperty parametersProperty)
             {
                 return parametersProperty.Value != null && !parametersProperty.IsReturnValueType;
             }
@@ -182,7 +238,7 @@ namespace RevitLookupWpf.ViewModel
                 RaisePropertyChanged(() => LookupData.DataSource);
                 RaisePropertyChanged(() => LookupData.OpenInNewWindowCommand);
                 //Remove back items
-                if (LookupData?.Next !=null)
+                if (LookupData?.Next != null)
                 {
                     LookupData.Next = null;
                     LookupDataChanged();

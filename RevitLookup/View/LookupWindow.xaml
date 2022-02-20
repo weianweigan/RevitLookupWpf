@@ -11,6 +11,7 @@
     Height="500"
     MinWidth="600"
     MinHeight="400"
+    Icon="../Resources/search.png"
     d:DataContext="{d:DesignInstance Type=viewModel:LookupWindowViewModel}"
     Closing="LookupWindow_OnClosing"
     ResizeMode="CanResize"
@@ -117,13 +118,15 @@
                     AlternationCount="2"
                     EnableColumnVirtualization="True"
                     FontSize="11"
+                    SelectionMode="Single"
                     ItemContainerStyle="{StaticResource AlternateColorStyle}"
                     ItemsSource="{Binding LookupData.DataSource}"
                     SelectedItem="{Binding LookupData.SelectedProperty}">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Command="{Binding LookupData.OpenInNewWindowCommand}" Header="Open In New Window" />
-                            <MenuItem Command="{Binding LookupData.SearchOnlineCommand}" Header="Search Online..." />
+                            <MenuItem Command="{Binding LookupData.CopyCommand}" Header="Copy" />
+                            <MenuItem Command="{Binding LookupData.HelpCommand}" Header="Help..." />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                     <controls:PropertyDataGrid.GroupStyle>

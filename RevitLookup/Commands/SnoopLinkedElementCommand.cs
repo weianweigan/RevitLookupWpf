@@ -31,7 +31,7 @@ namespace RevitLookupWpf.Commands
 
             try
             {
-                var lookupWindow = new LookupWindow(ProcessManager.GetActivateWindow());
+                var lookupWindow = new LookupWindow(commandData);
                 List<Element> selections = new List<Element>();
                 IList<Reference> references = uiDoc.Selection.PickObjects(ObjectType.LinkedElement,Resource.PickLinkElements);
                 foreach (Reference r in references)

@@ -11,8 +11,7 @@
   - Change snoop UIApplication to ExternalCommand Data
   - Fix some method inside class xyz with prefix op_
   - Add selection command **Edge** and **Face** with two model **Normal** or **Order**
-  
-# Changelog
+
 - 2022-02-18 **1.0.1**
   - Improve interface program
   - Fix problem show string with text note

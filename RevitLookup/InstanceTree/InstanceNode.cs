@@ -14,16 +14,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class InstanceNode<TRvtObject> : InstanceNode
     {   
-        public ExternalCommandData Data { get; set; }
+
         public InstanceNode(TRvtObject rvtObjcet)
         {
             RvtObject = rvtObjcet;
             Name = rvtObjcet?.GetType().Name;
-        }
-        
-        public InstanceNode(TRvtObject rvtObjcet,ExternalCommandData data): this(rvtObjcet)
-        {
-            Data = data;
         }
 
         public TRvtObject RvtObject { get; set; }
@@ -33,7 +28,7 @@ namespace RevitLookupWpf.InstanceTree
             if (PropertyList == null && RvtObject != null)
             {
                 
-                PropertyList = RvtObject.GetProperties(Data);
+                PropertyList = RvtObject.GetProperties();
             }
         }
     }
@@ -62,7 +57,7 @@ namespace RevitLookupWpf.InstanceTree
                 switch (item)
                 {
                     case Element element:
-                        node = new ElementInstanceNode(element,Data,false);
+                        node = new ElementInstanceNode(element,false);
                         Children.Add(node);
                         break;
                     case WorksetId worksetId:
@@ -170,7 +165,7 @@ namespace RevitLookupWpf.InstanceTree
                 switch (obj)
                 {
                     case Element element:
-                        node = new ElementInstanceNode(element,data,true);
+                        node = new ElementInstanceNode(element,true);
                         break;
                     case WorksetId worksetId:
                         node = new WorksetIdInstanceNode(worksetId).ToWorksetInstanceNode();

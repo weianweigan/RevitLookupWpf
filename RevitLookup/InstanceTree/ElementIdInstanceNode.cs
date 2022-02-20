@@ -19,7 +19,7 @@ namespace RevitLookupWpf.InstanceTree
             InstanceNode node;
             Document doc = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document;
             Element e = doc.GetElement(elementId);
-            if (e != null) node = new ElementInstanceNode(e, Data,isRoot);
+            if (e != null) node = new ElementInstanceNode(e,isRoot);
             else node = new ElementIdInstanceNode(elementId);
             return node;
         }

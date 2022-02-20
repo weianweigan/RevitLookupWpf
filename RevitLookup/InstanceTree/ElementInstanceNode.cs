@@ -5,7 +5,7 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class ElementInstanceNode : InstanceNode<Element>
     {
-        public ElementInstanceNode(Element rvtObjcet,ExternalCommandData data,bool isRoot) : base(rvtObjcet,data)
+        public ElementInstanceNode(Element rvtObjcet,bool isRoot) : base(rvtObjcet)
         {
             if (rvtObjcet != null)
             {

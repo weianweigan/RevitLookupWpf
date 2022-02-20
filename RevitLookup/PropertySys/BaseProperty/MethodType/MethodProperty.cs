@@ -21,13 +21,11 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         #region Fields
         private RelayCommand _selectedCommand;
         private readonly object _parent;
-        private ExternalCommandData Data;
         #endregion
 
         #region Ctor
-        public MethodProperty(string name,MethodInfo value,object parent,ExternalCommandData data) : base(name,value.GetFullName())
+        public MethodProperty(string name,MethodInfo value,object parent) : base(name,value.GetFullName())
         {
-            Data = data;
             IsMethod = true;
             Value = value;
             _parent = parent;
@@ -138,7 +136,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                         //if value is ElementId, get element
                         if (tempValue is ElementId id)
                         {
-                            var element = Data.Application.ActiveUIDocument.Document.GetElement(id);
+                            var element = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document.GetElement(id);
                             if (element == null)
                             {
                                 MethodValue = "<Null>";

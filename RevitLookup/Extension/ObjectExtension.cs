@@ -17,7 +17,7 @@ namespace RevitLookupWpf.Extension
     public static class ObjectExtension
     {
         #region Public Static Mehtod
-        public static PropertyList GetProperties(this object rvtObject,ExternalCommandData data)
+        public static PropertyList GetProperties(this object rvtObject)
         {
             if (rvtObject is null)
             {
@@ -75,7 +75,7 @@ namespace RevitLookupWpf.Extension
                     else
                     {
                         //Default Method Properties
-                        property = new MethodProperty(methodInfos[i].Name,methodInfos[i], rvtObject,data);
+                        property = new MethodProperty(methodInfos[i].Name,methodInfos[i], rvtObject);
                     }
                 }
                 catch (Exception ex)

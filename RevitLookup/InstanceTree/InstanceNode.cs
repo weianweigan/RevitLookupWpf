@@ -2,11 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.Exceptions;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight;
 using RevitLookupWpf.Extension;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
+using ArgumentNullException = System.ArgumentNullException;
 
 namespace RevitLookupWpf.InstanceTree
 {
@@ -34,12 +36,12 @@ namespace RevitLookupWpf.InstanceTree
     public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
     {
         private readonly IEnumerable _rvtObjcet;
-
-        public IEnumerableInstanceNode(IEnumerable rvtObjcet) : base(rvtObjcet)
+        private ExternalCommandData Data;
+        public IEnumerableInstanceNode(IEnumerable rvtObjcet,ExternalCommandData data) : base(rvtObjcet)
         {
             _rvtObjcet = rvtObjcet;
-
             Name = rvtObjcet?.GetType().Name;
+            Data = data;
             GetChild();
         }
 
@@ -55,11 +57,15 @@ namespace RevitLookupWpf.InstanceTree
                 switch (item)
                 {
                     case Element element:
-                        node = new ElementInstanceNode(element);
+                        node = new ElementInstanceNode(element,false);
+                        Children.Add(node);
+                        break;
+                    case WorksetId worksetId:
+                        node = new WorksetIdInstanceNode(worksetId, Data).ToWorksetInstanceNode();
                         Children.Add(node);
                         break;
                     case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId);
+                        node = new ElementIdInstanceNode(elementId, Data).ToElementInstanceNode(false);
                         Children.Add(node);
                         break;
                     case InstanceBinding instanceBinding:
@@ -132,6 +138,7 @@ namespace RevitLookupWpf.InstanceTree
             }
             if (Children.Any()) Children = Children.OrderBy(x => x.Name).ToObservableCollection();
         }
+
     }
 
     public abstract class InstanceNode : ObservableObject
@@ -142,7 +149,7 @@ namespace RevitLookupWpf.InstanceTree
         #endregion
 
         #region Ctor
-        public static InstanceNode Create<TRvtObjcet>(TRvtObjcet obj)
+        public static InstanceNode Create<TRvtObject>(TRvtObject obj,ExternalCommandData data)
         {
             if (obj == null)
             {
@@ -151,17 +158,20 @@ namespace RevitLookupWpf.InstanceTree
             InstanceNode node;
             if (obj is IEnumerable enumble)
             {
-                node = new IEnumerableInstanceNode(enumble);
+                node = new IEnumerableInstanceNode(enumble,data);
             }
             else
             {
                 switch (obj)
                 {
                     case Element element:
-                        node = new ElementInstanceNode(element);
+                        node = new ElementInstanceNode(element,true);
+                        break;
+                    case WorksetId worksetId:
+                        node = new WorksetIdInstanceNode(worksetId, data).ToWorksetInstanceNode();
                         break;
                     case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId);
+                        node = new ElementIdInstanceNode(elementId, data).ToElementInstanceNode(true);
                         break;
                     case Document doc:
                         node = new DocumentInstanceNode(doc);
@@ -171,6 +181,8 @@ namespace RevitLookupWpf.InstanceTree
                         break;
                 }
             }
+
+            if (node == null) throw new ArgumentNullException(nameof(obj));
             return node;
         }
 

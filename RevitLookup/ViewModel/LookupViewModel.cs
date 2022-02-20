@@ -6,17 +6,19 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Interop;
+using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.Helpers;
-using RevitLookupWpf.InstanceTree;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
 using RevitLookupWpf.PropertySys.BaseProperty.MethodType;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
 using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
 using RevitLookupWpf.View;
+using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
 namespace RevitLookupWpf.ViewModel
 {
@@ -31,12 +33,13 @@ namespace RevitLookupWpf.ViewModel
         private RelayCommand _copy;
         private RelayCommand _helpCommand;
         public LookupWindow _lookupWindow;
+        public ExternalCommandData _data;
 
-        public LookupViewModel(LookupWindow lookupWindow)
+        public LookupViewModel(LookupWindow lookupWindow,ExternalCommandData data)
         {
             _lookupWindow = lookupWindow;
+            _data = data;
         }
-
         public ObservableCollection<InstanceNode> Roots
         {
             get => _roots; set
@@ -126,7 +129,6 @@ namespace RevitLookupWpf.ViewModel
                 OpenInNewWindowCommand.RaiseCanExecuteChanged();
             }
         }
-
         public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??= new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
         public RelayCommand HelpCommand => _helpCommand ?? new RelayCommand(HelpClick);
         public RelayCommand CopyCommand => _copy ?? new RelayCommand(CopyClick);
@@ -193,7 +195,7 @@ namespace RevitLookupWpf.ViewModel
 
         private void OpenInNewWindow()
         {
-            var lookupWindow = new LookupWindow();
+            var lookupWindow = new LookupWindow(_data);
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
                 lookupWindow.SetRvtInstance(objectProperty.Value);

@@ -24,7 +24,7 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-            var lookupWindow = new LookupWindow();
+            var lookupWindow = new LookupWindow(commandData);
             List<GeometryObject> geos = new List<GeometryObject>();
             bool isNormal = MessageUtils.QuestionMsg("Selection Mode:","Normal","Order");
             if (isNormal)

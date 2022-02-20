@@ -5,7 +5,6 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class WorksetIdInstanceNode : InstanceNode<WorksetId>
     {
-        private ExternalCommandData Data;
         private WorksetId elementId;
         public WorksetIdInstanceNode(WorksetId rvtObjcet) : base(rvtObjcet)
         {

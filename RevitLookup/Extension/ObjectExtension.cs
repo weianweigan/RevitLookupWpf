@@ -4,6 +4,7 @@
  */
 
 using System.Reflection;
+using Autodesk.Revit.UI;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
@@ -16,7 +17,7 @@ namespace RevitLookupWpf.Extension
     public static class ObjectExtension
     {
         #region Public Static Mehtod
-        public static PropertyList GetProperties(this object rvtObject)
+        public static PropertyList GetProperties(this object rvtObject,ExternalCommandData data)
         {
             if (rvtObject is null)
             {
@@ -74,7 +75,7 @@ namespace RevitLookupWpf.Extension
                     else
                     {
                         //Default Method Properties
-                        property = new MethodProperty(methodInfos[i].Name,methodInfos[i], rvtObject);
+                        property = new MethodProperty(methodInfos[i].Name,methodInfos[i], rvtObject,data);
                     }
                 }
                 catch (Exception ex)

@@ -6,6 +6,7 @@
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
+using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight.CommandWpf;
 using RevitLookupWpf.Extension;
@@ -20,11 +21,13 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         #region Fields
         private RelayCommand _selectedCommand;
         private readonly object _parent;
+        private ExternalCommandData Data;
         #endregion
 
         #region Ctor
-        public MethodProperty(string name,MethodInfo value,object parent) : base(name,value.GetFullName())
+        public MethodProperty(string name,MethodInfo value,object parent,ExternalCommandData data) : base(name,value.GetFullName())
         {
+            Data = data;
             IsMethod = true;
             Value = value;
             _parent = parent;
@@ -132,7 +135,28 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                     }
                     else
                     {
-                        MethodValue = ToolTip;
+                        //if value is ElementId, get element
+                        if (tempValue is ElementId id)
+                        {
+                            MessageBox.Show(value.GetFullName());
+                            var element = Data.Application.ActiveUIDocument.Document.GetElement(id);
+                            if (element == null)
+                            {
+                                MethodValue = "<Null>";
+                                solvedValue = true;
+                            }
+                            else
+                            {
+                                MethodValue = element;
+                            }
+                        }
+                        else
+                        {
+                            
+                            MethodValue = ToolTip;
+
+                        }
+                        
                     }
                 }
             }

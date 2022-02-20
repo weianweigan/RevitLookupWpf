@@ -13,11 +13,17 @@ using ArgumentNullException = System.ArgumentNullException;
 namespace RevitLookupWpf.InstanceTree
 {
     public class InstanceNode<TRvtObject> : InstanceNode
-    {
+    {   
+        public ExternalCommandData Data { get; set; }
         public InstanceNode(TRvtObject rvtObjcet)
         {
             RvtObject = rvtObjcet;
             Name = rvtObjcet?.GetType().Name;
+        }
+        
+        public InstanceNode(TRvtObject rvtObjcet,ExternalCommandData data): this(rvtObjcet)
+        {
+            Data = data;
         }
 
         public TRvtObject RvtObject { get; set; }
@@ -26,7 +32,8 @@ namespace RevitLookupWpf.InstanceTree
         {
             if (PropertyList == null && RvtObject != null)
             {
-                PropertyList = RvtObject.GetProperties();
+                
+                PropertyList = RvtObject.GetProperties(Data);
             }
         }
     }
@@ -36,7 +43,6 @@ namespace RevitLookupWpf.InstanceTree
     public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
     {
         private readonly IEnumerable _rvtObjcet;
-        private ExternalCommandData Data;
         public IEnumerableInstanceNode(IEnumerable rvtObjcet,ExternalCommandData data) : base(rvtObjcet)
         {
             _rvtObjcet = rvtObjcet;
@@ -57,7 +63,7 @@ namespace RevitLookupWpf.InstanceTree
                 switch (item)
                 {
                     case Element element:
-                        node = new ElementInstanceNode(element,false);
+                        node = new ElementInstanceNode(element,Data,false);
                         Children.Add(node);
                         break;
                     case WorksetId worksetId:
@@ -125,7 +131,7 @@ namespace RevitLookupWpf.InstanceTree
                         Children.Add(node);
                         break;
                     case EdgeArray edgeArray:
-                        node = new IEnumerableInstanceNode(edgeArray);
+                        node = new IEnumerableInstanceNode(edgeArray,Data);
                         node.IsExpanded = true;
                         Children.Add(node);
                         break;
@@ -165,7 +171,7 @@ namespace RevitLookupWpf.InstanceTree
                 switch (obj)
                 {
                     case Element element:
-                        node = new ElementInstanceNode(element,true);
+                        node = new ElementInstanceNode(element,data,true);
                         break;
                     case WorksetId worksetId:
                         node = new WorksetIdInstanceNode(worksetId, data).ToWorksetInstanceNode();

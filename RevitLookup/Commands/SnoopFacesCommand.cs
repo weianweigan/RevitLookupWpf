@@ -27,22 +27,44 @@ namespace RevitLookupWpf.Commands
             }
             var lookupWindow = new LookupWindow(commandData);
             List<GeometryObject> geos = new List<GeometryObject>();
-            TaskDialog.Show(Resource.AppName, "Select Ordered Faces,Press Esc To Finish", TaskDialogCommonButtons.Ok);
-            while (true)
+            bool isNormal = MessageUtils.QuestionMsg("Selection Mode:", "Normal", "Order");
+            if (isNormal)
             {
                 try
                 {
-                    var refElem = uidoc.Selection.PickObject(ObjectType.Face);
-                    var geometryObject = uidoc.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
-                    geos.Add(geometryObject);
+                    var refElem = commandData.Application.ActiveUIDocument.Selection.PickObjects(ObjectType.Face);
+                    foreach (Reference r in refElem)
+                    {
+                        var geometryObject = commandData.Application.ActiveUIDocument.Document.GetElement(r).GetGeometryObjectFromReference(r);
+                        geos.Add(geometryObject);
+                    }
                 }
-                catch (Exception)
+                catch (OperationCanceledException) { }
+                catch (Exception e)
                 {
-                    //user press esc
-                    break;
+                    throw new ArgumentException(e.ToString());
+                }
+            }
+            else
+            {
+                TaskDialog.Show(Resource.AppName, "Select Ordered Faces,Press Esc To Finish", TaskDialogCommonButtons.Ok);
+                while (true)
+                {
+                    try
+                    {
+                        var refElem = uidoc.Selection.PickObject(ObjectType.Face);
+                        var geometryObject = uidoc.Document.GetElement(refElem).GetGeometryObjectFromReference(refElem);
+                        geos.Add(geometryObject);
+                    }
+                    catch (Exception)
+                    {
+                        //user press esc
+                        break;
+                    }
                 }
             }
             if (geos.Count == 0) return Result.Cancelled;
+            var lookupWindow = new LookupWindow();
             if (geos.Count == 1) lookupWindow.SetRvtInstance(geos.FirstOrDefault());
             else lookupWindow.SetRvtInstance(geos);
             lookupWindow.Show();

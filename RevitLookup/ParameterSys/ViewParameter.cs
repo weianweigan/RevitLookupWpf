@@ -14,7 +14,6 @@ namespace RevitLookupWpf.ParameterSys
 
         public ViewParameter(ParameterInfo parameterInfo) : base(parameterInfo)
         {
-            
         }
 
         public List<Autodesk.Revit.DB.View> AllViews
@@ -22,26 +21,18 @@ namespace RevitLookupWpf.ParameterSys
             get
             {
                 if (_view == null)
-                    _view = new List<Element>(new FilteredElementCollector(SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document)
-                            .OfClass(typeof(Autodesk.Revit.DB.View))
-                            .WhereElementIsNotElementType()
-                            .ToList()
-                            .OrderBy(v => v.Name))
-                            .Distinct()
-                            .ToList()
-                            .Cast<Autodesk.Revit.DB.View>()
-                            .ToList()
-                            .Where(x => !x.Name.Contains($"<Revision Schedule>"))
-                            .Where(x => !x.IsTemplate)
-                            .ToList();
+                    _view = new List<Element>(new FilteredElementCollector(SnoopingContext.Instance.CommandData
+                                .Application
+                                .ActiveUIDocument.Document).OfClass(typeof(Autodesk.Revit.DB.View))
+                            .WhereElementIsNotElementType().OrderBy(v => v.Name)).Distinct()
+                        .Cast<Autodesk.Revit.DB.View>()
+                        .Where(x => !x.Name.Contains($"<Revision Schedule>"))
+                        .Where(x => !x.IsTemplate)
+                        .ToList();
 
                 return _view;
             }
-            set
-            {
-                _view = value;
-            }
+            set => _view = value;
         }
-
     }
 }

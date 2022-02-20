@@ -19,12 +19,15 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
     public class MethodProperty : ObjectProperty<MethodInfo>
     {
         #region Fields
+
         private RelayCommand _selectedCommand;
         private readonly object _parent;
+
         #endregion
 
         #region Ctor
-        public MethodProperty(string name,MethodInfo value,object parent) : base(name,value.GetFullName())
+
+        public MethodProperty(string name, MethodInfo value, object parent) : base(name, value.GetFullName())
         {
             IsMethod = true;
             Value = value;
@@ -39,6 +42,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         #endregion
 
         #region Properties
+
         public object MethodValue { get; set; }
 
         /// <summary>
@@ -65,9 +69,11 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                 return _selectedCommand;
             }
         }
+
         #endregion
 
         #region Public Methods
+
         public string AggregateParameters(ParameterInfo[] parameterInfos)
         {
             if (parameterInfos?.Any() != true)
@@ -75,9 +81,9 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                 return string.Empty;
             }
 
-            return parameterInfos.Length == 1 ?
-                $"{parameterInfos[0].ParameterType.Name} {parameterInfos[0].Name}" : 
-                parameterInfos
+            return parameterInfos.Length == 1
+                ? $"{parameterInfos[0].ParameterType.Name} {parameterInfos[0].Name}"
+                : parameterInfos
                     .Select(p => $"{p.ParameterType.Name} {p.Name}")
                     .Aggregate((p1, p2) => $"{p1},{p2}");
         }
@@ -92,7 +98,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             //检查是否都是基本类型
             foreach (var parameterInfo in parameterInfos)
             {
-                if(parameterInfo.ParameterType.IsClass
+                if (parameterInfo.ParameterType.IsClass
                     && parameterInfo.ParameterType.FullName != "System.String")
                 {
                     return false;
@@ -101,6 +107,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
 
             return true;
         }
+
         #endregion
 
         #region Private Methods
@@ -117,7 +124,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
 
             if (parameters?.Any() != true && !IsExcept(value))
             {
-                if (value.ReturnType.IsValueTypeOrString() )
+                if (value.ReturnType.IsValueTypeOrString())
                 {
                     //Solve Value
                     MethodValue = value.Invoke(_parent, null)?.ToString() ?? "<Null>";
@@ -136,7 +143,8 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                         //if value is ElementId, get element
                         if (tempValue is ElementId id)
                         {
-                            var element = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document.GetElement(id);
+                            var element = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document
+                                .GetElement(id);
                             if (element == null)
                             {
                                 MethodValue = "<Null>";
@@ -149,11 +157,8 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                         }
                         else
                         {
-                            
                             MethodValue = ToolTip;
-
                         }
-                        
                     }
                 }
             }
@@ -172,9 +177,10 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         /// <returns></returns>
         bool IsExcept(MethodInfo methodInfo)
         {
-            if (methodInfo.Name.Equals("Save",StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Save", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Regenerate", StringComparison.OrdinalIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("ConvertTemporaryHideIsolateToPermanent", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ConvertTemporaryHideIsolateToPermanent", StringComparison.OrdinalIgnoreCase))
+                return true;
             if (methodInfo.Name.Equals("SaveAs", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("UpdateAllOpenViews", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("DeactivateAllModes", StringComparison.OrdinalIgnoreCase)) return true;
@@ -183,15 +189,17 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("Maximize3DExtents", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("OpenSharedParameterFile", StringComparison.OrdinalIgnoreCase)) return true;
             if (methodInfo.Name.Equals("PurgeReleasedAPIObjects", StringComparison.OrdinalIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("UpdateRenderAppearanceLibrary", StringComparison.OrdinalIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("UpdateRenderAppearanceLibrary", StringComparison.OrdinalIgnoreCase))
+                return true;
             if (methodInfo.Name.Equals("SaveCloudModel", StringComparison.OrdinalIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("Print",StringComparison.InvariantCultureIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("SubmitPrint",StringComparison.InvariantCultureIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("Set",StringComparison.InvariantCultureIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("Revert",StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Print", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("SubmitPrint", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Set", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("Revert", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ToggleToIsometric", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ToggleToPerspective", StringComparison.InvariantCultureIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("EnableRevealHiddenMode", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("EnableRevealHiddenMode", StringComparison.InvariantCultureIgnoreCase))
+                return true;
             if (methodInfo.Name.Equals("HideActiveWorkPlane", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ShowActiveWorkPlane", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("PickIMXFileToImport", StringComparison.InvariantCultureIgnoreCase)) return true;
@@ -204,14 +212,16 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             if (methodInfo.Name.Equals("ZoomToFit", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Launch", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ResetLinks", StringComparison.InvariantCultureIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("ResetManualAdjustment", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("ResetManualAdjustment", StringComparison.InvariantCultureIgnoreCase))
+                return true;
             if (methodInfo.Name.Equals("GetAnalyticalModel", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Activate", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("FitToModel", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("ResetPartShape", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("Reset", StringComparison.InvariantCultureIgnoreCase)) return true;
             if (methodInfo.Name.Equals("MakeUnbound", StringComparison.InvariantCultureIgnoreCase)) return true;
-            if (methodInfo.Name.Equals("DissociateFromGlobalParameter ", StringComparison.InvariantCultureIgnoreCase)) return true;
+            if (methodInfo.Name.Equals("DissociateFromGlobalParameter ", StringComparison.InvariantCultureIgnoreCase))
+                return true;
             return false;
         }
 
@@ -264,6 +274,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                 TaskDialog.Show("Success", result.ToString());
             }
         }
+
         #endregion
     }
 }

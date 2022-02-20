@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using Autodesk.Revit.DB;
 using GalaSoft.MvvmLight.CommandWpf;
 using RevitLookupWpf.View;
 
@@ -11,11 +12,31 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
 
         public DefaultObjectProperty(string name,string fullName ,object value) : base(name,fullName)
         {
-            Value = value;
+            
 
             if (value != null)
             {
-                ValueType = value.GetType()?.Name;
+                if (value is ElementId id)
+                {
+                    var element = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document
+                        .GetElement(id);
+                    if (element == null)
+                    {
+                        Value = value;
+                        ValueType = "-1";
+                    }
+                    else
+                    {
+                        Value = element;
+                        ValueType = $"<{element.GetType().Name} {element.Name} {element.Id.IntegerValue}>";
+                    }
+                }
+                else
+                {
+                    Value = value;
+                    ValueType = value.GetType()?.Name;
+                }
+                
             }
         }
 

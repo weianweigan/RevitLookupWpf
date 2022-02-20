@@ -15,6 +15,8 @@ namespace RevitLookupWpf.ParameterSys
         public ParameterInfo ParameterInfo { get; }
 
         public abstract object GetValue();
+
+        public virtual bool IsLegal() => true;
     }
 
     public abstract class ParameterBase<TValue> : ParameterBase

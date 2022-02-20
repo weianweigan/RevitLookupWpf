@@ -143,7 +143,9 @@
         <!--Parameters-->
         <controls:PropertyDataGridValueTemplateSelector.ParameterDataTemplate>
             <DataTemplate>
-                <controls:SplitDropDownItem Text="{Binding ValueType}" ToolTip="{Binding ToolTip}">
+                <controls:SplitDropDownItem Text="{Binding ValueType}"
+                                            ToolTip="{Binding ToolTip}"
+                                            ApplyCommand="{Binding ApplyCommand}">
                     <controls:SplitDropDownItem.Style>
                         <Style TargetType="controls:SplitDropDownItem">
                             <Style.Triggers>

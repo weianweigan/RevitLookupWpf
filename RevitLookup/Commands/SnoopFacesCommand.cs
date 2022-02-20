@@ -25,7 +25,7 @@ namespace RevitLookupWpf.Commands
                 message = Resource.NoActiveDocument;
                 return Result.Cancelled;
             }
-            
+            var lookupWindow = new LookupWindow(commandData);
             List<GeometryObject> geos = new List<GeometryObject>();
             bool isNormal = MessageUtils.QuestionMsg("Selection Mode:", "Normal", "Order");
             if (isNormal)
@@ -64,7 +64,6 @@ namespace RevitLookupWpf.Commands
                 }
             }
             if (geos.Count == 0) return Result.Cancelled;
-            var lookupWindow = new LookupWindow();
             if (geos.Count == 1) lookupWindow.SetRvtInstance(geos.FirstOrDefault());
             else lookupWindow.SetRvtInstance(geos);
             lookupWindow.Show();

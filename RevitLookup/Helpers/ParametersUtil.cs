@@ -1,4 +1,5 @@
-﻿using RevitLookupWpf.ParameterSys;
+﻿using Autodesk.Revit.DB;
+using RevitLookupWpf.ParameterSys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,10 @@ namespace RevitLookupWpf.Helpers
 
             if (parameterInfo.ParameterType.IsEnum)
             {
-                return new EnumParameter(parameterInfo);
+                if (parameterInfo.ParameterType == typeof(BuiltInParameter))
+                    return new BuiltInParameterParameter(parameterInfo);
+                else
+                    return new EnumParameter(parameterInfo);
             }
 
             switch (parameterInfo.ParameterType.FullName)

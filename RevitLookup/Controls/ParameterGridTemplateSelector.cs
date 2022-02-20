@@ -24,6 +24,8 @@ namespace RevitLookupWpf.Controls
 
         public DataTemplate EnumDataTemplate { get; set; }
 
+        public DataTemplate BuiltInParameterDataTemplate { get; set; }
+
         public DataTemplate GuidDataTemplate { get; set; }
         #endregion
 
@@ -54,6 +56,9 @@ namespace RevitLookupWpf.Controls
                     break;
                 case nameof(EnumParameter):
                     dataTemplate = EnumDataTemplate;
+                    break;
+                case nameof(BuiltInParameterParameter):
+                    dataTemplate = BuiltInParameterDataTemplate;
                     break;
                 case nameof(GuidParameter):
                     dataTemplate = GuidDataTemplate;

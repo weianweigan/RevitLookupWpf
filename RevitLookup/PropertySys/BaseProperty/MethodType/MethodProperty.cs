@@ -138,7 +138,6 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                         //if value is ElementId, get element
                         if (tempValue is ElementId id)
                         {
-                            MessageBox.Show(value.GetFullName());
                             var element = Data.Application.ActiveUIDocument.Document.GetElement(id);
                             if (element == null)
                             {

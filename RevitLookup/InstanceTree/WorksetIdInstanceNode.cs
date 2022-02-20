@@ -5,7 +5,6 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class WorksetIdInstanceNode : InstanceNode<WorksetId>
     {
-        private ExternalCommandData Data;
         private WorksetId elementId;
         public WorksetIdInstanceNode(WorksetId rvtObjcet) : base(rvtObjcet)
         {
@@ -15,19 +14,10 @@ namespace RevitLookupWpf.InstanceTree
                 Name += $"({rvtObjcet.IntegerValue})";
             }
         }
-        public WorksetIdInstanceNode(WorksetId rvtObjcet,ExternalCommandData data) : base(rvtObjcet)
-        {
-            Data = data;
-            elementId = rvtObjcet;
-            if (rvtObjcet != null)
-            {
-                Name += $"({rvtObjcet.IntegerValue})";
-            }
-        }
         public InstanceNode ToWorksetInstanceNode()
         {
             InstanceNode node;
-            Document doc = Data.Application.ActiveUIDocument.Document;
+            Document doc = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document;
             WorksetTable worksetTable = doc.GetWorksetTable();
             Workset workset = worksetTable.GetWorkset(elementId);
             node = new WorksetInstanceNode(workset);

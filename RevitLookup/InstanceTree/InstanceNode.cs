@@ -36,12 +36,10 @@ namespace RevitLookupWpf.InstanceTree
     public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
     {
         private readonly IEnumerable _rvtObjcet;
-        private ExternalCommandData Data;
-        public IEnumerableInstanceNode(IEnumerable rvtObjcet,ExternalCommandData data) : base(rvtObjcet)
+        public IEnumerableInstanceNode(IEnumerable rvtObjcet) : base(rvtObjcet)
         {
             _rvtObjcet = rvtObjcet;
             Name = rvtObjcet?.GetType().Name;
-            Data = data;
             GetChild();
         }
 
@@ -61,11 +59,11 @@ namespace RevitLookupWpf.InstanceTree
                         Children.Add(node);
                         break;
                     case WorksetId worksetId:
-                        node = new WorksetIdInstanceNode(worksetId, Data).ToWorksetInstanceNode();
+                        node = new WorksetIdInstanceNode(worksetId).ToWorksetInstanceNode();
                         Children.Add(node);
                         break;
                     case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId, Data).ToElementInstanceNode(false);
+                        node = new ElementIdInstanceNode(elementId).ToElementInstanceNode(false);
                         Children.Add(node);
                         break;
                     case InstanceBinding instanceBinding:
@@ -125,7 +123,7 @@ namespace RevitLookupWpf.InstanceTree
                         Children.Add(node);
                         break;
                     case EdgeArray edgeArray:
-                        node = new IEnumerableInstanceNode(edgeArray,Data);
+                        node = new IEnumerableInstanceNode(edgeArray);
                         node.IsExpanded = true;
                         Children.Add(node);
                         break;
@@ -149,7 +147,7 @@ namespace RevitLookupWpf.InstanceTree
         #endregion
 
         #region Ctor
-        public static InstanceNode Create<TRvtObject>(TRvtObject obj,ExternalCommandData data)
+        public static InstanceNode Create<TRvtObject>(TRvtObject obj)
         {
             if (obj == null)
             {
@@ -158,7 +156,7 @@ namespace RevitLookupWpf.InstanceTree
             InstanceNode node;
             if (obj is IEnumerable enumble)
             {
-                node = new IEnumerableInstanceNode(enumble,data);
+                node = new IEnumerableInstanceNode(enumble);
             }
             else
             {
@@ -168,10 +166,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new ElementInstanceNode(element,true);
                         break;
                     case WorksetId worksetId:
-                        node = new WorksetIdInstanceNode(worksetId, data).ToWorksetInstanceNode();
+                        node = new WorksetIdInstanceNode(worksetId).ToWorksetInstanceNode();
                         break;
                     case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId, data).ToElementInstanceNode(true);
+                        node = new ElementIdInstanceNode(elementId).ToElementInstanceNode(true);
                         break;
                     case Document doc:
                         node = new DocumentInstanceNode(doc);

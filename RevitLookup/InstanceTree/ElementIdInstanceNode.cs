@@ -5,7 +5,6 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class ElementIdInstanceNode : InstanceNode<ElementId>
     {
-        private ExternalCommandData Data;
         private ElementId elementId;
         public ElementIdInstanceNode(ElementId rvtObjcet) : base(rvtObjcet)
         {
@@ -15,19 +14,10 @@ namespace RevitLookupWpf.InstanceTree
                 Name += $"({rvtObjcet.IntegerValue})";
             }
         }
-        public ElementIdInstanceNode(ElementId rvtObjcet,ExternalCommandData data) : base(rvtObjcet)
-        {
-            Data = data;
-            elementId = rvtObjcet;
-            if (rvtObjcet != null)
-            {
-                Name += $"({rvtObjcet.IntegerValue})";
-            }
-        }
         public InstanceNode ToElementInstanceNode(bool isRoot)
         {
             InstanceNode node;
-            Document doc = Data.Application.ActiveUIDocument.Document;
+            Document doc = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document;
             Element e = doc.GetElement(elementId);
             if (e != null) node = new ElementInstanceNode(e,isRoot);
             else node = new ElementIdInstanceNode(elementId);

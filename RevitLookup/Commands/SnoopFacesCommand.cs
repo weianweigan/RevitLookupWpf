@@ -64,7 +64,6 @@ namespace RevitLookupWpf.Commands
                 }
             }
             if (geos.Count == 0) return Result.Cancelled;
-            var lookupWindow = new LookupWindow();
             if (geos.Count == 1) lookupWindow.SetRvtInstance(geos.FirstOrDefault());
             else lookupWindow.SetRvtInstance(geos);
             lookupWindow.Show();

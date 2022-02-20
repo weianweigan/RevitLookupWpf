@@ -24,7 +24,7 @@ namespace RevitLookupWpf.ViewModel
 
         #region Ctor
 
-        public LookupWindowViewModel(LookupWindow lookupWindow,ExternalCommandData data):base(lookupWindow,data)
+        public LookupWindowViewModel(LookupWindow lookupWindow):base(lookupWindow)
         {
             LookupData = this;
             Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
@@ -46,7 +46,7 @@ namespace RevitLookupWpf.ViewModel
         #region Public Methods
         public bool SetRvtInstance<TRvtObject>(TRvtObject rvtObject)
         {
-            var root = InstanceNode.Create(rvtObject,_data);
+            var root = InstanceNode.Create(rvtObject);
             root.IsSelected = true;
             root.IsExpanded = true;
             LookupData.Roots = new ObservableCollection<InstanceNode>() { root };
@@ -102,9 +102,9 @@ namespace RevitLookupWpf.ViewModel
                 return;
             }
 
-            var vm = new LookupViewModel(_lookupWindow,_data);
+            var vm = new LookupViewModel(_lookupWindow);
 
-            var root = InstanceNode.Create(objectMessage.RvtObject,_data);
+            var root = InstanceNode.Create(objectMessage.RvtObject);
 
             vm.Roots = new ObservableCollection<InstanceNode>() { root };
 

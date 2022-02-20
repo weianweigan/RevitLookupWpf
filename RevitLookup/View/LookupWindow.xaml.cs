@@ -23,7 +23,7 @@ namespace RevitLookupWpf.View
         }
         public LookupWindow(ExternalCommandData data) : this()
         {
-            _viewModel = new LookupWindowViewModel(this,data);
+            _viewModel = new LookupWindowViewModel(this);
             _viewModel.CloseAction = Close;
             DataContext = _viewModel;
         }

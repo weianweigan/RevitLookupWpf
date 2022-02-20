@@ -33,12 +33,10 @@ namespace RevitLookupWpf.ViewModel
         private RelayCommand _copy;
         private RelayCommand _helpCommand;
         public LookupWindow _lookupWindow;
-        public ExternalCommandData _data;
-
-        public LookupViewModel(LookupWindow lookupWindow,ExternalCommandData data)
+        
+        public LookupViewModel(LookupWindow lookupWindow)
         {
             _lookupWindow = lookupWindow;
-            _data = data;
         }
         public ObservableCollection<InstanceNode> Roots
         {
@@ -195,7 +193,7 @@ namespace RevitLookupWpf.ViewModel
 
         private void OpenInNewWindow()
         {
-            var lookupWindow = new LookupWindow(_data);
+            var lookupWindow = new LookupWindow(SnoopingContext.Instance.CommandData);
             if (SelectedProperty is DefaultObjectProperty objectProperty)
             {
                 lookupWindow.SetRvtInstance(objectProperty.Value);

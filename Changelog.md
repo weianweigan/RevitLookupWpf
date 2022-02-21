@@ -1,4 +1,18 @@
 # Changelog
+- 2022-02-20 **1.0.2**
+  - Improve show view to snoop boudingbox Element
+  - Add feature allow user continue snoop ElementId
+  - Fix problem when snoop EdgeArray from EdgeArrayArray  [#19](https://github.com/weianweigan/RevitLookupWpf/issues/19)
+  - Fix String downline extend row #23
+  - Fix Problem with menu context open new windows #28
+  - Support **Snoop** worketId
+  - Allow user copy text in lookup help window [#32](https://github.com/weianweigan/RevitLookupWpf/pull/32)
+  - Add feature copy value context menu with value type null, string, int, ....
+  - Change snoop UIApplication to ExternalCommand Data
+  - Fix some method inside class xyz with prefix op_
+  - Add selection command **Edge** and **Face** with two model **Normal** or **Order**
+  - Add config support debug in revit 2019
+
 - 2022-02-18 **1.0.1**
   - Improve interface program
   - Fix problem show string with text note

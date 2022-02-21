@@ -9,18 +9,18 @@
     Width="400"
     Height="Auto"
     d:DataContext="{d:DesignInstance viewModel:SnoopSearchViewModel}"
+    FocusManager.FocusedElement="{x:Reference textBox1}"
     ResizeMode="NoResize"
     SizeToContent="Height"
-    FocusManager.FocusedElement="{x:Reference textBox1}"
     mc:Ignorable="d">
     <StackPanel Orientation="Vertical">
         <TextBox
+            x:Name="textBox1"
             Margin="1,1,1,1"
             VerticalAlignment="Center"
-            x:Name="textBox1"
             HorizontalContentAlignment="Center"
             Focusable="True"
-            Text="{Binding Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <TextBox.Resources>
                 <VisualBrush
                     x:Key="tbxText"
@@ -44,6 +44,12 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
+        <ComboBox
+            x:Name="CbbDoc"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            ItemsSource="{Binding Docs}"
+            SelectedItem="{Binding DocSelected}" />
         <Button
             Margin="1,1,1,1"
             Background="SteelBlue"

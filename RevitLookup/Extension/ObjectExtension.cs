@@ -38,7 +38,7 @@ namespace RevitLookupWpf.Extension
                 var property = default(PropertyBase);
                 try
                 {
-                    property = GetProperty(propertyInfo, rvtObject);
+                    property = GetProperty(propertyInfo, rvtObject,type);
                     property.IsReadOnly = propertyInfo.CanWrite;
                 }
                 catch (Exception ex)
@@ -114,7 +114,7 @@ namespace RevitLookupWpf.Extension
             return name;
         }
 
-        private static PropertyBase GetProperty(PropertyInfo propertyInfo, object rvtObject)
+        private static PropertyBase GetProperty(PropertyInfo propertyInfo, object rvtObject, Type type)
         {
             var property = default(PropertyBase);
 
@@ -135,8 +135,15 @@ namespace RevitLookupWpf.Extension
             }
             else
             {
-                //Only Set
-                property = new SetOnlyProperty(propertyInfo.Name, rvtObject, propertyInfo);
+                if (propertyInfo.Name == "Name" && SetOnlyNameStringProperty.IsSpecialType(type))
+                {
+                    property = new SetOnlyNameStringProperty(propertyInfo.Name, rvtObject, propertyInfo);
+                }
+                else
+                {
+                    //Only Set
+                    property = new SetOnlyProperty(propertyInfo.Name, rvtObject, propertyInfo);
+                }
             }
 
             return property;

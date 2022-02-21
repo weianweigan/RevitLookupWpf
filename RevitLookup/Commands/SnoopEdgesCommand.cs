@@ -28,11 +28,10 @@ namespace RevitLookupWpf.Commands
             var lookupWindow = new LookupWindow(commandData);
             List<GeometryObject> geos = new List<GeometryObject>();
             TaskDialogResult result = MessageUtils.QuestionMsg("Selection Mode:","Single","Normal","Order","Cancel");
-            Document doc = uidoc.Document;
             switch (result)
             {
                 case TaskDialogResult.CommandLink1:
-                    geos = PickSigle(uidoc);
+                    geos = PickSingle(uidoc);
                     break;
                 case TaskDialogResult.CommandLink2:
                     geos = PickNormal(commandData);
@@ -43,10 +42,6 @@ namespace RevitLookupWpf.Commands
                 case TaskDialogResult.CommandLink4:
                     return Result.Succeeded;
             }
-            if (result>=0)
-            {
-                
-            }
             if (geos.Count == 0) return Result.Cancelled;
             if(geos.Count==1) lookupWindow.SetRvtInstance(geos.FirstOrDefault());
             else lookupWindow.SetRvtInstance(geos);
@@ -55,7 +50,7 @@ namespace RevitLookupWpf.Commands
             return Result.Succeeded;
         }
 
-        List<GeometryObject> PickSigle(UIDocument uidoc)
+        List<GeometryObject> PickSingle(UIDocument uidoc)
         {
             List<GeometryObject> geos = new List<GeometryObject>();
             Reference r = uidoc.Selection.PickObject(ObjectType.Edge);

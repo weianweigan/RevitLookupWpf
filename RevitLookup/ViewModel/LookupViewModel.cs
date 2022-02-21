@@ -200,6 +200,14 @@ namespace RevitLookupWpf.ViewModel
             }
             else if (SelectedProperty is MethodProperty methodProperty)
             {
+                if (!methodProperty.SolvedValue)
+                {
+                    if (!methodProperty.NoParameterSolve())//Invoke to get value when hasn't solved value
+                    {
+                        TaskDialog.Show("Error", "Cannot open in new window");
+                        return;
+                    }
+                }
                 lookupWindow.SetRvtInstance(methodProperty.MethodValue);
             }
             else if (SelectedProperty is ParametersProperty parametersProperty)

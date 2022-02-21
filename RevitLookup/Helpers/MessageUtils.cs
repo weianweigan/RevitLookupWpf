@@ -14,7 +14,7 @@ namespace RevitLookupWpf.Helpers
         /// </summary>
         /// <param name="Caption">Title Question</param>
         /// <returns></returns>
-        public static bool QuestionMsg(string Caption, string op1, string op2)
+        public static TaskDialogResult QuestionMsg(string Caption, string op1, string op2,string op3,string op4)
         {
 
             var dialog = new TaskDialog(Caption);
@@ -22,8 +22,9 @@ namespace RevitLookupWpf.Helpers
             dialog.MainInstruction = Caption;
             dialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink1, op1);
             dialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink2, op2);
-
-            return dialog.Show() == TaskDialogResult.CommandLink1;
+            dialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink3, op3);
+            dialog.AddCommandLink(TaskDialogCommandLinkId.CommandLink4, op4);
+            return dialog.Show();
         }
     }
 }

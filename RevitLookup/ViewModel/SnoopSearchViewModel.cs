@@ -15,6 +15,11 @@ using RevitLookupWpf.View;
 
 namespace RevitLookupWpf.ViewModel
 {
+    public enum DocType
+    {
+        DocCurrent,
+        DocLinked
+    }
     public class SnoopSearchViewModel : ViewModelBase
     {
         public SearchWindow SearchWindow { get; set; }
@@ -29,6 +34,10 @@ namespace RevitLookupWpf.ViewModel
             }
         }
 
+        public Array Docs => Enum.GetValues(typeof(DocType));
+
+        public DocType DocSelected { get; set; }
+
         private RelayCommand _snoopSearchCommand;
         public RelayCommand SnoopSearchCommand => _snoopSearchCommand ?? new RelayCommand(SnoopSearchClick);
         public ExternalCommandData Data { get; set; }
@@ -42,19 +51,32 @@ namespace RevitLookupWpf.ViewModel
             {
                 if (string.IsNullOrEmpty(Value))
                 {
-                    MessageBox.Show("Please Input ElementId or Guid",Resource.AppName,MessageBoxButton.OK,MessageBoxImage.Exclamation);
+                    MessageBox.Show("Please Input ElementId or Guid", Resource.AppName, MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     return;
                 }
-                Document doc = Data.Application.ActiveUIDocument.Document;
-                var element = doc.GetElement(Value);
+
+                Element element = null;
+                switch (DocSelected)
+                {
+                    case DocType.DocCurrent:
+                        Document doc = Data.Application.ActiveUIDocument.Document;
+                        element = TryGetElement(doc);
+                        break;
+                    case DocType.DocLinked:
+                        foreach (Document document in Data.Application.Application.Documents)
+                        {
+                            element = TryGetElement(document);
+                            if(element!=null) break;
+                        }
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
                 if (element == null)
                 {
-                    bool flag = int.TryParse(Value, out int result);
-                    if (flag) element = doc.GetElement(new ElementId(result)); if (element == null)
-                    {
-                        MessageBox.Show("ElementId or Guid not exist in project", Resource.AppName, MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                        return;
-                    }
+                    ShowWarning();
+                    return;
                 }
                 SearchWindow.Close();
                 var lookupWindow = new LookupWindow(Data);
@@ -65,6 +87,26 @@ namespace RevitLookupWpf.ViewModel
             {
                 MessageBox.Show(e.ToString());
             }
+        }
+
+        Element TryGetElement(Document doc)
+        {
+            Element element = doc.GetElement(Value);
+            if (element == null)
+            {
+                bool flag = int.TryParse(Value, out int result);
+                if (flag) element = doc.GetElement(new ElementId(result));
+                if (element == null)
+                {
+                    return null;
+                }
+            }
+            return element;
+        }
+
+        void ShowWarning()
+        {
+            MessageBox.Show("ElementId or Guid not exist in project", Resource.AppName, MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
     }
 }

@@ -175,6 +175,9 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                     else
                     {
                         if (tempValue is ElementId id) solvedValue = ResolveElementId(id);
+                        else if (tempValue is XYZ xyz) solvedValue = ResolveXYZValue(xyz);
+                        else if (tempValue is BoundingBoxXYZ bbxyz) solvedValue = ResolvebbXYZValue(bbxyz);
+                        else if (tempValue is BoundingBoxUV bbuv) solvedValue = ResolvebbUVValue(bbuv);
                         else MethodValue = ToolTip;
                     }
                 }
@@ -279,6 +282,29 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                 return true;
             }
             MethodValue = element;
+            return false;
+        }
+
+        bool ResolveXYZValue(XYZ xyz)
+        {
+            MethodValue = xyz.ToString();
+            return false;
+        }
+
+        bool ResolvebbXYZValue(BoundingBoxXYZ bbXyz)
+        {
+            XYZ minPoint = bbXyz.Min;
+            XYZ maxPoint = bbXyz.Max;
+            XYZ centerPoint = (minPoint + maxPoint) * 0.5;
+            MethodValue = $"Min:{minPoint}\nMax:{maxPoint}\nCenter:{centerPoint}";
+            return false;
+        }
+        bool ResolvebbUVValue(BoundingBoxUV bbuv)
+        {
+            UV minPoint = bbuv.Min;
+            UV maxPoint = bbuv.Max;
+            UV centerPoint = (minPoint + maxPoint) * 0.5;
+            MethodValue = $"Min:{minPoint}\nMax:{maxPoint}\nCenter:{centerPoint}";
             return false;
         }
 

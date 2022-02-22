@@ -10,33 +10,19 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
     {
         private RelayCommand _selectedCommand;
 
-        public DefaultObjectProperty(string name,string fullName ,object value) : base(name,fullName)
+        public DefaultObjectProperty(string name, string fullName, object value) : base(name, fullName)
         {
-            
+
 
             if (value != null)
             {
-                if (value is ElementId id)
-                {
-                    var element = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document
-                        .GetElement(id);
-                    if (element == null)
-                    {
-                        Value = value;
-                        ValueType = "<Null>";
-                    }
-                    else
-                    {
-                        Value = element;
-                        ValueType = $"<{element.GetType().Name} {element.Name} {element.Id.IntegerValue}>";
-                    }
-                }
+                if (value is ElementId id) ResolveElementId(value, id);
                 else
                 {
                     Value = value;
                     ValueType = value.GetType()?.Name;
                 }
-                
+
             }
         }
 
@@ -61,6 +47,22 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
             {
                 //使用面包屑导航
                 NaviRvtObj(Value);
+            }
+        }
+
+        void ResolveElementId(object value, ElementId id)
+        {
+            var element = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document
+                .GetElement(id);
+            if (element == null)
+            {
+                Value = value;
+                ValueType = "<Null>";
+            }
+            else
+            {
+                Value = element;
+                ValueType = $"<{element.GetType().Name} {element.Name} {element.Id.IntegerValue}>";
             }
         }
     }

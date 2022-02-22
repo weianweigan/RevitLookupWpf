@@ -174,25 +174,8 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                     }
                     else
                     {
-                        //if value is ElementId, get element
-                        if (tempValue is ElementId id)
-                        {
-                            var element = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document
-                                .GetElement(id);
-                            if (element == null)
-                            {
-                                MethodValue = "<Null>";
-                                solvedValue = true;
-                            }
-                            else
-                            {
-                                MethodValue = element;
-                            }
-                        }
-                        else
-                        {
-                            MethodValue = ToolTip;
-                        }
+                        if (tempValue is ElementId id) solvedValue = ResolveElementId(id);
+                        else MethodValue = ToolTip;
                     }
                 }
             }
@@ -284,6 +267,19 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                     TaskDialog.Show("Error", $"Exception When Call {MethodValue}：{ex.Message}");
                 }
             }
+        }
+
+        bool ResolveElementId(ElementId id)
+        {
+            var element = SnoopingContext.Instance.CommandData.Application.ActiveUIDocument.Document
+                .GetElement(id);
+            if (element == null)
+            {
+                MethodValue = "<Null>";
+                return true;
+            }
+            MethodValue = element;
+            return false;
         }
 
         private void VisitResult(object result)

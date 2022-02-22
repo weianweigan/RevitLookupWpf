@@ -152,11 +152,14 @@ namespace RevitLookupWpf.Extension
         private static PropertyBase GetNormalProperty(PropertyInfo propertyInfo, object element)
         {
             PropertyBase property;
-            bool isClass = propertyInfo.PropertyType.IsClass;
 
             var value = propertyInfo.GetValue(element);
 
-            if (isClass)
+            if (value == null)
+            {
+                property = new NullObjectProperty(propertyInfo.Name, propertyInfo.GetFullName());
+            }
+            else if (propertyInfo.PropertyType.IsClass)
             {
                 switch (propertyInfo.PropertyType.FullName)
                 {
@@ -176,6 +179,10 @@ namespace RevitLookupWpf.Extension
                         break;
                 }
             }
+            else if(propertyInfo.PropertyType.IsEnum)
+            {
+                property = new EnumProperty(propertyInfo.Name, propertyInfo.GetFullName(),value as Enum);
+            }
             else
             {
                 //值类型
@@ -189,6 +196,9 @@ namespace RevitLookupWpf.Extension
                         break;
                     case "System.Double":
                         property = new DoubleProperty(propertyInfo.Name, propertyInfo.GetFullName(), (double)value);
+                        break;
+                    case "System.Guid":
+                        property = new GuidProperty(propertyInfo.Name, propertyInfo.GetFullName(), (Guid)value);
                         break;
                     default:
                         throw new NotSupportedException(propertyInfo.PropertyType.FullName);

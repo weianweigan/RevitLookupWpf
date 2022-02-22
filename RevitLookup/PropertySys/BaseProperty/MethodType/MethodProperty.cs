@@ -21,12 +21,12 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         #region Fields
 
         private RelayCommand _selectedCommand;
+        private object _methodValue;
         private readonly object _parent;
 
         #endregion
 
         #region Ctor
-
         public MethodProperty(string name, MethodInfo value, object parent) : base(name, value.GetFullName())
         {
             IsMethod = true;
@@ -42,8 +42,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         #endregion
 
         #region Properties
-
-        public object MethodValue { get; set; }
+        public object MethodValue { get => _methodValue; set => Set(ref _methodValue ,value); }
 
         /// <summary>
         /// User Click this object to Snoop
@@ -81,9 +80,9 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                 return string.Empty;
             }
 
-            return parameterInfos.Length == 1
-                ? $"{parameterInfos[0].ParameterType.Name} {parameterInfos[0].Name}"
-                : parameterInfos
+            return parameterInfos.Length == 1 ?
+                $"{parameterInfos[0].ParameterType.Name} {parameterInfos[0].Name}" :
+                parameterInfos
                     .Select(p => $"{p.ParameterType.Name} {p.Name}")
                     .Aggregate((p1, p2) => $"{p1},{p2}");
         }
@@ -106,6 +105,41 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Solve Value without parameters
+        /// </summary>
+        public bool NoParameterSolve()
+        {
+            bool resultFlag = false;
+            if (!CanExecute || SolvedValue)
+            {
+                return resultFlag;
+            }
+
+            //直接执行
+            try
+            {
+                var result = Value.Invoke(_parent, null);
+                if (result != null)
+                {
+                    MethodValue = result;
+                    var type = result.GetType();
+                    if (!type.IsValueTypeOrString())
+                        resultFlag = true;
+                }
+                else
+                {
+                    MethodValue = "<Null>";
+                    resultFlag = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                TaskDialog.Show("Error", $"Exception When Call {MethodValue}：{ex.Message}");
+            }
+            return resultFlag;
         }
 
         #endregion
@@ -256,7 +290,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         {
             //对值类型和引用类型分别处理
             var type = result.GetType();
-            if (type.IsClass && type.FullName != "System.String")
+            if (!type.IsValueTypeOrString())
             {
                 if (SnoopOption.WindowOrNavi)
                 {
@@ -271,7 +305,8 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             }
             else
             {
-                TaskDialog.Show("Success", result.ToString());
+                MethodValue = result;
+                //TaskDialog.Show("Success", result.ToString());
             }
         }
 

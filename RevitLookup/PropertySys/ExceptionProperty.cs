@@ -6,10 +6,10 @@ namespace RevitLookupWpf.PropertySys
     {
         public ExceptionProperty(string name, string fullName, Exception exception):base(name,fullName)
         {
-            Value = exception;
+            Value = exception.InnerException ?? exception;
             Msg = Value.Message;
 
-            ToolTip = Value.ToString();
+            ToolTip = Value.GetType().FullName;
         }
 
         public string Msg { get; set; }

@@ -53,9 +53,16 @@ namespace RevitLookupWpf.Commands
         List<GeometryObject> PickSingle(UIDocument uidoc)
         {
             List<GeometryObject> geos = new List<GeometryObject>();
-            Reference r = uidoc.Selection.PickObject(ObjectType.Edge);
-            var geometryObject = uidoc.Document.GetElement(r).GetGeometryObjectFromReference(r);
-            geos.Add(geometryObject);
+            try
+            {
+                Reference r = uidoc.Selection.PickObject(ObjectType.Edge);
+                var geometryObject = uidoc.Document.GetElement(r).GetGeometryObjectFromReference(r);
+                geos.Add(geometryObject);
+            }
+            catch (OperationCanceledException)
+            {
+                //ignore
+            }
             return geos;
         }
         List<GeometryObject> PickNormal(ExternalCommandData data)

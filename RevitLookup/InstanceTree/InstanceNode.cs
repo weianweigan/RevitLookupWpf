@@ -13,7 +13,8 @@ using ArgumentNullException = System.ArgumentNullException;
 namespace RevitLookupWpf.InstanceTree
 {
     public class InstanceNode<TRvtObject> : InstanceNode
-    {
+    {   
+
         public InstanceNode(TRvtObject rvtObjcet)
         {
             RvtObject = rvtObjcet;
@@ -26,6 +27,7 @@ namespace RevitLookupWpf.InstanceTree
         {
             if (PropertyList == null && RvtObject != null)
             {
+                
                 PropertyList = RvtObject.GetProperties();
             }
         }

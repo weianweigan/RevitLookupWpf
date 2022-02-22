@@ -23,7 +23,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
                     if (element == null)
                     {
                         Value = value;
-                        ValueType = "-1";
+                        ValueType = "<Null>";
                     }
                     else
                     {

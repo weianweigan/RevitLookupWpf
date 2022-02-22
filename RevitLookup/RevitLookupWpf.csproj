@@ -42,7 +42,6 @@
     <Version>$(RevitVersion).0.5</Version>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\RevitAPI2022.json" />
@@ -56,7 +55,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
-    <PackageReference Include="System.Resources.Extensions" Version="7.0.0-preview.1.22076.8" />
 
   </ItemGroup>
 

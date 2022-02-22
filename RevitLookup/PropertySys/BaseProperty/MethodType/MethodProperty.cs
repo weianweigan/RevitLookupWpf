@@ -175,6 +175,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                     else
                     {
                         if (tempValue is ElementId id) solvedValue = ResolveElementId(id);
+                        if (tempValue is XYZ xyz) solvedValue = ResolveXYZValue(xyz);
                         else MethodValue = ToolTip;
                     }
                 }
@@ -280,6 +281,12 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             }
             MethodValue = element;
             return false;
+        }
+
+        bool ResolveXYZValue(XYZ xyz)
+        {
+            MethodValue = xyz.ToString();
+            return true;
         }
 
         private void VisitResult(object result)

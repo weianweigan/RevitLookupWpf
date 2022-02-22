@@ -17,6 +17,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
             if (value != null)
             {
                 if (value is ElementId id) ResolveElementId(value, id);
+                else if(value is XYZ xyz) ResolveXYZValue(xyz);
                 else
                 {
                     Value = value;
@@ -64,6 +65,11 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
                 Value = element;
                 ValueType = $"<{element.GetType().Name} {element.Name} {element.Id.IntegerValue}>";
             }
+        }
+
+        void ResolveXYZValue(XYZ xyz)
+        {
+            ValueType = xyz.ToString();
         }
     }
 }

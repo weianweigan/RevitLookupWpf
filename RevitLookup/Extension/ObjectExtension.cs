@@ -175,6 +175,10 @@ namespace RevitLookupWpf.Extension
                         break;
                 }
             }
+            else if(propertyInfo.PropertyType.IsEnum)
+            {
+                property = new EnumProperty(propertyInfo.Name, propertyInfo.GetFullName(),value as Enum);
+            }
             else
             {
                 //值类型

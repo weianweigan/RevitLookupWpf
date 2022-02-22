@@ -52,6 +52,7 @@ namespace RevitLookupWpf.Controls
                     dataTemplate = IntDataTemplate;
                     break;
                 case nameof(StringProperty):
+                case nameof(EnumProperty):
                 case nameof(SetOnlyNameStringProperty):
                     dataTemplate = StringDataTemplate;
                     break;

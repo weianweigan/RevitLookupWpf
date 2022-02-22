@@ -120,7 +120,9 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
                 if (result != null)
                 {
                     MethodValue = result;
-                    resultFlag = true;
+                    var type = result.GetType();
+                    if (!type.IsValueTypeOrString())
+                        resultFlag = true;
                 }
                 else
                 {
@@ -260,7 +262,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         {
             //对值类型和引用类型分别处理
             var type = result.GetType();
-            if (type.IsClass && type.FullName != "System.String")
+            if (!type.IsValueTypeOrString())
             {
                 if (SnoopOption.WindowOrNavi)
                 {
@@ -275,7 +277,8 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
             }
             else
             {
-                TaskDialog.Show("Success", result.ToString());
+                MethodValue = result;
+                //TaskDialog.Show("Success", result.ToString());
             }
         }
         #endregion

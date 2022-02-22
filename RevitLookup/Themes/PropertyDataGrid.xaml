@@ -62,7 +62,9 @@
         <!--  String  -->
         <controls:PropertyDataGridValueTemplateSelector.StringDataTemplate>
             <DataTemplate DataType="{x:Type referenceType:StringProperty}">
-                <TextBox IsReadOnly="{Binding IsReadOnly}" Text="{Binding Value}" />
+                <TextBox IsReadOnly="{Binding IsReadOnly}"
+                         BorderThickness="0"
+                         Text="{Binding Value}" />
             </DataTemplate>
         </controls:PropertyDataGridValueTemplateSelector.StringDataTemplate>
         <!--  Bool  -->

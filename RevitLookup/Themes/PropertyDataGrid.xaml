@@ -98,7 +98,7 @@
         <!--  Exception  -->
         <controls:PropertyDataGridValueTemplateSelector.ExceptionDataTemplate>
             <DataTemplate DataType="{x:Type propertySys1:ExceptionProperty}">
-                <Grid>
+                <Grid ToolTip="{Binding ToolTip}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="25" />
                         <ColumnDefinition />

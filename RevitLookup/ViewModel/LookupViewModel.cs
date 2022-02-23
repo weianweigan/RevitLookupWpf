@@ -177,7 +177,7 @@ namespace RevitLookupWpf.ViewModel
                 var helpWindow = new HelpWindow(revitInfo);
                 helpWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 helpWindow.Owner = _lookupWindow;
-                helpWindow.ShowDialog();
+                helpWindow.Show();
             }
             catch (Exception ex)
             {

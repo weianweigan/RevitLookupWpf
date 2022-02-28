@@ -76,6 +76,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new ParameterInstanceNode(parameter);
                         Children.Add(node);
                         break;
+                    case FamilyParameter familyParameter:
+                        node = new FamilyParameterInstanceNode(familyParameter);
+                        Children.Add(node);
+                        break;
                     case Connector connector:
                         node = new ConnectorInstanceNode(connector);
                         Children.Add(node);

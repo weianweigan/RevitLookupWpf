@@ -9,7 +9,7 @@ namespace RevitLookupWpf.InstanceTree
             if (rvtObject != null)
             {
 #if R19 || R20
-                Name += $"({rvtObjcet.GetHashCode()})";
+                Name += $"({rvtObject.GetHashCode()})";
 #else
 Name += $"({rvtObject.Id})";
 #endif

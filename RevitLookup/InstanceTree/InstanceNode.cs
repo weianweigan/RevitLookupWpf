@@ -60,6 +60,10 @@ namespace RevitLookupWpf.InstanceTree
                         node = new ElementInstanceNode(element,false);
                         Children.Add(node);
                         break;
+                    case FamilyType familyType:
+                        node = new FamilyTypeInstanceNode(familyType);
+                        Children.Add(node);
+                        break;
                     case WorksetId worksetId:
                         node = new WorksetIdInstanceNode(worksetId).ToWorksetInstanceNode();
                         Children.Add(node);

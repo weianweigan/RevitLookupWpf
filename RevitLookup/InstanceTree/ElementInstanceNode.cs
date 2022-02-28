@@ -5,12 +5,12 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class ElementInstanceNode : InstanceNode<Element>
     {
-        public ElementInstanceNode(Element rvtObjcet,bool isRoot) : base(rvtObjcet)
+        public ElementInstanceNode(Element rvtObject,bool isRoot) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                if(isRoot) Name += $"({rvtObjcet.Id.IntegerValue})";
-                else Name += $"({rvtObjcet.Name})";
+                if(isRoot) Name += $"({rvtObject.Id.IntegerValue})";
+                else Name += $"({rvtObject.Name})";
             }
         }
     }

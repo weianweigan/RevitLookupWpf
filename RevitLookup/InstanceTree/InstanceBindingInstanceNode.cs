@@ -5,17 +5,17 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class InstanceBindingInstanceNode : InstanceNode<InstanceBinding>
     {
-        public InstanceBindingInstanceNode(InstanceBinding rvtObjcet) : base(rvtObjcet)
+        public InstanceBindingInstanceNode(InstanceBinding rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
                 StringBuilder sb = new StringBuilder();
                 int index = 0;
-                foreach (Category cat in rvtObjcet.Categories)
+                foreach (Category cat in rvtObject.Categories)
                 {
-                    if(rvtObjcet.Categories.Size==1)sb.Append($"({cat.Name})");
+                    if(rvtObject.Categories.Size==1)sb.Append($"({cat.Name})");
                     else if (index == 0) sb.Append($"({cat.Name}");
-                    else if (index==rvtObjcet.Categories.Size) sb.Append($"{cat.Name})");
+                    else if (index==rvtObject.Categories.Size) sb.Append($"{cat.Name})");
                     else sb.Append($",{cat.Name}");
                     index++;
                 }

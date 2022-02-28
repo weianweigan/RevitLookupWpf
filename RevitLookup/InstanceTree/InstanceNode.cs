@@ -15,10 +15,10 @@ namespace RevitLookupWpf.InstanceTree
     public class InstanceNode<TRvtObject> : InstanceNode
     {   
 
-        public InstanceNode(TRvtObject rvtObjcet)
+        public InstanceNode(TRvtObject rvtObject)
         {
-            RvtObject = rvtObjcet;
-            Name = rvtObjcet?.GetType().Name;
+            RvtObject = rvtObject;
+            Name = rvtObject?.GetType().Name;
         }
 
         public TRvtObject RvtObject { get; set; }
@@ -37,11 +37,11 @@ namespace RevitLookupWpf.InstanceTree
 
     public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
     {
-        private readonly IEnumerable _rvtObjcet;
-        public IEnumerableInstanceNode(IEnumerable rvtObjcet) : base(rvtObjcet)
+        private readonly IEnumerable _rvtObject;
+        public IEnumerableInstanceNode(IEnumerable rvtObject) : base(rvtObject)
         {
-            _rvtObjcet = rvtObjcet;
-            Name = rvtObjcet?.GetType().Name;
+            _rvtObject = rvtObject;
+            Name = rvtObject?.GetType().Name;
             GetChild();
         }
 
@@ -51,7 +51,7 @@ namespace RevitLookupWpf.InstanceTree
             {
                 Children = new ObservableCollection<InstanceNode>();
             }
-            foreach (var item in _rvtObjcet)
+            foreach (var item in _rvtObject)
             {
                 InstanceNode node;
                 switch (item)
@@ -62,6 +62,14 @@ namespace RevitLookupWpf.InstanceTree
                         break;
                     case FamilyType familyType:
                         node = new FamilyTypeInstanceNode(familyType);
+                        Children.Add(node);
+                        break;
+                    case PlanTopology planTopology:
+                        node = new PlanTopologyInstanceNode(planTopology);
+                        Children.Add(node);
+                        break;
+                    case PlanCircuit planTopology:
+                        node = new PlanCircuitInstanceNode(planTopology);
                         Children.Add(node);
                         break;
                     case WorksetId worksetId:

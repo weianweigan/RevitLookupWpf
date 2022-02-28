@@ -6,12 +6,12 @@ namespace RevitLookupWpf.InstanceTree
     public class WorksetIdInstanceNode : InstanceNode<WorksetId>
     {
         private WorksetId elementId;
-        public WorksetIdInstanceNode(WorksetId rvtObjcet) : base(rvtObjcet)
+        public WorksetIdInstanceNode(WorksetId rvtObject) : base(rvtObject)
         {
-            elementId = rvtObjcet;
-            if (rvtObjcet != null)
+            elementId = rvtObject;
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.IntegerValue})";
+                Name += $"({rvtObject.IntegerValue})";
             }
         }
         public InstanceNode ToWorksetInstanceNode()

@@ -4,11 +4,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class ParameterInstanceNode : InstanceNode<Parameter>
     {
-        public ParameterInstanceNode(Parameter rvtObjcet) : base(rvtObjcet)
+        public ParameterInstanceNode(Parameter rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.Definition.Name})";
+                Name += $"({rvtObject.Definition.Name})";
             }
         }
     }

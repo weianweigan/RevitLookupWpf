@@ -4,11 +4,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class EdgeArrayInstanceNode : InstanceNode<EdgeArray>
     {
-        public EdgeArrayInstanceNode(EdgeArray rvtObjcet) : base(rvtObjcet)
+        public EdgeArrayInstanceNode(EdgeArray rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.Size})";
+                Name += $"({rvtObject.Size})";
             }
         }
     }

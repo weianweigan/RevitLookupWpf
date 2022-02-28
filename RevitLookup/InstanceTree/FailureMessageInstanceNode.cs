@@ -4,11 +4,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class FailureMessageInstanceNode : InstanceNode<FailureMessage>
     {
-        public FailureMessageInstanceNode(FailureMessage rvtObjcet) : base(rvtObjcet)
+        public FailureMessageInstanceNode(FailureMessage rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.GetSeverity()+" "+rvtObjcet.GetDescriptionText()})";
+                Name += $"({rvtObject.GetSeverity()+" "+rvtObject.GetDescriptionText()})";
             }
         }
     }

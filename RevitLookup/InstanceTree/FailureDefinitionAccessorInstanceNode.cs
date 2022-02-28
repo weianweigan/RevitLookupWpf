@@ -4,12 +4,12 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class FailureDefinitionAccessorInstanceNode : InstanceNode<FailureDefinitionAccessor>
     {
-        public FailureDefinitionAccessorInstanceNode(FailureDefinitionAccessor rvtObjcet) : base(rvtObjcet)
+        public FailureDefinitionAccessorInstanceNode(FailureDefinitionAccessor rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                string content = rvtObjcet.GetDescriptionText().Replace("\n", "").Replace("\r", "");
-                Name += $"({rvtObjcet.GetSeverity()+" "+ content})";
+                string content = rvtObject.GetDescriptionText().Replace("\n", "").Replace("\r", "");
+                Name += $"({rvtObject.GetSeverity()+" "+ content})";
             }
         }
     }

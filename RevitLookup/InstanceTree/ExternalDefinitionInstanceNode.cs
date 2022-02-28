@@ -4,11 +4,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class ExternalDefinitionInstanceNode : InstanceNode<ExternalDefinition>
     {
-        public ExternalDefinitionInstanceNode(ExternalDefinition rvtObjcet) : base(rvtObjcet)
+        public ExternalDefinitionInstanceNode(ExternalDefinition rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.Name})";
+                Name += $"({rvtObject.Name})";
             }
         }
     }

@@ -4,11 +4,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class ConnectorInstanceNode : InstanceNode<Connector>
     {
-        public ConnectorInstanceNode(Connector rvtObjcet) : base(rvtObjcet)
+        public ConnectorInstanceNode(Connector rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.Id})";
+                Name += $"({rvtObject.Id})";
             }
         }
     }

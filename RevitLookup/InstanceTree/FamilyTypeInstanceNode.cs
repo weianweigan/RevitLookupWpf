@@ -5,12 +5,12 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class FamilyTypeInstanceNode : InstanceNode<FamilyType>
     {
-        public FamilyTypeInstanceNode(FamilyType rvtObjcet) : base(rvtObjcet)
+        public FamilyTypeInstanceNode(FamilyType rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                string result = rvtObjcet.Name;
-                Name += $"({(string.IsNullOrEmpty(result)?result:rvtObjcet.GetHashCode())})";
+                string result = rvtObject.Name;
+                Name += $"({(string.IsNullOrEmpty(result)?result:rvtObject.GetHashCode())})";
             }
         }
     }

@@ -4,11 +4,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class DefinitionGroupInstanceNode : InstanceNode<DefinitionGroup>
     {
-        public DefinitionGroupInstanceNode(DefinitionGroup rvtObjcet) : base(rvtObjcet)
+        public DefinitionGroupInstanceNode(DefinitionGroup rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.Name})";
+                Name += $"({rvtObject.Name})";
             }
         }
     }

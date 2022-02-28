@@ -4,14 +4,14 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class GeometryObjectInstanceNode : InstanceNode<GeometryObject>
     {
-        public GeometryObjectInstanceNode(GeometryObject rvtObjcet) : base(rvtObjcet)
+        public GeometryObjectInstanceNode(GeometryObject rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
 #if R19 || R20
                 Name += $"({rvtObjcet.GetHashCode()})";
 #else
-Name += $"({rvtObjcet.Id})";
+Name += $"({rvtObject.Id})";
 #endif
 
             }

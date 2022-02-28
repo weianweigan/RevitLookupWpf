@@ -4,11 +4,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class PaperSizeInstanceNode : InstanceNode<PaperSize>
     {
-        public PaperSizeInstanceNode(PaperSize rvtObjcet) : base(rvtObjcet)
+        public PaperSizeInstanceNode(PaperSize rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.Name})";
+                Name += $"({rvtObject.Name})";
             }
         }
     }

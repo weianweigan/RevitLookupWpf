@@ -5,11 +5,11 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class RibbonPanelInstanceNode : InstanceNode<RibbonPanel>
     {
-        public RibbonPanelInstanceNode(RibbonPanel rvtObjcet) : base(rvtObjcet)
+        public RibbonPanelInstanceNode(RibbonPanel rvtObject) : base(rvtObject)
         {
-            if (rvtObjcet != null)
+            if (rvtObject != null)
             {
-                Name += $"({rvtObjcet.Name})";
+                Name += $"({rvtObject.Name})";
             }
         }
     }

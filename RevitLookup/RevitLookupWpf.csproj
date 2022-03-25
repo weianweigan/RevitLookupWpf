@@ -51,10 +51,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*" />
-    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
 
   </ItemGroup>
 
@@ -120,7 +120,7 @@
       <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.dll" />
       <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.Extras.dll" />
       <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.Platform.dll" />
-      <AddinItem Include="$(TargetDir)Microsoft.Expression.Interactions.dll" />
+      <AddinItem Include="$(TargetDir)Microsoft.Xaml.Behaviors.dll" />
       <AddinItem Include="$(TargetDir)System.Windows.Interactivity.dll" />
       <AddinItem Include="$(TargetDir)Newtonsoft.Json.dll" />
     </ItemGroup>

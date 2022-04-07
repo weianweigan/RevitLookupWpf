@@ -1,4 +1,7 @@
 # Changelog
+- 2022-04-07 **1.0.4**
+  - Support Revit 2023
+  - Fix some nuget package
 - 2022-02-23 **1.0.3**
   - Improve show preview elementid
   - Support Snoop search element inside linked
@@ -8,7 +11,6 @@
   - Support show value with value return enum 
   - Add show detail XYZ,Boundingbox
   - Support show help window modeless
-
 - 2022-02-20 **1.0.2**
   - Improve show view to snoop boudingbox Element
   - Add feature allow user continue snoop ElementId

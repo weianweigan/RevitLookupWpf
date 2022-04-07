@@ -13,7 +13,7 @@ const string installationDir = @"%AppDataFolder%\Autodesk\Revit\Addins\";
 const string projectName = "RevitLookupWpf";
 const string outputName = "RevitLookupWpf";
 const string outputDir = "output";
-var version = "1.0.3";
+var version = "1.0.4";
 var fileName = new StringBuilder().Append(outputName).Append("-").Append(version);
 
 var project = new Project

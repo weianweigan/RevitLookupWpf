@@ -11,7 +11,8 @@
 ![.NET Framework](https://img.shields.io/badge/.NET_6-yellow)
 
 [![Publish](../../actions/workflows/Workflow.yml/badge.svg)](../../actions)
-
+[![Github All Releases](https://img.shields.io/github/downloads/weianweigan/RevitLookupWpf/total?color=blue&label=Download)]()
+[![HitCount](https://hits.dwyl.com/weianweigan/RevitLookupWpf.svg?style=flat-square)](http://hits.dwyl.com/weianweigan/RevitLookupWpf)
 
 # Introduction
 

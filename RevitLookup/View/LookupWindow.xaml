@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:RevitLookupWpf.ViewModel"
+    xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"   
     Title="{Binding Title}"
     Width="700"
     Height="500"
@@ -24,8 +25,13 @@
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Generic.xaml" />
     </Window.Resources>
     <DockPanel>
-        <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Disabled">
-            <ListBox
+        <Grid DockPanel.Dock="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Disabled">
+                <ListBox
                 Height="25"
                 ItemsSource="{Binding Items}"
                 SelectedItem="{Binding LookupData}">
@@ -59,7 +65,12 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </ScrollViewer>
+            </ScrollViewer>
+            <ToggleButton Grid.Column="1" Width="23" Height="23"
+                    BorderThickness="0" Background="Transparent">
+                <Image Source="{StaticResource previewToggleDrawingImage}"/>
+            </ToggleButton>
+        </Grid>
         <Grid DockPanel.Dock="Bottom">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -68,6 +79,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TreeView
                 Grid.Row="0"
@@ -168,6 +180,10 @@
                     </controls:PropertyDataGrid.Columns>
                 </controls:PropertyDataGrid>
             </Grid>
+            <hx:Viewport3DX Grid.Column="2"
+                            EffectsManager="{Binding EffectsManager}"
+                            Camera="{Binding Camera}">
+            </hx:Viewport3DX>
             <Button
                 Grid.Row="1"
                 Margin="2,0,2,0"

@@ -147,7 +147,6 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource DefaultTreeViewItem}" />
         <Setter Property="Padding" Value="0" />
 
-        <!--  类似于SolidWorks选择框的效果  -->
         <!--<Setter Property="Background" Value="#FFCFE4F7"/>-->
         <Setter Property="BorderBrush" Value="#FF53A9FF" />
         <Setter Property="BorderThickness" Value="2" />

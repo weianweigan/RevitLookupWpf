@@ -52,6 +52,7 @@ namespace RevitLookupWpf.ViewModel
 
             return LookupData.Roots.Any();
         }
+
         public ICommand SelectedItemChangedCommand
         {
             get

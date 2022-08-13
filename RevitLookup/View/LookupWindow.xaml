@@ -72,6 +72,7 @@
             <TreeView
                 Grid.Row="0"
                 FontSize="10"
+                BorderThickness="0,1"
                 ItemsSource="{Binding LookupData.Roots}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"

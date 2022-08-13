@@ -56,6 +56,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.21.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*" />
@@ -125,6 +126,9 @@
       <AddinItem Include="$(TargetDir)CommunityToolkit.Mvvm.dll" />
       <AddinItem Include="$(TargetDir)Microsoft.Bcl.AsyncInterfaces.dll" />
       <AddinItem Include="$(TargetDir)System.*.dll" />
+      <AddinItem Include="$(TargetDir)SharpDX.*.dll" />
+      <AddinItem Include="$(TargetDir)Helix*.dll" />
+      <AddinItem Include="$(TargetDir)Cyotek.Drawing.BitmapFont.dll" />
     </ItemGroup>
 
     <PropertyGroup>

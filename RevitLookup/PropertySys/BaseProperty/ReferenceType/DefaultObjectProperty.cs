@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Autodesk.Revit.DB;
-using GalaSoft.MvvmLight.CommandWpf;
+using CommunityToolkit.Mvvm.Input;
 using RevitLookupWpf.View;
 
 namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType

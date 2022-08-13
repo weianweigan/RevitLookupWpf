@@ -1,11 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.Input;
 using RevitLookupWpf.PropertySys;
-using System.Linq;
-using Autodesk.Revit.DB;
-using Autodesk.Revit.UI;
 using RevitLookupWpf.View;
 using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
@@ -29,18 +25,19 @@ namespace RevitLookupWpf.ViewModel
             LookupData = this;
             Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
 
-            Messenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
+            //TODO： Fix this
+            //Messenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
         }
         #endregion
 
         #region Properties
-        public string Title { get => _title; set => Set(ref _title, value); }
+        public string Title { get => _title; set => SetProperty(ref _title, value); }
 
         public Action CloseAction { get; set; }
 
         public ICommand CloseCommand => _closeCommand ??= (_closeCommand = new RelayCommand(CloseAction));
 
-        public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
+        public ObservableCollection<LookupViewModel> Items { get => _items; set => SetProperty(ref _items , value); }
         #endregion
 
         #region Public Methods

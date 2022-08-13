@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿
 
 namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
 {
@@ -24,7 +24,8 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
             }
 
             //发生消息到 LookupWindowViewModel
-            Messenger.Default.Send<RvtObjectMessage>(new RvtObjectMessage(result));
+            //TODO:Fix Messager with toolkit update
+            //Messenger.Default.Send<RvtObjectMessage>(new RvtObjectMessage(result));
         }
     }
 }

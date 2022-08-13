@@ -8,8 +8,8 @@ using System.Windows.Input;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 
@@ -20,7 +20,7 @@ namespace RevitLookupWpf.ViewModel
         DocCurrent,
         DocLinked
     }
-    public class SnoopSearchViewModel : ViewModelBase
+    public class SnoopSearchViewModel : ObservableObject
     {
         public SearchWindow SearchWindow { get; set; }
         private string _value;
@@ -29,8 +29,8 @@ namespace RevitLookupWpf.ViewModel
             get => _value;
             set
             {
-                Set(ref _value, value);
-                RaisePropertyChanged(nameof(Value));
+                SetProperty(ref _value, value);
+                OnPropertyChanged(nameof(Value));
             }
         }
 

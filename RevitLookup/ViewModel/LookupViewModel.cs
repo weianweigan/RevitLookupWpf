@@ -8,9 +8,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
@@ -22,7 +21,7 @@ using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
 namespace RevitLookupWpf.ViewModel
 {
-    public class LookupViewModel : ViewModelBase
+    public class LookupViewModel : ObservableObject
     {
         private PropertyList _propertyList;
         private ListCollectionView _dataSource;
@@ -42,7 +41,7 @@ namespace RevitLookupWpf.ViewModel
         {
             get => _roots; set
             {
-                Set(ref _roots, value);
+                SetProperty(ref _roots, value);
                 GetNaviName();
             }
         }
@@ -90,7 +89,7 @@ namespace RevitLookupWpf.ViewModel
                     return;
                 }
 
-                Set(ref _propertyList, value);
+                SetProperty(ref _propertyList, value);
 
                 if (_propertyList != null)
                 {
@@ -107,9 +106,8 @@ namespace RevitLookupWpf.ViewModel
             get { return _dataSource; }
             set
             {
-
                 _dataSource = value;
-                RaisePropertyChanged(nameof(DataSource));
+                OnPropertyChanged(nameof(DataSource));
             }
         }
 
@@ -123,8 +121,8 @@ namespace RevitLookupWpf.ViewModel
             get => _selectedProperty;
             set
             {
-                Set(ref _selectedProperty, value);
-                OpenInNewWindowCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _selectedProperty, value);
+                OpenInNewWindowCommand.NotifyCanExecuteChanged();
             }
         }
         public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??= new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
@@ -240,9 +238,9 @@ namespace RevitLookupWpf.ViewModel
         {
             get => _lookupData; set
             {
-                Set(ref _lookupData, value);
-                RaisePropertyChanged(() => LookupData.DataSource);
-                RaisePropertyChanged(() => LookupData.OpenInNewWindowCommand);
+                SetProperty(ref _lookupData, value);
+                OnPropertyChanged("LookupData.DataSource");
+                OnPropertyChanged("LookupData.OpenInNewWindowCommand");
                 //Remove back items
                 if (LookupData?.Next != null)
                 {

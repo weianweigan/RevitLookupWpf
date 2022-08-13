@@ -4,7 +4,7 @@ using System.Windows;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.Exceptions;
 using Autodesk.Revit.UI;
-using GalaSoft.MvvmLight;
+using CommunityToolkit.Mvvm.ComponentModel;
 using RevitLookupWpf.Extension;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
@@ -14,7 +14,6 @@ namespace RevitLookupWpf.InstanceTree
 {
     public class InstanceNode<TRvtObject> : InstanceNode
     {   
-
         public InstanceNode(TRvtObject rvtObject)
         {
             RvtObject = rvtObject;
@@ -212,7 +211,7 @@ namespace RevitLookupWpf.InstanceTree
             get => _isSelected; set
             {
                 Snoop();
-                Set(ref _isSelected, value);
+                SetProperty(ref _isSelected, value);
             }
         }
 
@@ -220,7 +219,7 @@ namespace RevitLookupWpf.InstanceTree
 
         public ObservableCollection<InstanceNode> Children { get; set; }
 
-        public PropertyList PropertyList { get => _properties; set => Set(ref _properties, value); }
+        public PropertyList PropertyList { get => _properties; set => SetProperty(ref _properties, value); }
         #endregion
 
         public abstract void Snoop();

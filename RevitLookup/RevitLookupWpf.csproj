@@ -55,8 +55,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*" />
 
@@ -120,13 +120,11 @@
       <RootItem Include="$(ProjectDir)*.addin" />
       <AddinItem Include="$(TargetDir)$(AssemblyName).*" />
       <!--Files to copy to Revit add-ins folder-->
-      <AddinItem Include="$(TargetDir)CommonServiceLocator.dll" />
-      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.dll" />
-      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.Extras.dll" />
-      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.Platform.dll" />
       <AddinItem Include="$(TargetDir)Microsoft.Xaml.Behaviors.dll" />
-      <AddinItem Include="$(TargetDir)System.Windows.Interactivity.dll" />
       <AddinItem Include="$(TargetDir)Newtonsoft.Json.dll" />
+      <AddinItem Include="$(TargetDir)CommunityToolkit.Mvvm.dll" />
+      <AddinItem Include="$(TargetDir)Microsoft.Bcl.AsyncInterfaces.dll" />
+      <AddinItem Include="$(TargetDir)System.*.dll" />
     </ItemGroup>
 
     <PropertyGroup>
@@ -142,5 +140,15 @@
     </ItemGroup>
 
     <Copy SourceFiles="@(AddinFiles)" DestinationFolder="$(AppData)\Autodesk\Revit\Addins\$(RevitVersion)\%(RecursiveDir)" Condition="$(Configuration.Contains('Debug'))" />
+  </Target>
+
+  <Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">
+    <!-- Work around https://github.com/dotnet/wpf/issues/6792 -->
+
+    <ItemGroup>
+      <FilteredAnalyzer Include="@(Analyzer-&gt;Distinct())" />
+      <Analyzer Remove="@(Analyzer)" />
+      <Analyzer Include="@(FilteredAnalyzer)" />
+    </ItemGroup>
   </Target>
 </Project>

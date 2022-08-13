@@ -2,7 +2,7 @@
 using Autodesk.Revit.UI;
 using System.Diagnostics;
 using System.Reflection;
-using GalaSoft.MvvmLight.Command;
+using CommunityToolkit.Mvvm.Input;
 
 namespace RevitLookupWpf.ParameterSys
 {

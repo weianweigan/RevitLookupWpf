@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 using System.Windows.Input;

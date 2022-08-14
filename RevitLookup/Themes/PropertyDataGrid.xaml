@@ -50,13 +50,15 @@
         <!--  Int  -->
         <controls:PropertyDataGridValueTemplateSelector.IntDataTemplate>
             <DataTemplate DataType="{x:Type propertySys:IntProperty}">
-                <TextBox IsReadOnly="{Binding IsReadOnly}" Text="{Binding Value}" />
+                <TextBox IsReadOnly="{Binding IsReadOnly}" Text="{Binding Value}" 
+                         BorderThickness="0"/>
             </DataTemplate>
         </controls:PropertyDataGridValueTemplateSelector.IntDataTemplate>
         <!--  Double  -->
         <controls:PropertyDataGridValueTemplateSelector.DoubleDataTemplate>
             <DataTemplate DataType="{x:Type propertySys:DoubleProperty}">
-                <TextBox IsReadOnly="{Binding IsReadOnly}" Text="{Binding Value}" />
+                <TextBox IsReadOnly="{Binding IsReadOnly}" Text="{Binding Value}" 
+                         BorderThickness="0"/>
             </DataTemplate>
         </controls:PropertyDataGridValueTemplateSelector.DoubleDataTemplate>
         <!--  String  -->

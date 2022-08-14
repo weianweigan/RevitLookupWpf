@@ -1,17 +1,9 @@
-﻿using RevitLookupWpf.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Autodesk.Revit.DB;
+using HelixToolkit.Wpf.SharpDX;
+using RevitLookupWpf.GeometryConverter;
+using RevitLookupWpf.Helpers;
+using RevitLookupWpf.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RevitLookupWpf.View
 {
@@ -24,8 +16,21 @@ namespace RevitLookupWpf.View
         {
             InitializeComponent();
             DataContext = (ViewModel = new PreviewWindowViewModel());
+            this.SetOwnerWindow();
         }
 
         public PreviewWindowViewModel ViewModel { get; }
+
+        internal void AddSolid(Solid solid)
+        {
+            var geo = solid.ToGeometry3D();
+
+            ThreeDView.Items.Add(new MeshGeometryModel3D()
+            {
+                Geometry = geo,
+            });
+
+            ThreeDView.ZoomExtents();
+        }
     }
 }

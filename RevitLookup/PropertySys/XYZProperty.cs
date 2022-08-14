@@ -1,21 +1,21 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Autodesk.Revit.DB;
 using CommunityToolkit.Mvvm.Input;
+using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
 using RevitLookupWpf.View;
 
-namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
+namespace RevitLookupWpf.PropertySys
 {
-    public class DefaultObjectProperty : ObjectProperty<object>
+    public class XYZProperty : ObjectProperty<XYZ>
     {
         private RelayCommand _selectedCommand;
 
-        public DefaultObjectProperty(string name, string fullName, object value) : base(name, fullName)
+        public XYZProperty(string name, string fullName,XYZ value) : base(name, fullName)
         {
             if (value != null)
             {
                 Value = value;
-                ValueType = value.GetType()?.Name;
+                ValueType = value.ToString();
             }
         }
 

@@ -9,7 +9,8 @@
         Title="PreviewWindow" Height="450" Width="800">
     <Grid>
         <hx:Viewport3DX EffectsManager="{Binding EffectsManager}"
-                    Camera="{Binding Camera}">
+                        Camera="{Binding Camera}"
+                        Name="ThreeDView">
         </hx:Viewport3DX>
     </Grid>
 </Window>

@@ -69,6 +69,8 @@ namespace RevitLookupWpf.Controls
                 case nameof(ExceptionProperty):
                     dataTemplate = ExceptionDataTemplate;
                     break;
+                case nameof(XYZProperty):
+                case nameof(ElementIdProperty):
                 case nameof(DefaultObjectProperty):
                     dataTemplate = DefaultObjectDataTemplate;
                     break;

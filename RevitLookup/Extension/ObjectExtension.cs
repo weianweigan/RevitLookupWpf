@@ -4,6 +4,7 @@
  */
 
 using System.Reflection;
+using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
@@ -166,16 +167,14 @@ namespace RevitLookupWpf.Extension
                     case "System.String":
                         property = new StringProperty(propertyInfo.Name,propertyInfo.GetFullName() ,value as string);
                         break;
-
+                    case "Autodesk.Revit.DB.XYZ":
+                        property = new XYZProperty(propertyInfo.Name, propertyInfo.GetFullName(), value as XYZ);
+                        break;
+                    case "Autodesk.Revit.DB.ElementId":
+                        property = new ElementIdProperty(propertyInfo.Name, propertyInfo.GetFullName(), value as ElementId);
+                        break;
                     default:
-                        if (value == null)
-                        {
-                            property = new NullObjectProperty(propertyInfo.Name, propertyInfo.GetFullName());
-                        }
-                        else
-                        {
-                            property = new DefaultObjectProperty(propertyInfo.Name, propertyInfo.GetFullName(), value);
-                        }
+                        property = new DefaultObjectProperty(propertyInfo.Name, propertyInfo.GetFullName(), value);
                         break;
                 }
             }

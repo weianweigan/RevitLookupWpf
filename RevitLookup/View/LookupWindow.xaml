@@ -89,12 +89,20 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="28" />
                                 <ColumnDefinition />
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Image Margin="2" Source="{StaticResource Class_16xDrawingImage}" />
+                            <Image Margin="2" Source="{StaticResource Class_16xDrawingImage}"/>
                             <TextBlock
                                 Grid.Column="1"
                                 VerticalAlignment="Center"
                                 Text="{Binding Name}" />
+                            <Button Style="{StaticResource IconButton}" 
+                                    Grid.Column="2"
+                                    Margin="0,0,2,0"
+                                    Command="{Binding PreviewCommand}"
+                                    Visibility="{Binding IsGeometryObject,Converter={StaticResource BoolToVisiblilityConverter}}">
+                                <Image Source="{StaticResource previewToggleDrawingImage}"/>
+                            </Button>
                         </Grid>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>

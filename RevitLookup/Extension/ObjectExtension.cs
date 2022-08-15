@@ -5,20 +5,20 @@
 
 using System.Reflection;
 using Autodesk.Revit.DB;
-using Autodesk.Revit.UI;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
 using RevitLookupWpf.PropertySys.BaseProperty.MethodType;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
 using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
+using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
 namespace RevitLookupWpf.Extension
 {
     public static class ObjectExtension
     {
         #region Public Static Mehtod
-        public static PropertyList GetProperties(this object rvtObject)
+        public static PropertyList GetProperties(this object rvtObject, InstanceNode parent)
         {
             if (rvtObject is null)
             {
@@ -26,7 +26,7 @@ namespace RevitLookupWpf.Extension
             }
 
             //init
-            var list = new PropertyList(rvtObject);
+            var list = new PropertyList(rvtObject,parent);
             var type = rvtObject.GetType();
 
             list.Inheri = GetBaseChain(type);

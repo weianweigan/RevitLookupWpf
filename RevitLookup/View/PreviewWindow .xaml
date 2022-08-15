@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RevitLookupWpf.View"
-        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+        xmlns:h="http://helix-toolkit.org/wpf"
         mc:Ignorable="d"
         Title="PreviewWindow" Height="450" Width="800">
     <Grid>
-        <hx:Viewport3DX EffectsManager="{Binding EffectsManager}"
-                        Camera="{Binding Camera}"
-                        Name="ThreeDView">
-        </hx:Viewport3DX>
+        <h:HelixViewport3D Name="ThreeDView" ZoomExtentsWhenLoaded="True">
+            <h:DefaultLights/>
+            <!--<h:Teapot/>-->
+        </h:HelixViewport3D>
+        <Button Width="75" Height="23" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Window>

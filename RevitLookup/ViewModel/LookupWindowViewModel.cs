@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.View;
 using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
@@ -25,8 +26,7 @@ namespace RevitLookupWpf.ViewModel
             LookupData = this;
             Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
 
-            //TODO： Fix this
-            //Messenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
+            StrongReferenceMessenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
         }
         #endregion
 
@@ -95,7 +95,7 @@ namespace RevitLookupWpf.ViewModel
 
         }
 
-        private void OnNavigation(RvtObjectMessage objectMessage)
+        private void OnNavigation(object obj,RvtObjectMessage objectMessage)
         {
             if (!_lookupWindow.IsActive)
             {

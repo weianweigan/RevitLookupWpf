@@ -22,7 +22,7 @@ using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
 namespace RevitLookupWpf.ViewModel
 {
-    public class LookupViewModel : ObservableObject
+    public class LookupViewModel : ObservableRecipient
     {
         #region Fields
         private PropertyList _propertyList;

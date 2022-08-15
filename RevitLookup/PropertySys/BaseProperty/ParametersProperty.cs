@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.UI;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.ParameterSys;
 using RevitLookupWpf.View;
@@ -138,8 +139,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
             {
                 //使用面包屑导航
                 //发生消息到 LookupWindowViewModel
-                //TODO:Fix this
-                //Messenger.Default.Send<RvtObjectMessage>(new RvtObjectMessage(Value));
+                StrongReferenceMessenger.Default.Send<RvtObjectMessage>(new RvtObjectMessage(Value));
             }
         }
     }

@@ -36,6 +36,20 @@ namespace RevitLookupWpf.GeometryConverter
             }
 
             PreviewWindow.Show();
+            PreviewWindow.ThreeDView.ZoomExtents();
+        }
+
+        internal static void Preview(Solid solid)
+        {
+            if (PreviewWindow == null)
+            {
+                PreviewWindow = new PreviewWindow();
+                PreviewWindow.Closed += PreviewWindow_Closed;
+            }
+
+            PreviewWindow.AddSolid(solid);
+            PreviewWindow.Show();
+            PreviewWindow.ThreeDView.ZoomExtents();
         }
 
         private static void PreviewWindow_Closed(object sender, EventArgs e)

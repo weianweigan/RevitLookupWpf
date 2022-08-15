@@ -1,4 +1,6 @@
-﻿namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
+﻿using CommunityToolkit.Mvvm.Messaging;
+
+namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
 {
     //public delegate void NaviRequest(object obj);
 
@@ -22,8 +24,7 @@
             }
 
             //发生消息到 LookupWindowViewModel
-            //TODO:Fix Messager with toolkit update
-            //Messenger.Default.Send<RvtObjectMessage>(new RvtObjectMessage(result));
+            StrongReferenceMessenger.Default.Send<RvtObjectMessage>(new RvtObjectMessage(result));
         }
     }
 }

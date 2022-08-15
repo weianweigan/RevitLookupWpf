@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "RevitLookupWpf": {
+    "Revit 2023": {
       "commandName": "Executable",
-      "executablePath": "C:\\Program Files\\Autodesk\\Revit 2022\\Revit.exe"
+      "executablePath": "C:\\Program Files\\Autodesk\\Revit 2023\\Revit.exe"
     }
   }
 }

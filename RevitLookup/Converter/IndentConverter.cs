@@ -26,6 +26,5 @@ namespace RevitLookupWpf.Converter
         {
             throw new NotImplementedException();
         }
-
     }
 }

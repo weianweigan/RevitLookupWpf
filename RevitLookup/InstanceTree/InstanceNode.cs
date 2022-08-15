@@ -26,13 +26,10 @@ namespace RevitLookupWpf.InstanceTree
         {
             if (PropertyList == null && RvtObject != null)
             {
-                
-                PropertyList = RvtObject.GetProperties();
+                PropertyList = RvtObject.GetProperties(this);
             }
         }
     }
-
-
 
     public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
     {
@@ -217,7 +214,11 @@ namespace RevitLookupWpf.InstanceTree
 
         public bool IsExpanded { get; set; }
 
+        public virtual bool IsGeometryObject => false;
+
         public ObservableCollection<InstanceNode> Children { get; set; }
+
+        public InstanceNode Parent { get; }
 
         public PropertyList PropertyList { get => _properties; set => SetProperty(ref _properties, value); }
         #endregion

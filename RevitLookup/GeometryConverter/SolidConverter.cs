@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.DB;
-using HelixToolkit.Wpf.SharpDX;
-using SharpDX;
+using HelixToolkit.Wpf;
+using System.Windows.Media.Media3D;
 
 namespace RevitLookupWpf.GeometryConverter
 {
@@ -21,7 +21,7 @@ namespace RevitLookupWpf.GeometryConverter
             foreach (Face face in solid.Faces)
             {
                 Mesh mesh = face.Triangulate();
-                var triangleCorners = new Vector3[3];
+                var triangleCorners = new Point3D[3];
 
                 for (int i = 0; i < mesh.NumTriangles; i++)
                 {

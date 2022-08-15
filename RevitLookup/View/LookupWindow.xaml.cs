@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Interop;
 using Autodesk.Revit.UI;
+using CommunityToolkit.Mvvm.Messaging;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.ViewModel;
 
@@ -35,8 +36,7 @@ namespace RevitLookupWpf.View
         {
             this.Closed -= LookupWindow_Closed;
 
-            //TODO:Fix this
-            //Messenger.Default.Unregister(_viewModel);
+            StrongReferenceMessenger.Default.Unregister<LookupWindowViewModel>(_viewModel);
         }
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

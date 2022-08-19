@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.UI;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.ParameterSys;
 using RevitLookupWpf.View;
@@ -30,7 +30,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
             _parent = parent;
         }
 
-        public string ValueType { get => _valueType; set => SetProperty(ref _valueType, value); }
+        public string ValueType { get => _valueType; set => Set(ref _valueType, value); }
 
         public bool IsReturnValueType { get; set; }
 
@@ -38,9 +38,9 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
 
         public string ReturnTypeName { get; set; }
 
-        public bool SolvedValue { get => _solvedValue; set => SetProperty(ref _solvedValue, value); }
+        public bool SolvedValue { get => _solvedValue; set => Set(ref _solvedValue, value); }
 
-        public bool HasError { get => _hasError; set => SetProperty(ref _hasError ,value); }
+        public bool HasError { get => _hasError; set => Set(ref _hasError ,value); }
 
         public List<ParameterBase> Parameters { get; protected set; }
 
@@ -139,7 +139,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
             {
                 //使用面包屑导航
                 //发生消息到 LookupWindowViewModel
-                StrongReferenceMessenger.Default.Send<RvtObjectMessage>(new RvtObjectMessage(Value));
+                Messenger.Default.Send<RvtObjectMessage>(new RvtObjectMessage(Value));
             }
         }
     }

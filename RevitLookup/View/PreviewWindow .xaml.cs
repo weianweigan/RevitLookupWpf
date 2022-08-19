@@ -1,5 +1,7 @@
 ﻿using Autodesk.Revit.DB;
+using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.GeometryConverter;
+using RevitLookupWpf.GeometryTree;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.ViewModel;
 using System.Windows;
@@ -13,41 +15,38 @@ namespace RevitLookupWpf.View
     /// </summary>
     public partial class PreviewWindow : Window
     {
+        private RelayCommand zoomFitCommand;
+
         public PreviewWindow()
         {
             InitializeComponent();
-            DataContext = (ViewModel = new PreviewWindowViewModel());
+            DataContext = this;
             this.SetOwnerWindow();
         }
 
-        public PreviewWindowViewModel ViewModel { get; }
-
-        internal void AddSolid(Solid solid)
+        public List<RootGeometryNode> RootGeometryNode { get; set; }
+            = new List<RootGeometryNode>(1)
         {
-            var geo = solid.ToGeometry3D();
-            var geometryModel = new GeometryModel3D()
-            {
-                Geometry = geo,
-                Material = new DiffuseMaterial(new SolidColorBrush(Colors.Gray)),
-                BackMaterial = new DiffuseMaterial(new SolidColorBrush(Colors.Gray)),
-            };
+            new RootGeometryNode()
+        };
 
-            var modelGroup = new Model3DGroup();
-            modelGroup.Children.Add(geometryModel);
+        public RelayCommand ZoomFitCommand { get => zoomFitCommand ??= new RelayCommand(ZoomFitClick); }
 
-            var visual = new ModelVisual3D()
-            {
-                Content = modelGroup
-            };
-
-            ThreeDView.Children.Add(visual);
-
-            ThreeDView.ZoomExtents();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ZoomFitClick()
         {
             ThreeDView.ZoomExtents(1000);
+        }
+
+        internal void AddGeometryNode(GeometryNode geometryNode)
+        {
+            RootGeometryNode.First().Children.Add(geometryNode);
+
+            var visual = geometryNode.LoadModel3D();
+
+            if (visual != null)
+            {
+                ThreeDView.Children.Add(visual);
+            }
         }
     }
 }

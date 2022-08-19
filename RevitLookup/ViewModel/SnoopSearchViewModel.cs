@@ -8,8 +8,8 @@ using System.Windows.Input;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 
@@ -29,8 +29,8 @@ namespace RevitLookupWpf.ViewModel
             get => _value;
             set
             {
-                SetProperty(ref _value, value);
-                OnPropertyChanged(nameof(Value));
+                Set(ref _value, value);
+                RaisePropertyChanged(nameof(Value));
             }
         }
 

@@ -1,18 +1,18 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:RevitLookupWpf.Controls"
-                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:RevitLookupWpf.Controls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Icons.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/GroupBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Icons.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/GroupBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="GroupBoxHeaderTemplate">
-        <TextBlock Text="{Binding Name}" FontWeight="Black"/>
+        <TextBlock FontWeight="Black" Text="{Binding Name}" />
     </DataTemplate>
 
-    <Style TargetType="GroupBox" BasedOn="{StaticResource RvtGroupBox}">
-        <Setter Property="Padding" Value="0,5"/>
+    <Style BasedOn="{StaticResource RvtGroupBox}" TargetType="GroupBox">
+        <Setter Property="Padding" Value="0,5" />
     </Style>
 
     <controls:ParameterGridTemplateSelector x:Key="ParameterGridTemSele">
@@ -20,11 +20,12 @@
             <DataTemplate>
                 <GroupBox>
                     <GroupBox.Header>
-                        <TextBlock Text="{Binding Name}" 
-                           Foreground="Black"
-                           FontWeight="Black"/>
+                        <TextBlock
+                            FontWeight="Black"
+                            Foreground="Black"
+                            Text="{Binding Name}" />
                     </GroupBox.Header>
-                    <TextBox Text="{Binding Value}"/>
+                    <TextBox Text="{Binding Value}" />
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.IntDataTemplate>
@@ -32,11 +33,12 @@
             <DataTemplate>
                 <GroupBox>
                     <GroupBox.Header>
-                        <TextBlock Text="{Binding Name}" 
-                           Foreground="Black"
-                           FontWeight="Black"/>
+                        <TextBlock
+                            FontWeight="Black"
+                            Foreground="Black"
+                            Text="{Binding Name}" />
                     </GroupBox.Header>
-                    <TextBox Text="{Binding Value}"/>
+                    <TextBox Text="{Binding Value}" />
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.DoubleDataTemplate>
@@ -44,11 +46,12 @@
             <DataTemplate>
                 <GroupBox>
                     <GroupBox.Header>
-                        <TextBlock Text="{Binding Name}" 
-                           Foreground="Black"
-                           FontWeight="Black"/>
+                        <TextBlock
+                            FontWeight="Black"
+                            Foreground="Black"
+                            Text="{Binding Name}" />
                     </GroupBox.Header>
-                    <TextBox Text="{Binding Value}"/>
+                    <TextBox Text="{Binding Value}" />
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.StringDataTemplate>
@@ -56,11 +59,12 @@
             <DataTemplate>
                 <GroupBox>
                     <GroupBox.Header>
-                        <TextBlock Text="{Binding Name}" 
-                           Foreground="Black"
-                           FontWeight="Black"/>
+                        <TextBlock
+                            FontWeight="Black"
+                            Foreground="Black"
+                            Text="{Binding Name}" />
                     </GroupBox.Header>
-                    <CheckBox IsChecked="{Binding Value}"/>
+                    <CheckBox IsChecked="{Binding Value}" />
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.BoolDataTemplate>
@@ -68,13 +72,15 @@
             <DataTemplate>
                 <GroupBox>
                     <GroupBox.Header>
-                        <TextBlock Text="{Binding Name}" 
-                           Foreground="Black"
-                           FontWeight="Black"/>
+                        <TextBlock
+                            FontWeight="Black"
+                            Foreground="Black"
+                            Text="{Binding Name}" />
                     </GroupBox.Header>
-                    <ComboBox SelectedItem="{Binding Value}" 
-                              DisplayMemberPath="Name"
-                              ItemsSource="{Binding AllViews}"/>
+                    <ComboBox
+                        DisplayMemberPath="Name"
+                        ItemsSource="{Binding AllViews}"
+                        SelectedItem="{Binding Value}" />
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.ViewDataTemplate>
@@ -82,13 +88,15 @@
             <DataTemplate>
                 <GroupBox>
                     <GroupBox.Header>
-                        <TextBlock Text="{Binding Name}" 
-                           Foreground="Black"
-                           FontWeight="Black"/>
+                        <TextBlock
+                            FontWeight="Black"
+                            Foreground="Black"
+                            Text="{Binding Name}" />
                     </GroupBox.Header>
-                    <ComboBox SelectedItem="{Binding SelectedItem}" 
-                              ItemsSource="{Binding EnumValues}"
-                              MaxHeight="80"/>
+                    <ComboBox
+                        MaxHeight="80"
+                        ItemsSource="{Binding EnumValues}"
+                        SelectedItem="{Binding SelectedItem}" />
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.EnumDataTemplate>
@@ -96,14 +104,11 @@
             <DataTemplate>
                 <GroupBox>
                     <GroupBox.Header>
-                        <Hyperlink NavigateUri="https://www.revitapidocs.com/2022/fb011c91-be7e-f737-28c7-3f1e1917a0e0.htm"
-                                   Command="{Binding OpenUrlCommand}">
-                            <TextBlock Text="{Binding Name}"
-                                       FontWeight="Black"/>
+                        <Hyperlink Command="{Binding OpenUrlCommand}" NavigateUri="https://www.revitapidocs.com/2022/fb011c91-be7e-f737-28c7-3f1e1917a0e0.htm">
+                            <TextBlock FontWeight="Black" Text="{Binding Name}" />
                         </Hyperlink>
                     </GroupBox.Header>
-                    <TextBox Text="{Binding SelectedItem}"
-                             MaxHeight="80"/>
+                    <TextBox MaxHeight="80" Text="{Binding SelectedItem}" />
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.BuiltInParameterDataTemplate>
@@ -111,18 +116,19 @@
             <DataTemplate>
                 <GroupBox>
                     <GroupBox.Header>
-                        <TextBlock Text="{Binding Name}" 
-                           Foreground="Black"
-                           FontWeight="Black"/>
+                        <TextBlock
+                            FontWeight="Black"
+                            Foreground="Black"
+                            Text="{Binding Name}" />
                     </GroupBox.Header>
-                    <TextBox Text="{Binding GuidString}"/>
+                    <TextBox Text="{Binding GuidString}" />
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.GuidDataTemplate>
     </controls:ParameterGridTemplateSelector>
 
     <Style x:Key="ParmeterGrid" TargetType="ItemsControl">
-        <Setter Property="ItemTemplateSelector" Value="{StaticResource ParameterGridTemSele}"/>
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource ParameterGridTemSele}" />
     </Style>
 
 </ResourceDictionary>

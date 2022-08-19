@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using CommunityToolkit.Mvvm.Input;
+using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.Extension;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
@@ -42,7 +42,7 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.MethodType
         #endregion
 
         #region Properties
-        public object MethodValue { get => _methodValue; set => SetProperty(ref _methodValue ,value); }
+        public object MethodValue { get => _methodValue; set => Set(ref _methodValue ,value); }
 
         /// <summary>
         /// User Click this object to Snoop

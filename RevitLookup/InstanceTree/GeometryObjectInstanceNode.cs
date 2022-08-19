@@ -1,5 +1,5 @@
 ﻿using Autodesk.Revit.DB;
-using CommunityToolkit.Mvvm.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace RevitLookupWpf.InstanceTree
 {
@@ -16,7 +16,6 @@ namespace RevitLookupWpf.InstanceTree
 #else
                 Name += $"({rvtObject.Id})";
 #endif
-
             }
         }
 
@@ -26,10 +25,7 @@ namespace RevitLookupWpf.InstanceTree
 
         private void PreviewClick()
         {
-            if (RvtObject is Solid solid)
-            {
-                GeometryConverter.GeometryPreviewManager.Preview(solid);
-            }
+            GeometryConverter.GeometryPreviewManager.Preview(this);
         }
     }
 }

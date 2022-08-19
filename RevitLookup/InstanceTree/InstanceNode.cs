@@ -4,9 +4,8 @@ using System.Windows;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.Exceptions;
 using Autodesk.Revit.UI;
-using CommunityToolkit.Mvvm.ComponentModel;
+using GalaSoft.MvvmLight;
 using RevitLookupWpf.Extension;
-using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
 using ArgumentNullException = System.ArgumentNullException;
 
@@ -29,128 +28,6 @@ namespace RevitLookupWpf.InstanceTree
                 PropertyList = RvtObject.GetProperties(this);
             }
         }
-    }
-
-    public class IEnumerableInstanceNode : InstanceNode<IEnumerable>
-    {
-        private readonly IEnumerable _rvtObject;
-        public IEnumerableInstanceNode(IEnumerable rvtObject) : base(rvtObject)
-        {
-            _rvtObject = rvtObject;
-            Name = rvtObject?.GetType().Name;
-            GetChild();
-        }
-
-        private void GetChild()
-        {
-            if (Children == null)
-            {
-                Children = new ObservableCollection<InstanceNode>();
-            }
-            foreach (var item in _rvtObject)
-            {
-                InstanceNode node;
-                switch (item)
-                {
-                    case Element element:
-                        node = new ElementInstanceNode(element,false);
-                        Children.Add(node);
-                        break;
-                    case FamilyType familyType:
-                        node = new FamilyTypeInstanceNode(familyType);
-                        Children.Add(node);
-                        break;
-                    case PlanTopology planTopology:
-                        node = new PlanTopologyInstanceNode(planTopology);
-                        Children.Add(node);
-                        break;
-                    case PlanCircuit planTopology:
-                        node = new PlanCircuitInstanceNode(planTopology);
-                        Children.Add(node);
-                        break;
-                    case WorksetId worksetId:
-                        node = new WorksetIdInstanceNode(worksetId).ToWorksetInstanceNode();
-                        Children.Add(node);
-                        break;
-                    case ElementId elementId:
-                        node = new ElementIdInstanceNode(elementId).ToElementInstanceNode(false);
-                        Children.Add(node);
-                        break;
-                    case InstanceBinding instanceBinding:
-                        node = new InstanceBindingInstanceNode(instanceBinding);
-                        Children.Add(node);
-                        break;
-                    case Parameter parameter:
-                        node = new ParameterInstanceNode(parameter);
-                        Children.Add(node);
-                        break;
-                    case FamilyParameter familyParameter:
-                        node = new FamilyParameterInstanceNode(familyParameter);
-                        Children.Add(node);
-                        break;
-                    case Connector connector:
-                        node = new ConnectorInstanceNode(connector);
-                        Children.Add(node);
-                        break;
-                    case Category category:
-                        node = new CategoryInstanceNode(category);
-                        Children.Add(node);
-                        break;
-                    case DefinitionGroup definitionGroup:
-                        node = new DefinitionGroupInstanceNode(definitionGroup);
-                        Children.Add(node);
-                        break;
-                    case FailureMessage failureMessage:
-                        node = new FailureMessageInstanceNode(failureMessage);
-                        Children.Add(node);
-                        break;
-                    case FailureDefinitionAccessor failureDefinitionAccessor:
-                        node = new FailureDefinitionAccessorInstanceNode(failureDefinitionAccessor);
-                        Children.Add(node);
-                        break;
-                    case ExternalDefinition externalDefinition:
-                        node = new ExternalDefinitionInstanceNode(externalDefinition);
-                        Children.Add(node);
-                        break;
-                    case City city:
-                        node = new CityInstanceNode(city);
-                        Children.Add(node);
-                        break;
-                    case RibbonPanel ribbonPanel:
-                        node = new RibbonPanelInstanceNode(ribbonPanel);
-                        Children.Add(node);
-                        break;
-                    case Document document:
-                        node = new DocumentInstanceNode(document);
-                        Children.Add(node);
-                        break;
-                    case PaperSize paperSize:
-                        node = new PaperSizeInstanceNode(paperSize);
-                        Children.Add(node);
-                        break;
-                    case GeometryObject geometryObject:
-                        node = new GeometryObjectInstanceNode(geometryObject);
-                        Children.Add(node);
-                        break;
-                    case XYZ xyz:
-                        node = new XYZInstanceNode(xyz);
-                        Children.Add(node);
-                        break;
-                    case EdgeArray edgeArray:
-                        node = new IEnumerableInstanceNode(edgeArray);
-                        node.IsExpanded = true;
-                        Children.Add(node);
-                        break;
-                    default:
-                        node = new InstanceNode<object>(item);
-                        Children.Add(node);
-                        break;
-                }
-
-            }
-            if (Children.Any()) Children = Children.OrderBy(x => x.Name).ToObservableCollection();
-        }
-
     }
 
     public abstract class InstanceNode : ObservableObject
@@ -188,6 +65,64 @@ namespace RevitLookupWpf.InstanceTree
                     case Document doc:
                         node = new DocumentInstanceNode(doc);
                         break;
+                    case FamilyType familyType:
+                        node = new FamilyTypeInstanceNode(familyType);
+                        break;
+                    case PlanTopology planTopology:
+                        node = new PlanTopologyInstanceNode(planTopology);
+                        break;
+                    case PlanCircuit planTopology:
+                        node = new PlanCircuitInstanceNode(planTopology);
+                        break;
+                    case InstanceBinding instanceBinding:
+                        node = new InstanceBindingInstanceNode(instanceBinding);
+                        break;
+                    case Parameter parameter:
+                        node = new ParameterInstanceNode(parameter);
+                        break;
+                    case FamilyParameter familyParameter:
+                        node = new FamilyParameterInstanceNode(familyParameter);
+                        break;
+                    case Connector connector:
+                        node = new ConnectorInstanceNode(connector);
+                        break;
+                    case Category category:
+                        node = new CategoryInstanceNode(category);
+                        break;
+                    case DefinitionGroup definitionGroup:
+                        node = new DefinitionGroupInstanceNode(definitionGroup);
+                        break;
+                    case FailureMessage failureMessage:
+                        node = new FailureMessageInstanceNode(failureMessage);
+                        break;
+                    case FailureDefinitionAccessor failureDefinitionAccessor:
+                        node = new FailureDefinitionAccessorInstanceNode(failureDefinitionAccessor);
+                        break;
+                    case ExternalDefinition externalDefinition:
+                        node = new ExternalDefinitionInstanceNode(externalDefinition);
+                        break;
+                    case City city:
+                        node = new CityInstanceNode(city);
+                        break;
+                    case RibbonPanel ribbonPanel:
+                        node = new RibbonPanelInstanceNode(ribbonPanel);
+                        break;
+                    case PaperSize paperSize:
+                        node = new PaperSizeInstanceNode(paperSize);
+                        break;
+                    case GeometryObject geometryObject:
+                        node = new GeometryObjectInstanceNode(geometryObject);
+                        break;
+                    case XYZ xyz:
+                        node = new XYZInstanceNode(xyz);
+                        break;
+                    case BoundingBoxXYZ boundsXYZ:
+                        node = new BoundingBoxXYZInstanceNode(boundsXYZ);
+                        break;
+                    case EdgeArray edgeArray:
+                        node = new IEnumerableInstanceNode(edgeArray);
+                        node.IsExpanded = true;
+                        break;
                     default:
                         node = new InstanceNode<object>(obj);
                         break;
@@ -208,7 +143,7 @@ namespace RevitLookupWpf.InstanceTree
             get => _isSelected; set
             {
                 Snoop();
-                SetProperty(ref _isSelected, value);
+                Set(ref _isSelected, value);
             }
         }
 
@@ -220,7 +155,7 @@ namespace RevitLookupWpf.InstanceTree
 
         public InstanceNode Parent { get; }
 
-        public PropertyList PropertyList { get => _properties; set => SetProperty(ref _properties, value); }
+        public PropertyList PropertyList { get => _properties; set => Set(ref _properties, value); }
         #endregion
 
         public abstract void Snoop();

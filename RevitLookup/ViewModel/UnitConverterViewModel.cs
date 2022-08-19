@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using GalaSoft.MvvmLight;
 using RevitLookupWpf.PropertySys.BaseProperty;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
 using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
@@ -13,7 +13,7 @@ namespace RevitLookupWpf.ViewModel
         {
             get => _result; set
             {
-                SetProperty(ref _result, value);
+                Set(ref _result, value);
             }
         }
 

@@ -8,8 +8,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.GeometryConverter;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
@@ -22,7 +22,7 @@ using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
 namespace RevitLookupWpf.ViewModel
 {
-    public class LookupViewModel : ObservableRecipient
+    public class LookupViewModel : ViewModelBase
     {
         #region Fields
         private PropertyList _propertyList;
@@ -49,7 +49,7 @@ namespace RevitLookupWpf.ViewModel
         {
             get => _roots; set
             {
-                SetProperty(ref _roots, value);
+                Set(ref _roots, value);
                 GetNaviName();
             }
         }
@@ -63,7 +63,7 @@ namespace RevitLookupWpf.ViewModel
                     return;
                 }
 
-                SetProperty(ref _propertyList, value);
+                Set(ref _propertyList, value);
 
                 if (_propertyList != null)
                 {
@@ -81,7 +81,7 @@ namespace RevitLookupWpf.ViewModel
             set
             {
                 _dataSource = value;
-                OnPropertyChanged(nameof(DataSource));
+                RaisePropertyChanged(nameof(DataSource));
             }
         }
 
@@ -89,9 +89,9 @@ namespace RevitLookupWpf.ViewModel
         {
             get => _lookupData; set
             {
-                SetProperty(ref _lookupData, value);
-                OnPropertyChanged("LookupData.DataSource");
-                OnPropertyChanged("LookupData.OpenInNewWindowCommand");
+                Set(ref _lookupData, value);
+                RaisePropertyChanged("LookupData.DataSource");
+                RaisePropertyChanged("LookupData.OpenInNewWindowCommand");
                 //Remove back items
                 if (LookupData?.Next != null)
                 {
@@ -112,9 +112,9 @@ namespace RevitLookupWpf.ViewModel
             get => _selectedProperty;
             set
             {
-                SetProperty(ref _selectedProperty, value);
-                OpenInNewWindowCommand.NotifyCanExecuteChanged();
-                PreviewCommand.NotifyCanExecuteChanged();
+                Set(ref _selectedProperty, value);
+                OpenInNewWindowCommand.RaiseCanExecuteChanged();
+                PreviewCommand.RaiseCanExecuteChanged();
                 if (_selectedProperty.NeedUnitConvert)
                     UnitConverter.Update(_selectedProperty);
             }

@@ -20,18 +20,7 @@ namespace RevitLookupWpf.GeometryConverter
         {
             foreach (Face face in solid.Faces)
             {
-                Mesh mesh = face.Triangulate();
-                var triangleCorners = new Point3D[3];
-
-                for (int i = 0; i < mesh.NumTriangles; i++)
-                {
-                    MeshTriangle triangle = mesh.get_Triangle(i);
-                    triangleCorners[0] = triangle.get_Vertex(0).ToVector3();
-                    triangleCorners[1] = triangle.get_Vertex(0).ToVector3();
-                    triangleCorners[2] = triangle.get_Vertex(0).ToVector3();
-
-                    meshBuilder.AddPolygon(triangleCorners);
-                }
+                face.AddToMeshBuilder(meshBuilder);
             }
 
             return meshBuilder;

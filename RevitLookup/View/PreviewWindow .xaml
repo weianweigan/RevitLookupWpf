@@ -1,17 +1,58 @@
-﻿<Window x:Class="RevitLookupWpf.View.PreviewWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RevitLookupWpf.View"
-        xmlns:h="http://helix-toolkit.org/wpf"
-        mc:Ignorable="d"
-        Title="PreviewWindow" Height="450" Width="800">
+﻿<Window
+    x:Class="RevitLookupWpf.View.PreviewWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:h="http://helix-toolkit.org/wpf"
+    xmlns:local="clr-namespace:RevitLookupWpf.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="PreviewWindow"
+    Width="700"
+    Height="500"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Generic.xaml" />
+    </Window.Resources>
     <Grid>
         <h:HelixViewport3D Name="ThreeDView" ZoomExtentsWhenLoaded="True">
-            <h:DefaultLights/>
-            <!--<h:Teapot/>-->
+            <h:SunLight />
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup x:Name="ThreeDGroup" />
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
         </h:HelixViewport3D>
-        <Button Width="75" Height="23" VerticalAlignment="Top" Click="Button_Click"/>
+        <TreeView
+            Margin="2,5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Transparent"
+            BorderThickness="0"
+            ItemContainerStyle="{x:Null}"
+            ItemsSource="{Binding RootGeometryNode}"
+            Style="{x:Null}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Name}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <Button
+            Margin="2"
+            VerticalAlignment="Top"
+            Command="{Binding ZoomFitCommand}"
+            Style="{StaticResource IconButton}">
+            <Image>
+                <Image.Source>
+                    <DrawingImage>
+                        <DrawingImage.Drawing>
+                            <DrawingGroup ClipGeometry="M0,0 V1024 H1024 V0 H0 Z">
+                                <GeometryDrawing Brush="#FF000000" Geometry="F1 M1024,1024z M0,0z M958.6,645.5C958.6,620.8 938.5,600.8 913.8,600.8 889.1,600.8 869.1,620.8 869.1,645.5L869.1,751.9C869.1,771.8,845,781.8,830.9,767.7L695.6,632.3C678.1,614.8 649.8,614.8 632.3,632.3 614.8,649.8 614.8,678.1 632.3,695.6L767.6,831C781.7,845.1,771.7,869.2,751.8,869.2L645.4,869.2C620.7,869.2 600.7,889.2 600.7,913.9 600.7,938.6 620.7,958.6 645.4,958.6L869.1,958.6C918.5,958.6,958.7,918.5,958.7,869.1L958.7,645.5z M153.3,63.9C103.9,63.9,63.9,104,63.9,153.4L63.9,377C63.9,401.7 83.9,421.7 108.6,421.7 133.3,421.7 153.4,401.7 153.4,377L153.4,270.6C153.4,250.7,177.5,240.7,191.5,254.8L326.8,390.1C344.3,407.6 372.6,407.6 390.1,390.1 407.6,372.6 407.6,344.3 390.1,326.8L254.7,191.5C240.6,177.4,250.6,153.3,270.5,153.3L376.9,153.3C401.6,153.3 421.6,133.3 421.6,108.6 421.6,83.9 401.6,63.9 376.9,63.9L153.3,63.9z" />
+                            </DrawingGroup>
+                        </DrawingImage.Drawing>
+                    </DrawingImage>
+                </Image.Source>
+            </Image>
+        </Button>
     </Grid>
 </Window>

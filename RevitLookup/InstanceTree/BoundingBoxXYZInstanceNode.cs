@@ -1,19 +1,15 @@
 ﻿using Autodesk.Revit.DB;
 using GalaSoft.MvvmLight.Command;
-using Microsoft.Windows.Input;
 
 namespace RevitLookupWpf.InstanceTree
 {
-    public class XYZInstanceNode : InstanceNode<XYZ>
+    public class BoundingBoxXYZInstanceNode : InstanceNode<BoundingBoxXYZ>
     {
         private RelayCommand _previewCommand;
 
-        public XYZInstanceNode(XYZ rvtObject) : base(rvtObject)
+        public BoundingBoxXYZInstanceNode(BoundingBoxXYZ rvtObject) 
+            : base(rvtObject)
         {
-            if (rvtObject != null)
-            {
-                Name += $"({rvtObject})";
-            }
         }
 
         public override bool IsGeometryObject => true;

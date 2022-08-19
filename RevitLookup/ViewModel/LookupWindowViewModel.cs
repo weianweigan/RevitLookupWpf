@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.View;
 using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
@@ -26,20 +26,19 @@ namespace RevitLookupWpf.ViewModel
             LookupData = this;
             Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
 
-            StrongReferenceMessenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
+            Messenger.Default.Register<RvtObjectMessage>(this, OnNavigation);
         }
         #endregion
 
         #region Properties
-        public string Title { get => _title; set => SetProperty(ref _title, value); }
+        public string Title { get => _title; set => Set(ref _title, value); }
 
         public Action CloseAction { get; set; }
 
         public ICommand CloseCommand => _closeCommand ??= (_closeCommand = new RelayCommand(CloseAction));
 
-        public ObservableCollection<LookupViewModel> Items { get => _items; set => SetProperty(ref _items , value); }
+        public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
 
-        public PreviewViewModel PreviewViewModel { get; } = new PreviewViewModel();
         #endregion
 
         #region Public Methods
@@ -95,7 +94,7 @@ namespace RevitLookupWpf.ViewModel
 
         }
 
-        private void OnNavigation(object obj,RvtObjectMessage objectMessage)
+        private void OnNavigation(RvtObjectMessage objectMessage)
         {
             if (!_lookupWindow.IsActive)
             {

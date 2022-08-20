@@ -1,12 +1,8 @@
-﻿using RevitLookupWpf.Extension;
+﻿using Autodesk.Revit.UI;
+using RevitLookupWpf.Extension;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys.BaseProperty;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RevitLookupWpf.PropertySys
 {
@@ -33,7 +29,16 @@ namespace RevitLookupWpf.PropertySys
 
         protected override object Invoke()
         {
-            return _methodInfo.Invoke(_parent, Parameters.Select(p => p.GetValue()).ToArray());
+            try
+            {
+                return _methodInfo.Invoke(_parent, Parameters.Select(p => p.GetValue()).ToArray());
+            }
+            catch (Exception ex)
+            {
+                TaskDialog.Show(ex.GetType().Name, ex.ToString());
+            }
+
+            return null;
         }
     }
 }

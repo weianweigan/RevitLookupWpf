@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:RevitLookupWpf.Controls">
+    xmlns:controls="clr-namespace:RevitLookupWpf.Controls"
+    xmlns:parameters="clr-namespace:RevitLookupWpf.ParameterSys">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Icons.xaml" />
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/GroupBox.xaml" />
@@ -125,6 +126,36 @@
                 </GroupBox>
             </DataTemplate>
         </controls:ParameterGridTemplateSelector.GuidDataTemplate>
+        <controls:ParameterGridTemplateSelector.OptionsDataTemplate>
+            <DataTemplate DataType="{x:Type parameters:OptionsParameter}">
+                <GroupBox>
+                    <GroupBox.Header>
+                        <TextBlock
+                            FontWeight="Black"
+                            Foreground="Black"
+                            Text="{Binding Name}" />
+                    </GroupBox.Header>
+                    <StackPanel>
+                        <ComboBox
+                            DisplayMemberPath="Name"
+                            ItemsSource="{Binding AllViews}"
+                            SelectedItem="{Binding SelectedView}"
+                            ToolTip="View"
+                            Margin="0,2"/>
+                        <CheckBox IsChecked="{Binding ComputeReferences}" 
+                                  Content="ComputeReferences"
+                                  Margin="0,2"/>
+                        <ComboBox ItemsSource="{Binding ViewDetailLevels}" 
+                                  SelectedItem="{Binding DetailLevel}" 
+                                  ToolTip="DetailLevel"
+                                  Margin="0,2"/>
+                        <CheckBox IsChecked="{Binding IncludeNonVisibleObjects}" 
+                                  Content="IncludeNonVisibleObjects"
+                                  Margin="0,2"/>
+                    </StackPanel>
+                </GroupBox>
+            </DataTemplate>
+        </controls:ParameterGridTemplateSelector.OptionsDataTemplate>
     </controls:ParameterGridTemplateSelector>
 
     <Style x:Key="ParmeterGrid" TargetType="ItemsControl">

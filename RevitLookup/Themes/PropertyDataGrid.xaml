@@ -16,6 +16,9 @@
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="ColumnHeaderHeight" Value="30" />
         <Setter Property="VerticalGridLinesBrush" Value="Gray" />
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
         <Setter Property="HorizontalGridLinesBrush" Value="Gray" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
         <Style.Triggers>

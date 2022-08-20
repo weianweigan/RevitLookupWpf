@@ -89,6 +89,7 @@ namespace RevitLookupWpf.ViewModel
         {
             get => _lookupData; set
             {
+                LookupDataChanging();
                 Set(ref _lookupData, value);
                 RaisePropertyChanged("LookupData.DataSource");
                 RaisePropertyChanged("LookupData.OpenInNewWindowCommand");
@@ -115,7 +116,7 @@ namespace RevitLookupWpf.ViewModel
                 Set(ref _selectedProperty, value);
                 OpenInNewWindowCommand.RaiseCanExecuteChanged();
                 PreviewCommand.RaiseCanExecuteChanged();
-                if (_selectedProperty.NeedUnitConvert)
+                if (_selectedProperty != null)
                     UnitConverter.Update(_selectedProperty);
             }
         }
@@ -285,6 +286,8 @@ namespace RevitLookupWpf.ViewModel
         {
             return SelectedProperty?.IsGeometeryObject == true;
         }
+
+        protected virtual void LookupDataChanging() { }
         #endregion
     }
 }

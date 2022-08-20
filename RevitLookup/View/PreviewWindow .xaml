@@ -14,7 +14,8 @@
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Generic.xaml" />
     </Window.Resources>
     <Grid>
-        <h:HelixViewport3D Name="ThreeDView" ZoomExtentsWhenLoaded="True">
+        <h:HelixViewport3D Name="ThreeDView" 
+                           ZoomExtentsWhenLoaded="True">
             <h:SunLight />
             <ModelVisual3D>
                 <ModelVisual3D.Content>

@@ -1,0 +1,36 @@
+﻿<Window x:Class="RevitLookupWpf.View.UnitConverterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RevitLookupWpf.View"
+        mc:Ignorable="d"
+        Title="UnitConverterWindow" Height="300" Width="300">
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Generic.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="127*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <GroupBox Header="Value">
+                <TextBox MinHeight="30"/>
+            </GroupBox>
+            <GroupBox Header="Current Unit Type">
+                <ComboBox/>
+            </GroupBox>
+            <GroupBox Header="Target Unit Type">
+                <ComboBox/>
+            </GroupBox>
+            <GroupBox Header="Result">
+                <TextBox MinHeight="30"/>
+            </GroupBox>
+        </StackPanel>
+        <Button Content="Close(C)" 
+                Grid.Row="1"
+                Height="23" 
+                Margin="2,0"/>
+    </Grid>
+</Window>

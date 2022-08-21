@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RevitLookupWpf.Helpers;
+using RevitLookupWpf.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RevitLookupWpf.View
 {
@@ -19,9 +9,17 @@ namespace RevitLookupWpf.View
     /// </summary>
     public partial class UnitConverterWindow : Window
     {
-        public UnitConverterWindow()
+        private UnitConverterWindowViewModel _viewModel;
+
+        public UnitConverterWindow(string converterData)
         {
             InitializeComponent();
+            _viewModel = new UnitConverterWindowViewModel(converterData)
+            {
+                CloseAction = ()=> this.Close(),
+            };
+            DataContext = _viewModel;
+            this.SetOwnerWindow();
         }
     }
 }

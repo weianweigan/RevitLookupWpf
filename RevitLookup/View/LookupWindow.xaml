@@ -210,7 +210,12 @@
                             <ColumnDefinition />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="../Resources/unit.png" />
+                        <Button Style="{StaticResource IconButton}"
+                                Width="23" Height="23"
+                                ToolTip="Open unit converter window"
+                                Command="{Binding OpenUnitConverterCommand}">
+                            <Image Source="/RevitLookupWpf;component/Resources/unit.png" />
+                        </Button>
                         <TextBlock Text="{Binding LookupData.UnitConverter.Result}"
                                    Grid.Column="1"/>
                     </Grid>

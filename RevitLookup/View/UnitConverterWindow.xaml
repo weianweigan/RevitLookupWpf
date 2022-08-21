@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RevitLookupWpf.View"
+        xmlns:local="clr-namespace:RevitLookupWpf.View" 
         mc:Ignorable="d"
-        Title="UnitConverterWindow" Height="300" Width="300">
+        xmlns:viewmodel="clr-namespace:RevitLookupWpf.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:UnitConverterWindowViewModel}"
+        Title="UnitConverterWindow" Height="320" Width="300"
+        WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/Generic.xaml" />
     </Window.Resources>
@@ -16,21 +19,27 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <GroupBox Header="Value">
-                <TextBox MinHeight="30"/>
+                <TextBox MinHeight="30" Text="{Binding ConverterData}"/>
             </GroupBox>
             <GroupBox Header="Current Unit Type">
-                <ComboBox/>
+                <ComboBox ItemsSource="{Binding UnitTypes}"
+                          SelectedItem="{Binding SelectedUnitType}"/>
             </GroupBox>
             <GroupBox Header="Target Unit Type">
-                <ComboBox/>
+                <ComboBox ItemsSource="{Binding UnitTypes}"
+                          SelectedItem="{Binding SelectedTargetUnitType}"/>
             </GroupBox>
             <GroupBox Header="Result">
-                <TextBox MinHeight="30"/>
+                <TextBox MinHeight="30" Text="{Binding TargetData}"
+                         IsReadOnly="True"/>
             </GroupBox>
         </StackPanel>
+        <Separator VerticalAlignment="Bottom"/>
         <Button Content="Close(C)" 
                 Grid.Row="1"
                 Height="23" 
-                Margin="2,0"/>
+                Margin="5,0"
+                Command="{Binding CloseCommand}"
+                HorizontalAlignment="Right"/>
     </Grid>
 </Window>

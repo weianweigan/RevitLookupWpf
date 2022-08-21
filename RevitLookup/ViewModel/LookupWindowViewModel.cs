@@ -3,6 +3,8 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.PropertySys;
+using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
+using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
 using RevitLookupWpf.View;
 using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
@@ -16,12 +18,13 @@ namespace RevitLookupWpf.ViewModel
 
         private RelayCommand _selectedItemChangedCommand;
         private ObservableCollection<LookupViewModel> _items;
-       
+        private ICommand _openUnitConverterCommand;
+
         #endregion
 
         #region Ctor
 
-        public LookupWindowViewModel(LookupWindow lookupWindow):base(lookupWindow)
+        public LookupWindowViewModel(LookupWindow lookupWindow) : base(lookupWindow)
         {
             LookupData = this;
             Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
@@ -37,8 +40,9 @@ namespace RevitLookupWpf.ViewModel
 
         public ICommand CloseCommand => _closeCommand ??= (_closeCommand = new RelayCommand(CloseAction));
 
-        public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
+        public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items, value); }
 
+        public ICommand OpenUnitConverterCommand { get => _openUnitConverterCommand ??= new RelayCommand(OpenUnitConverterClick);}
         #endregion
 
         #region Public Methods
@@ -114,13 +118,33 @@ namespace RevitLookupWpf.ViewModel
             {
                 LookupData.Next = vm;
                 LookupData = vm;
-                Items = new ObservableCollection<LookupViewModel>( GetAllSnoopItems());
+                Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
             }
 
             root.IsSelected = true;
             root.IsExpanded = true;
         }
 
+        private void OpenUnitConverterClick()
+        {
+            string converterData = string.Empty;
+            if (SelectedProperty is DoubleProperty @double)
+            {
+                converterData = @double.Value.ToString();
+            }else if(SelectedProperty is StringProperty str)
+            {
+                converterData = str.Value;
+            } else if(SelectedProperty is DefaultObjectProperty @default)
+            {
+                converterData = @default.ValueType;
+            }else if(SelectedProperty is XYZProperty xYZ)
+            {
+                converterData = xYZ.ValueType;
+            }
+
+            var unitConverterWindow = new UnitConverterWindow(converterData);
+            unitConverterWindow?.ShowDialog();
+        }
         #endregion
 
         protected override void LookupDataChanged()

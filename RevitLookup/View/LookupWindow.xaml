@@ -99,14 +99,27 @@
                                 VerticalAlignment="Center"
                                 Text="{Binding Name}" />
                             <Button
-                                Width="15"
-                                Height="15"
+                                Width="12"
+                                Height="12"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
                                 Command="{Binding PreviewCommand}"
                                 Style="{StaticResource IconButton}"
                                 Visibility="{Binding IsGeometryObject, Converter={StaticResource BoolToVisiblilityConverter}}">
-                                <Image Source="{StaticResource previewToggleDrawingImage}" />
+                                <Image Source="/RevitLookupWpf;component/Resources/PreviewSend.png" />
+                                <Button.ToolTip>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="/RevitLookupWpf;component/Resources/PreviewSend.png" 
+                                               Width="32"/>
+                                        <TextBlock Text="Send geometryobject to preview window"
+                                                   Grid.Column="1" 
+                                                   VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Button.ToolTip>
                             </Button>
                         </Grid>
                     </HierarchicalDataTemplate>

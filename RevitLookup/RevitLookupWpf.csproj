@@ -48,6 +48,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\previewsend.png" />
     <None Remove="Resources\RevitAPI2022.json" />
     <None Remove="Resources\unit.png" />
   </ItemGroup>
@@ -64,6 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\previewsend.png" />
     <Resource Include="Resources\RevitAPI2022.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

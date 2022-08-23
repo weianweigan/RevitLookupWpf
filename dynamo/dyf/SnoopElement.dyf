@@ -1,0 +1,196 @@
+{
+  "Uuid": "f4f094e3-fe53-4607-ac1e-a30cd003c6ed",
+  "IsCustomNode": true,
+  "Category": "RevitLookup",
+  "Description": "Snoop Element In Revit",
+  "Name": "SnoopElement",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "element",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": "revit element"
+      },
+      "Id": "53de9c305bbc4653a9ba1d2fbe914e1d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5b38cd51e2884039a7ee1b1024ef0ee8",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "1533cbc7-82d1-414b-b3fd-d313993d07b7",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "d46097ff68794d0c83398348653fe080",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "1a189e2755e9402596def0283eb01ee4",
+          "Name": "RevitLookupWpf",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2c270fc37d0b4c069211f41313b84c6c",
+          "Name": "IsInstalled",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Init Revitlookup Assembly"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\n\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.Structure import *\r\n\r\nclr.AddReference('RevitAPIUI')\r\nfrom Autodesk.Revit.UI import *\r\n\r\nclr.AddReference('System')\r\nfrom System.Collections.Generic import List\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.GeometryConversion)\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nimport System \r\nfrom System.Collections.Generic import *\r\n\r\nimport sys\r\nsys.path.append(r'C:\\Program Files (x86)\\IronPython 2.7\\Lib')\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\n\r\ndef tolist(obj1):\r\n\tif hasattr(obj1,'__iter__') : return obj1\r\n\telse : return [obj1]\r\n# toList = lambda x : x if hasattr(x, '__iter__') else [x]\r\n# element = toList(UnwrapElement(IN[0]))\r\ndef flatten(x):\r\n    result = []\r\n    for el in x:\r\n        if hasattr(el, \"__iter__\") and not isinstance(el, basestring):\r\n            result.extend(flatten(el))\r\n        else:\r\n            result.append(el)\r\n    return result\r\nrevitlookup = IN[0]\r\nelement = UnwrapElement(tolist(IN[1]))\r\nOUT = revitlookup.Snoop(element)",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "39d104c2ed4e4a6aa6d1be459b616a68",
+      "Inputs": [
+        {
+          "Id": "19f3bb05f1b94fed9705e91312f20f53",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "567547db50124e7bb4c1acf944c9bfaf",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b096a9c2b14d4ea991752f5fb3901f40",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "5b38cd51e2884039a7ee1b1024ef0ee8",
+      "End": "567547db50124e7bb4c1acf944c9bfaf",
+      "Id": "3149ab2981724236877d2a7d9d31f22a"
+    },
+    {
+      "Start": "1a189e2755e9402596def0283eb01ee4",
+      "End": "19f3bb05f1b94fed9705e91312f20f53",
+      "Id": "885fe738f9bd4edfaaa94da79e233e24"
+    }
+  ],
+  "Dependencies": [
+    "1533cbc7-82d1-414b-b3fd-d313993d07b7"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "RevitLookupWpf",
+      "Version": "2022.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "d46097ff68794d0c83398348653fe080"
+      ]
+    }
+  ],
+  "Author": "None provided",
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Elements",
+        "Id": "53de9c305bbc4653a9ba1d2fbe914e1d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1034.4605909579361,
+        "Y": 431.41673751836026
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Init",
+        "Id": "d46097ff68794d0c83398348653fe080",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1084.6346888316993,
+        "Y": 303.34708165853488
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "39d104c2ed4e4a6aa6d1be459b616a68",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1343.1765923876249,
+        "Y": 401.11614626997056
+      }
+    ],
+    "Annotations": [],
+    "X": -1279.4248533979824,
+    "Y": -246.4374390200656,
+    "Zoom": 1.5907768970610712
+  }
+}

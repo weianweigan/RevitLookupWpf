@@ -11,6 +11,7 @@
     <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
     <Configurations>Debug R22;Debug R19;Debug R23</Configurations>
     <Configurations>$(Configurations);Release R19;Release R20;Release R21; Release R22;Release R23</Configurations>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +60,7 @@
     <PackageReference Include="MvvmLight" Version="5.4.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Revit_All_Main_Versions_API_x64" Version="$(RevitVersion).*" />
+    <PackageReference Include="System.Resources.Extensions" Version="7.0.0-preview.7.22375.6" />
 
   </ItemGroup>
 

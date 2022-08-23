@@ -1,0 +1,216 @@
+{
+  "Uuid": "1533cbc7-82d1-414b-b3fd-d313993d07b7",
+  "IsCustomNode": true,
+  "Category": "RevitLookup",
+  "Description": "Init Revitlookup Assembly",
+  "Name": "Init",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "OUT[0];\nOUT[1];",
+      "Id": "edfd5b3b9a75439189f4d69afd71aba8",
+      "Inputs": [
+        {
+          "Id": "a111eebecd1648d5b9af5ab525a5efe4",
+          "Name": "OUT",
+          "Description": "OUT",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "09c192fd43fa4074a7466f1a38cfd64b",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0ccc5449d84d4403a9ce128332907762",
+          "Name": "",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# these commands get executed in the current scope\r\n# of each new shell (but not for canned commands)\r\nimport clr\r\nclr.AddReference(\"RevitAPI\")\r\nclr.AddReference(\"RevitAPIUI\")\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.Architecture import *\r\nfrom Autodesk.Revit.DB.Analysis import *\r\nfrom Autodesk.Revit.UI import TaskDialog\r\nfrom Autodesk.Revit.UI import UIApplication\r\nfrom Autodesk.Revit.DB import ElementSet, ElementId\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\ndef get_selected_elements(doc):\r\n    \"\"\"API change in Revit 2016 makes old method throw an error\"\"\"\r\n    try:\r\n        # Revit 2016\r\n        return [doc.GetElement(id)\r\n                for id in uidoc.Selection.GetElementIds()]\r\n    except:\r\n        # old method\r\n        return list(uidoc.Selection.Elements)\r\n\r\n\r\nselection = get_selected_elements(doc)\r\n# convenience variable for first element in selection\r\nif len(selection):\r\n    s0 = selection[0]\r\n\r\n# ------------------------------------------------------------------------------\r\nexmessage = 'RevitLookup not installed. Visit https://github.com/weianweigan/RevitLookupWpf to install.'\r\n\r\nclass RevitLookup(object):\r\n    def __init__(self, uiApplication):\r\n        \"\"\"\r\n        for RevitSnoop to function properly, it needs to be instantiated\r\n        with a reference to the Revit Application object.\r\n        \"\"\"\r\n        # find the RevitLookup plugin\r\n        try:\r\n            rlapp = [app for app in uiApplication.LoadedApplications\r\n                     if app.GetType().Namespace == 'RevitLookupWpf'\r\n                     and app.GetType().Name == 'RvtAddin'][0]\r\n        except IndexError:\r\n            self.RevitLookup = None\r\n            return exmessage\r\n        # tell IronPython about the assembly of the RevitLookup plugin\r\n        clr.AddReference(rlapp.GetType().Assembly)\r\n        import RevitLookupWpf\r\n        self.RevitLookupWpf = RevitLookupWpf\r\n        self.uiapp = uiApplication\r\n    def IsInstalled(self):\r\n    \ttry:\r\n        \tif not self.RevitLookupWpf:\r\n        \t\treturn exmessage\r\n    \texcept:\r\n    \t\treturn exmessage\r\n        return True\r\n    def Snoop(self,obj):\r\n        if self.IsInstalled()== True: \r\n            form = self.RevitLookupWpf.View.LookupWindow(None)\r\n            form.SetRvtInstance(obj)\r\n            form.Show()\r\nrevitlookup = RevitLookup(uiapp)\r\nOUT = revitlookup,revitlookup.IsInstalled()\r\n",
+      "Engine": "IronPython2",
+      "VariableInputPorts": true,
+      "Id": "4639c05d1dd34031a2ae11eaf2aa3a84",
+      "Inputs": [
+        {
+          "Id": "a909d6733003411990a432c0dd9eaa98",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "dd7fd39951fa4fd3aa4449de931c878f",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "RevitlookupWpf",
+      "Id": "7c5034c8a73d4b2fba349e4c0dfbb48c",
+      "Inputs": [
+        {
+          "Id": "8a177c616b814d98a0e2363f25ca4a9d",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "Isinstalled",
+      "Id": "99b920c2d94d47498ff70a445400fa85",
+      "Inputs": [
+        {
+          "Id": "d75dda02b70e466697a124bcda5753ba",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "09c192fd43fa4074a7466f1a38cfd64b",
+      "End": "8a177c616b814d98a0e2363f25ca4a9d",
+      "Id": "279c6e978352415c8219ef3ae015cd9e"
+    },
+    {
+      "Start": "0ccc5449d84d4403a9ce128332907762",
+      "End": "d75dda02b70e466697a124bcda5753ba",
+      "Id": "f5269ac7ecfc4ab6957131459ebfcc7f"
+    },
+    {
+      "Start": "dd7fd39951fa4fd3aa4449de931c878f",
+      "End": "a111eebecd1648d5b9af5ab525a5efe4",
+      "Id": "269a908bf1ac47efb0432274a8f5c520"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Author": "None provided",
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "edfd5b3b9a75439189f4d69afd71aba8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 196.81687395345227,
+        "Y": 7.5085019785007461
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Init RevitLookupWPF",
+        "Id": "4639c05d1dd34031a2ae11eaf2aa3a84",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -29.964946638707659,
+        "Y": 12.16711191283207
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "7c5034c8a73d4b2fba349e4c0dfbb48c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 391.91565014331042,
+        "Y": -15.269759799157214
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "99b920c2d94d47498ff70a445400fa85",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 403.58623374055736,
+        "Y": 67.980403194537672
+      }
+    ],
+    "Annotations": [],
+    "X": -107.48657041566935,
+    "Y": 243.36182071173087,
+    "Zoom": 1.2852827688530037
+  }
+}

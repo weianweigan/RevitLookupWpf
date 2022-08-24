@@ -1,0 +1,202 @@
+{
+  "Uuid": "a3941988-beaf-4893-b283-49f9876d6751",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "SnoopSurface",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "c348a847-c2ac-4f28-b389-5caf4178fa78",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "5e516532b63643e297b739c11a801be1",
+      "Inputs": [
+        {
+          "Id": "e550c1160a374fab8d514021f752f235",
+          "Name": "surface",
+          "Description": "surface\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fffccb1da6474217af677639e2e6b34b",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Allow User Snoop Current Surface In Dynamo"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Faces",
+      "Id": "013dac9e043c47beacb64745dbd8f58e",
+      "Inputs": [
+        {
+          "Id": "b4b5868b7cdd4be4956bc4a226e9744e",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "47b5eadc139547f7a65761d2c2452fcb",
+          "Name": "Surface[]",
+          "Description": "Surface[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "The Faces in this Element\n\nElement.Faces: Surface[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f36a9"
+      ],
+      "Id": "2bb0b894c4184b689d195d4e18323a02",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "ba7568e4b3fe46d88984eb9c7b5d5fbf",
+          "Name": "Element",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "47b5eadc139547f7a65761d2c2452fcb",
+      "End": "e550c1160a374fab8d514021f752f235",
+      "Id": "3e70d32ee1114c3f8b17f0208ec6bd15"
+    },
+    {
+      "Start": "ba7568e4b3fe46d88984eb9c7b5d5fbf",
+      "End": "b4b5868b7cdd4be4956bc4a226e9744e",
+      "Id": "ddbfd052e43e43e1b96d3233883434d4"
+    }
+  ],
+  "Dependencies": [
+    "c348a847-c2ac-4f28-b389-5caf4178fa78"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "RevitLookupWpf",
+      "Version": "2022.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "5e516532b63643e297b739c11a801be1"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "SnoopFace",
+        "Id": "5e516532b63643e297b739c11a801be1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 539.5,
+        "Y": 282.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.Faces",
+        "Id": "013dac9e043c47beacb64745dbd8f58e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 281.5,
+        "Y": 274.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Element",
+        "Id": "2bb0b894c4184b689d195d4e18323a02",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 90.5,
+        "Y": 268.0
+      }
+    ],
+    "Annotations": [],
+    "X": -10.0,
+    "Y": 10.0,
+    "Zoom": 1.0
+  }
+}

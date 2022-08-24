@@ -1,0 +1,202 @@
+{
+  "Uuid": "a3941988-beaf-4893-b283-49f9876d6751",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "SnoopByElementId",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "705e25a1-127e-4d76-b5f5-4e766ef073a3-000f1db5"
+      ],
+      "Id": "0eefc742a2254722b966290d4e0b6905",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d433e08560b145219547a661d89b028e",
+          "Name": "Element",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "75b785c0-7864-4800-8993-f7f4c6e55ca3",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "c03e04402db549d2b974a7c7d069ddc8",
+      "Inputs": [
+        {
+          "Id": "6da558abe1f44317b04eb05030b28003",
+          "Name": "elementids",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "09e458dc46bb44639dbc7abe51b58882",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Allow Snoop By Input Is ElementId (integer)"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "x.Id;",
+      "Id": "9cc497c4d88a4410b157b59f70c1cf14",
+      "Inputs": [
+        {
+          "Id": "b9c6cdb4a3ec4a73b7e10491e603f0b1",
+          "Name": "x",
+          "Description": "x",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f59f4a9fb6a54672bc4e178d2d0ac5d0",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "d433e08560b145219547a661d89b028e",
+      "End": "b9c6cdb4a3ec4a73b7e10491e603f0b1",
+      "Id": "e39ac5c9aa8e4364a0519b2022e7b799"
+    },
+    {
+      "Start": "f59f4a9fb6a54672bc4e178d2d0ac5d0",
+      "End": "6da558abe1f44317b04eb05030b28003",
+      "Id": "47428b58ffb14347aebeb7d8ebe8c3d3"
+    }
+  ],
+  "Dependencies": [
+    "75b785c0-7864-4800-8993-f7f4c6e55ca3"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "RevitLookupWpf",
+      "Version": "2022.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "c03e04402db549d2b974a7c7d069ddc8"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Element",
+        "Id": "0eefc742a2254722b966290d4e0b6905",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 213.7112346108263,
+        "Y": 343.81004618384935
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "SnoopByElementId",
+        "Id": "c03e04402db549d2b974a7c7d069ddc8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 606.7673674727663,
+        "Y": 352.7771062491409
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "9cc497c4d88a4410b157b59f70c1cf14",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 443.12098525572463,
+        "Y": 355.42821915121175
+      }
+    ],
+    "Annotations": [],
+    "X": -123.32118983372874,
+    "Y": -56.415421205543282,
+    "Zoom": 0.93181152849833082
+  }
+}

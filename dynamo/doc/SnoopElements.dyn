@@ -1,0 +1,168 @@
+{
+  "Uuid": "a3941988-beaf-4893-b283-49f9876d6751",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "SnoopElements",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "f4f094e3-fe53-4607-ac1e-a30cd003c6ed",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "fe423e228d4b4a51889ae9dac36ab0c8",
+      "Inputs": [
+        {
+          "Id": "d2b13d8a99184cdca7466f2d645f650d",
+          "Name": "element",
+          "Description": "revit element\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "22b5430bfdce4bdc83ed1f2562ff778f",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Snoop Element In Revit"
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "705e25a1-127e-4d76-b5f5-4e766ef073a3-000f1c6d",
+        "705e25a1-127e-4d76-b5f5-4e766ef073a3-000f1d84",
+        "705e25a1-127e-4d76-b5f5-4e766ef073a3-000f1d9c",
+        "705e25a1-127e-4d76-b5f5-4e766ef073a3-000f1d9d",
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f36ba",
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f36bb",
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f36cc",
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f36cd",
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f36fe",
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f36ff",
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f3700",
+        "17d64ad0-d78d-4987-a236-e3b1011abdd3-000f3701"
+      ],
+      "Id": "819285d6eb47404ebb9cfa7e2e2213e1",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b1576de6354a411b95b2aeaf55807191",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "b1576de6354a411b95b2aeaf55807191",
+      "End": "d2b13d8a99184cdca7466f2d645f650d",
+      "Id": "5ae12ffee4824a968792905d0e084a3a"
+    }
+  ],
+  "Dependencies": [
+    "f4f094e3-fe53-4607-ac1e-a30cd003c6ed"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "RevitLookupWpf",
+      "Version": "2022.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "fe423e228d4b4a51889ae9dac36ab0c8"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "SnoopElement",
+        "Id": "fe423e228d4b4a51889ae9dac36ab0c8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 472.5,
+        "Y": 270.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Elements",
+        "Id": "819285d6eb47404ebb9cfa7e2e2213e1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 158.5,
+        "Y": 221.0
+      }
+    ],
+    "Annotations": [],
+    "X": -89.0,
+    "Y": -62.0,
+    "Zoom": 1.0
+  }
+}

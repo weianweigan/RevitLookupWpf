@@ -1,0 +1,157 @@
+{
+  "Uuid": "a3941988-beaf-4893-b283-49f9876d6751",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "SnoopObject",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "9c2b3df1-c62d-44a2-ab5f-9e53461ba132",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "03465c069c7344afa242e1ec0b95ff94",
+      "Inputs": [
+        {
+          "Id": "c8eb5b3f62a843e096efc58dccce6400",
+          "Name": "obj",
+          "Description": "input any object to snoop\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4cbb60cf81104772911e079f65f4bba2",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Allow Snoop Object Undefine"
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "705e25a1-127e-4d76-b5f5-4e766ef073a3-000f1db5"
+      ],
+      "Id": "0eefc742a2254722b966290d4e0b6905",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d433e08560b145219547a661d89b028e",
+          "Name": "Element",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "d433e08560b145219547a661d89b028e",
+      "End": "c8eb5b3f62a843e096efc58dccce6400",
+      "Id": "af2b1a0126ce4203af9fdbc31e19db72"
+    }
+  ],
+  "Dependencies": [
+    "9c2b3df1-c62d-44a2-ab5f-9e53461ba132"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "RevitLookupWpf",
+      "Version": "2022.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "03465c069c7344afa242e1ec0b95ff94"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "SnoopObject",
+        "Id": "03465c069c7344afa242e1ec0b95ff94",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 431.5,
+        "Y": 346.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Element",
+        "Id": "0eefc742a2254722b966290d4e0b6905",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 233.13986475229103,
+        "Y": 338.57926114576276
+      }
+    ],
+    "Annotations": [],
+    "X": -223.4066151322894,
+    "Y": -259.00891036717064,
+    "Zoom": 1.33823125
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "Uuid": "a3941988-beaf-4893-b283-49f9876d6751",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "SnoopCurrentSelection",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "1b3929b9-bc94-4a57-8beb-9e2924aff027",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "c94a9cb97c834fbdb4a8f1707e23bee2",
+      "Inputs": [
+        {
+          "Id": "33f7b838f78242208f97eebd27567c33",
+          "Name": "fresh",
+          "Description": "input true to snoop\n\nvar[]..[]\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "938117e543d7442aad173c27130a27e7",
+          "Name": "OUT",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Snoop Element Selected In Revit"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "d671685d582746b884a1c7298d8529ac",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7ce3b0a0c2a64d9ca179fbf60cc1f09f",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7ce3b0a0c2a64d9ca179fbf60cc1f09f",
+      "End": "33f7b838f78242208f97eebd27567c33",
+      "Id": "fbf257973a884c3cb3bd0a9e3ea89e65"
+    }
+  ],
+  "Dependencies": [
+    "1b3929b9-bc94-4a57-8beb-9e2924aff027"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "RevitLookupWpf",
+      "Version": "2022.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "c94a9cb97c834fbdb4a8f1707e23bee2"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Properties",
+      "Version": "2.12",
+      "Data": {}
+    },
+    {
+      "ExtensionGuid": "DFBD9CC0-DB40-457A-939E-8C8555555A9D",
+      "Name": "Generative Design",
+      "Version": "1.10",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "None",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.12.0.5650",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "SnoopCurrentSelection",
+        "Id": "c94a9cb97c834fbdb4a8f1707e23bee2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 426.5,
+        "Y": 305.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Boolean",
+        "Id": "d671685d582746b884a1c7298d8529ac",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 251.10367170626353,
+        "Y": 327.401727861771
+      }
+    ],
+    "Annotations": [],
+    "X": -176.65249999999997,
+    "Y": -80.967499999999973,
+    "Zoom": 1.1575
+  }
+}

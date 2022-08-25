@@ -19,6 +19,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug R19|Any CPU = Debug R19|Any CPU
 		Debug R22|Any CPU = Debug R22|Any CPU
+		Debug R23|Any CPU = Debug R23|Any CPU
 		Installer|Any CPU = Installer|Any CPU
 		Release R19|Any CPU = Release R19|Any CPU
 		Release R20|Any CPU = Release R20|Any CPU
@@ -36,6 +37,7 @@ Global
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Release R21|Any CPU.ActiveCfg = Release|Any CPU
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Release R22|Any CPU.ActiveCfg = Release|Any CPU
 		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Release R23|Any CPU.ActiveCfg = Release|Any CPU
+		{5D52F2C5-3944-453A-93EB-502C02B2F35D}.Debug R23|Any CPU.ActiveCfg = Debug|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Debug R19|Any CPU.ActiveCfg = Debug|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Debug R22|Any CPU.ActiveCfg = Debug|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Installer|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,6 +46,7 @@ Global
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Release R21|Any CPU.ActiveCfg = Release|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Release R22|Any CPU.ActiveCfg = Release|Any CPU
 		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Release R23|Any CPU.ActiveCfg = Release|Any CPU
+		{48FCDBBE-32C3-485E-BD02-4B85BB8D3B87}.Debug R23|Any CPU.ActiveCfg = Debug|Any CPU
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R19|Any CPU.ActiveCfg = Debug R19|Any CPU
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R19|Any CPU.Build.0 = Debug R19|Any CPU
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R22|Any CPU.ActiveCfg = Debug R22|Any CPU
@@ -56,8 +59,8 @@ Global
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Release R21|Any CPU.Build.0 = Release R21|Any CPU
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Release R23|Any CPU.ActiveCfg = Release R23|Any CPU
 		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Release R23|Any CPU.Build.0 = Release R23|Any CPU
-		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Release R22|Any CPU.ActiveCfg = Release R22|Any CPU
-		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Release R22|Any CPU.Build.0 = Release R22|Any CPU
+		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R23|Any CPU.ActiveCfg = Debug R23|Any CPU
+		{A70650C6-71C9-48CA-A20E-0ECBA81E5B28}.Debug R23|Any CPU.Build.0 = Debug R23|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

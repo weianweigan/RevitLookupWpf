@@ -33,26 +33,6 @@ Please follow last release at section [Release](https://github.com/weianweigan/R
 **Note:** The release currently supports 5 version Revit : 2019, 2020, 2021, 2022 , 2023
 
 ---
-## Build
-
-Debugging:
-
-- Run **Debug Profile** in Visual Studio or **Run Configuration** in JetBrains Rider. The required files have been added. All project files will be automatically copied to the Revit plugins folder.
-
-Creating a package:
-
-- Open the terminal of your IDE.
-- Install Nuke global tools `dotnet tool install Nuke.GlobalTool --global`.
-- Run `nuke` command.
-- The generated package will be in the **output** folder.
-
-For more information on building, see the [**RevitTemplates**](https://github.com/Nice3point/RevitTemplates) Wiki page.
-
-**Note:** The project currently supports 4 version nearest with current year.
-
-Please refer to the [CHANGELOG](CHANGELOG.md) for details.
-
----
 
 ## Author
 

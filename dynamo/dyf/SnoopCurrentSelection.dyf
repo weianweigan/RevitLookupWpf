@@ -69,7 +69,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import clr\r\n\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.Structure import *\r\n\r\nclr.AddReference('RevitAPIUI')\r\nfrom Autodesk.Revit.UI import *\r\n\r\nclr.AddReference('System')\r\nfrom System.Collections.Generic import List\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.GeometryConversion)\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nimport System \r\nfrom System.Collections.Generic import *\r\n\r\nimport sys\r\nsys.path.append(r'C:\\Program Files (x86)\\IronPython 2.7\\Lib')\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\n\r\ndef tolist(obj1):\r\n\tif hasattr(obj1,'__iter__') : return obj1\r\n\telse : return [obj1]\r\n# toList = lambda x : x if hasattr(x, '__iter__') else [x]\r\n# element = toList(UnwrapElement(IN[0]))\r\ndef flatten(x):\r\n    result = []\r\n    for el in x:\r\n        if hasattr(el, \"__iter__\") and not isinstance(el, basestring):\r\n            result.extend(flatten(el))\r\n        else:\r\n            result.append(el)\r\n    return result\r\nrevitlookup = IN[0]\r\nselectElemId = uidoc.Selection.GetElementIds()\r\nselectElem = [doc.GetElement(xId) for xId in selectElemId]\r\nflag = IN[1]\r\nif flag:\r\n\tif len(selectElem) ==0:\r\n\t\tOUT = False\r\n\telif len(selectElem) == 1:\r\n\t\tOUT = revitlookup.Snoop(selectElem[0])\r\n\telse:\r\n\t\tOUT = revitlookup.Snoop(selectElem)\r\nelse:\r\n\tOUT = False",
+      "Code": "import clr\r\n\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.Structure import *\r\n\r\nclr.AddReference('RevitAPIUI')\r\nfrom Autodesk.Revit.UI import *\r\n\r\nclr.AddReference('System')\r\nfrom System.Collections.Generic import List\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.GeometryConversion)\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nimport System \r\nfrom System.Collections.Generic import *\r\n\r\nimport sys\r\nsys.path.append(r'C:\\Program Files (x86)\\IronPython 2.7\\Lib')\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\n\r\ndef tolist(obj1):\r\n\tif hasattr(obj1,'__iter__') : return obj1\r\n\telse : return [obj1]\r\n# toList = lambda x : x if hasattr(x, '__iter__') else [x]\r\n# element = toList(UnwrapElement(IN[0]))\r\ndef flatten(x):\r\n    result = []\r\n    for el in x:\r\n        if hasattr(el, \"__iter__\") and not isinstance(el, basestring):\r\n            result.extend(flatten(el))\r\n        else:\r\n            result.append(el)\r\n    return result\r\nrevitlookup = IN[0]\r\nselectElemId = uidoc.Selection.GetElementIds()\r\nselectElem = [doc.GetElement(xId) for xId in selectElemId]\r\nflag = IN[1]\r\nif flag:\r\n\tOUT = revitlookup.Snoop(selectElem)\r\nelse:\r\n\tOUT = False",
       "Engine": "IronPython2",
       "VariableInputPorts": true,
       "Id": "91ce3fd6bf664e73a14c96d0a1bb01f1",
@@ -140,7 +140,7 @@
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.12.0.5650",
+      "Version": "2.12.1.8246",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -189,8 +189,8 @@
       }
     ],
     "Annotations": [],
-    "X": -758.0694202617924,
-    "Y": -42.604768510994234,
-    "Zoom": 1.2059988786994926
+    "X": -513.17359585089036,
+    "Y": 5.2922627251851111,
+    "Zoom": 1.0181140440913174
   }
 }

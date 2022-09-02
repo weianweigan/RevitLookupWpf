@@ -20,7 +20,7 @@
       "Outputs": [
         {
           "Id": "98b8c3107e014fa69863fed29eb4fe07",
-          "Name": "RevitLookupWpf",
+          "Name": "RevitlookupWpf",
           "Description": "return value",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -29,7 +29,7 @@
         },
         {
           "Id": "70c344b282264dde86b91c2cf4a814ff",
-          "Name": "IsInstalled",
+          "Name": "Isinstalled",
           "Description": "return value",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -69,7 +69,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import clr\r\n\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.Structure import *\r\n\r\nclr.AddReference('RevitAPIUI')\r\nfrom Autodesk.Revit.UI import *\r\n\r\nclr.AddReference('System')\r\nfrom System.Collections.Generic import List\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.GeometryConversion)\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nimport System \r\nfrom System.Collections.Generic import *\r\n\r\nimport sys\r\nsys.path.append(r'C:\\Program Files (x86)\\IronPython 2.7\\Lib')\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\n\r\ndef tolist(obj1):\r\n\tif hasattr(obj1,'__iter__') : return obj1\r\n\telse : return [obj1]\r\n# toList = lambda x : x if hasattr(x, '__iter__') else [x]\r\n# element = toList(UnwrapElement(IN[0]))\r\ndef flatten(x):\r\n    result = []\r\n    for el in x:\r\n        if hasattr(el, \"__iter__\") and not isinstance(el, basestring):\r\n            result.extend(flatten(el))\r\n        else:\r\n            result.append(el)\r\n    return result\r\nrevitlookup = IN[0]\r\nselectElem = [doc.GetElement(ElementId(xId)) for xId in tolist(IN[1])]\r\nflag = IN[1]\r\nif flag:\r\n\tif len(selectElem) == 1:\r\n\t\tOUT = revitlookup.Snoop(selectElem[0])\r\n\telse:\r\n\t\tOUT = revitlookup.Snoop(selectElem)\r\nelse:\r\n OUT = False",
+      "Code": "import clr\r\n\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.Structure import *\r\n\r\nclr.AddReference('RevitAPIUI')\r\nfrom Autodesk.Revit.UI import *\r\n\r\nclr.AddReference('System')\r\nfrom System.Collections.Generic import List\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.GeometryConversion)\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nimport System \r\nfrom System.Collections.Generic import *\r\n\r\nimport sys\r\nsys.path.append(r'C:\\Program Files (x86)\\IronPython 2.7\\Lib')\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\n\r\ndef tolist(obj1):\r\n\tif hasattr(obj1,'__iter__') : return obj1\r\n\telse : return [obj1]\r\n# toList = lambda x : x if hasattr(x, '__iter__') else [x]\r\n# element = toList(UnwrapElement(IN[0]))\r\ndef flatten(x):\r\n    result = []\r\n    for el in x:\r\n        if hasattr(el, \"__iter__\") and not isinstance(el, basestring):\r\n            result.extend(flatten(el))\r\n        else:\r\n            result.append(el)\r\n    return result\r\nrevitlookup = IN[0]\r\nselectElem = [doc.GetElement(ElementId(xId)) for xId in tolist(IN[1])]\r\nflag = IN[1]\r\nif flag:\r\n\tOUT = revitlookup.Snoop(selectElem)\r\nelse:\r\n\tOUT = False",
       "Engine": "IronPython2",
       "VariableInputPorts": true,
       "Id": "d4b369cda5ea4257bcc7ab7114f26ba7",
@@ -123,14 +123,24 @@
   "Dependencies": [
     "1533cbc7-82d1-414b-b3fd-d313993d07b7"
   ],
-  "NodeLibraryDependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "RevitLookupWpf",
+      "Version": "2022.0.2",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "e5130486d23a4f44bd32e5744600fbb3"
+      ]
+    }
+  ],
   "Author": "None provided",
+  "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.12.0.5650",
+      "Version": "2.12.1.8246",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -164,8 +174,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 0.0,
-        "Y": 0.0
+        "X": -437.31794059286574,
+        "Y": 56.627066666512093
       },
       {
         "ShowGeometry": true,
@@ -174,13 +184,13 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 0.0,
-        "Y": 0.0
+        "X": -187.82244884437176,
+        "Y": -2.8033201320055525
       }
     ],
     "Annotations": [],
-    "X": 0.0,
-    "Y": 0.0,
-    "Zoom": 1.0
+    "X": 681.917702437985,
+    "Y": 193.16989697861894,
+    "Zoom": 1.7835993623828124
   }
 }

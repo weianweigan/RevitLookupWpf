@@ -20,7 +20,7 @@
       "Outputs": [
         {
           "Id": "ce2686e837114b788b11cd01f68eb156",
-          "Name": "RevitLookupWpf",
+          "Name": "RevitlookupWpf",
           "Description": "return value",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -29,7 +29,7 @@
         },
         {
           "Id": "38099a1a06a441fb8b57cf127e9b702f",
-          "Name": "IsInstalled",
+          "Name": "Isinstalled",
           "Description": "return value",
           "UsingDefaultValue": false,
           "Level": 2,
@@ -69,13 +69,13 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import clr\r\n\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.Structure import *\r\n\r\nclr.AddReference('RevitAPIUI')\r\nfrom Autodesk.Revit.UI import *\r\n\r\nclr.AddReference('System')\r\nfrom System.Collections.Generic import List\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.GeometryConversion)\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nimport System \r\nfrom System.Collections.Generic import *\r\n\r\nimport sys\r\nsys.path.append(r'C:\\Program Files (x86)\\IronPython 2.7\\Lib')\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\n\r\ndef tolist(obj1):\r\n\tif hasattr(obj1,'__iter__') : return obj1\r\n\telse : return [obj1]\r\n# toList = lambda x : x if hasattr(x, '__iter__') else [x]\r\n# element = toList(UnwrapElement(IN[0]))\r\ndef flatten(x):\r\n    result = []\r\n    for el in x:\r\n        if hasattr(el, \"__iter__\") and not isinstance(el, basestring):\r\n            result.extend(flatten(el))\r\n        else:\r\n            result.append(el)\r\n    return result\r\nrevitlookup = IN[0]\r\nobj = tolist(IN[1])\r\nOUT = revitlookup.Snoop(obj)",
+      "Code": "import clr\r\n\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.Structure import *\r\n\r\nclr.AddReference('RevitAPIUI')\r\nfrom Autodesk.Revit.UI import *\r\n\r\nclr.AddReference('System')\r\nfrom System.Collections.Generic import List\r\n\r\nclr.AddReference('RevitNodes')\r\nimport Revit\r\nclr.ImportExtensions(Revit.GeometryConversion)\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nimport System \r\nfrom System.Collections.Generic import *\r\n\r\nimport sys\r\nsys.path.append(r'C:\\Program Files (x86)\\IronPython 2.7\\Lib')\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nuidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument\r\nuiapp = DocumentManager.Instance.CurrentUIApplication\r\napp = DocumentManager.Instance.CurrentUIApplication.Application\r\n\r\ndef tolist(obj1):\r\n\tif hasattr(obj1,'__iter__') : return obj1\r\n\telse : return [obj1]\r\n# toList = lambda x : x if hasattr(x, '__iter__') else [x]\r\n# element = toList(UnwrapElement(IN[0]))\r\ndef flatten(x):\r\n    result = []\r\n    for el in x:\r\n        if hasattr(el, \"__iter__\") and not isinstance(el, basestring):\r\n            result.extend(flatten(el))\r\n        else:\r\n            result.append(el)\r\n    return result\r\nrevitlookup = IN[0]\r\nobj = tolist(IN[1])\r\nif len(obj)==1:\r\n\tOUT = revitlookup.Snoop(obj[0])\r\nelse:\r\n\tOUT = revitlookup.Snoop(obj)",
       "Engine": "IronPython2",
       "VariableInputPorts": true,
-      "Id": "6aebcc9b8d014683bdd23bb8264bc41f",
+      "Id": "263b996aadc547c8946cc9cf609f1567",
       "Inputs": [
         {
-          "Id": "87482059f9a44baaa50f3929e505b586",
+          "Id": "8400192cc0f4427f9009c8d8631b50e6",
           "Name": "IN[0]",
           "Description": "Input #0",
           "UsingDefaultValue": false,
@@ -84,7 +84,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "b676a498b0a646c3805ebc81c1d08383",
+          "Id": "a463cf40124847988c7bfa4b563bd161",
           "Name": "IN[1]",
           "Description": "Input #1",
           "UsingDefaultValue": false,
@@ -95,7 +95,7 @@
       ],
       "Outputs": [
         {
-          "Id": "fd67d92a5d034c29a9516ee7df0db494",
+          "Id": "0b27d51735af40c4affb9d179fca4d03",
           "Name": "OUT",
           "Description": "Result of the python script",
           "UsingDefaultValue": false,
@@ -111,13 +111,13 @@
   "Connectors": [
     {
       "Start": "ce2686e837114b788b11cd01f68eb156",
-      "End": "87482059f9a44baaa50f3929e505b586",
-      "Id": "d65d2c06ce3b4129b71ecf9cb37e6ea0"
+      "End": "8400192cc0f4427f9009c8d8631b50e6",
+      "Id": "5dcc03fa8b6e4816a62d74ed736a1145"
     },
     {
       "Start": "b8a6c31961e540c9b155162a4c291849",
-      "End": "b676a498b0a646c3805ebc81c1d08383",
-      "Id": "552874d2f1964d7d986c6e6b4e619399"
+      "End": "a463cf40124847988c7bfa4b563bd161",
+      "Id": "baa1ef7fc03c44beb10a222a8caa7175"
     }
   ],
   "Dependencies": [
@@ -140,7 +140,7 @@
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.12.0.5650",
+      "Version": "2.12.1.8246",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -180,17 +180,17 @@
       {
         "ShowGeometry": true,
         "Name": "Python Script",
-        "Id": "6aebcc9b8d014683bdd23bb8264bc41f",
+        "Id": "263b996aadc547c8946cc9cf609f1567",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 713.905029812728,
-        "Y": 362.08837022236736
+        "X": 675.43895484844438,
+        "Y": 336.86346003372557
       }
     ],
     "Annotations": [],
-    "X": -167.89179912610672,
-    "Y": -249.98731712927446,
+    "X": -599.89179912610666,
+    "Y": -387.98731712927446,
     "Zoom": 1.703916824554996
   }
 }

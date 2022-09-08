@@ -116,7 +116,9 @@ namespace RevitLookupWpf.ViewModel
                 return;
             }
 
-            var matchs = Regex.Matches(ConverterData, "^(-?d+)(.d+)?$");
+            var regex = new Regex("([1-9]\\d*\\.?\\d*)|(0\\.\\d*[1-9])");
+
+            var matchs = regex.Matches(ConverterData);
             if (matchs?.Count <= 0)
             {
                 TargetData = string.Empty;

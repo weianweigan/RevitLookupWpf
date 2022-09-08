@@ -13,11 +13,14 @@ namespace RevitLookupWpf.ViewModel
 
         public UnitItem Result { get => _result; set =>  Set(ref _result , value); }
 
+        public string SourceValue { get; private set; }
+
         public void Update(PropertyBase property)
         {
             if (!property.NeedUnitConvert)
             {
                 Result = null;
+                SourceValue = null;
             }
 
             if (property is DoubleProperty doubleProperty)
@@ -35,14 +38,17 @@ namespace RevitLookupWpf.ViewModel
                         Result = UnitItem.CreateByValue(doubleProperty.Value, UnitType.Normal);
                         break;
                 }
+                SourceValue = doubleProperty.Value.ToString();
 
             }
-            else if (property is StringProperty)
+            else if (property is StringProperty stringProperty)
             {
-
-            }else if (property is XYZProperty xYZProperty)
+                SourceValue = stringProperty.Value;
+            }
+            else if (property is XYZProperty xYZProperty)
             {
                 Result = UnitItem.CreateByXYZ(xYZProperty.Value);
+                SourceValue = $"({xYZProperty.Value.X},{xYZProperty.Value.Y},{xYZProperty.Value.Z})";
             }
         }
     }

@@ -63,6 +63,7 @@ namespace RevitLookupWpf.ViewModel
 #else
         private string _selectedUnitType = nameof(UnitTypeId.Inches);
         private string _selectedTargetUnitType = nameof(UnitTypeId.Meters);
+        private Exception _ex;
 
         public List<string> UnitTypes { get; set; }
 
@@ -103,6 +104,11 @@ namespace RevitLookupWpf.ViewModel
 
         public Action CloseAction { get; set; }
 
+        /// <summary>
+        /// Unit Conveter Exception
+        /// </summary>
+        public Exception Ex { get => _ex; set => Set(ref _ex ,value); }
+
         private void Update()
         {
             if (string.IsNullOrEmpty(_converterData))
@@ -124,35 +130,43 @@ namespace RevitLookupWpf.ViewModel
             {
                 TargetData = string.Empty;
             }
-            
-            var strBuilder = new StringBuilder();
-            int endIndex = 0;
-            foreach (Match match in matchs)
-            {
-                strBuilder.Append(ConverterData.Substring(endIndex, match.Index));
-                endIndex = match.Index + match.Length;
 
-                var value = double.Parse(match.Value);
+            try
+            {
+                var strBuilder = new StringBuilder();
+                int endIndex = 0;
+                foreach (Match match in matchs)
+                {
+                    strBuilder.Append(ConverterData.Substring(endIndex, match.Index));
+                    endIndex = match.Index + match.Length;
+
+                    var value = double.Parse(match.Value);
 #if R19 || R20
                 var result = UnitUtils.Convert(value, SelectedUnitType, SelectedTargetUnitType);
 #else
-                var type = typeof(UnitTypeId);
-                var properties = type.GetProperties();
+                    var type = typeof(UnitTypeId);
+                    var properties = type.GetProperties();
 
-                var realSelectedUnitType = properties
-                    .FirstOrDefault(p => p.Name == SelectedUnitType)
-                    .GetValue(null) as ForgeTypeId;
-                var realSelectedTargetUnitType = properties
-                    .FirstOrDefault(p => p.Name == SelectedTargetUnitType)
-                    .GetValue(null) as ForgeTypeId;
+                    var realSelectedUnitType = properties
+                        .FirstOrDefault(p => p.Name == SelectedUnitType)
+                        .GetValue(null) as ForgeTypeId;
+                    var realSelectedTargetUnitType = properties
+                        .FirstOrDefault(p => p.Name == SelectedTargetUnitType)
+                        .GetValue(null) as ForgeTypeId;
 
-                var result = UnitUtils.Convert(value, realSelectedUnitType, realSelectedTargetUnitType);
+                    var result = UnitUtils.Convert(value, realSelectedUnitType, realSelectedTargetUnitType);
 #endif
-                strBuilder.Append(result);
-            }
-            strBuilder.Append(ConverterData.Substring(endIndex, ConverterData.Length - endIndex));
+                    strBuilder.Append(result);
+                }
+                strBuilder.Append(ConverterData.Substring(endIndex, ConverterData.Length - endIndex));
 
-            TargetData = strBuilder.ToString();
+                TargetData = strBuilder.ToString();
+                Ex = null;
+            }
+            catch (Exception ex)
+            {
+                Ex = ex;
+            }
         }
     }
 }

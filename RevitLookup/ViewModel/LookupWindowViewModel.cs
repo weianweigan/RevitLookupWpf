@@ -1,10 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
 using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
+using RevitLookupWpf.Unit;
 using RevitLookupWpf.View;
 using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
@@ -127,22 +129,7 @@ namespace RevitLookupWpf.ViewModel
 
         private void OpenUnitConverterClick()
         {
-            string converterData = string.Empty;
-            if (SelectedProperty is DoubleProperty @double)
-            {
-                converterData = @double.Value.ToString();
-            }else if(SelectedProperty is StringProperty str)
-            {
-                converterData = str.Value;
-            } else if(SelectedProperty is DefaultObjectProperty @default)
-            {
-                converterData = @default.ValueType;
-            }else if(SelectedProperty is XYZProperty xYZ)
-            {
-                converterData = xYZ.ValueType;
-            }
-
-            var unitConverterWindow = new UnitConverterWindow(converterData);
+            var unitConverterWindow = new UnitConverterWindow(UnitConverter.SourceValue);
             unitConverterWindow?.ShowDialog();
         }
         #endregion

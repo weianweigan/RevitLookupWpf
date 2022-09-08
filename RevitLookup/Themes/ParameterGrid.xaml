@@ -137,21 +137,24 @@
                     </GroupBox.Header>
                     <StackPanel>
                         <ComboBox
+                            Margin="0,2"
                             DisplayMemberPath="Name"
                             ItemsSource="{Binding AllViews}"
                             SelectedItem="{Binding SelectedView}"
-                            ToolTip="View"
-                            Margin="0,2"/>
-                        <CheckBox IsChecked="{Binding ComputeReferences}" 
-                                  Content="ComputeReferences"
-                                  Margin="0,2"/>
-                        <ComboBox ItemsSource="{Binding ViewDetailLevels}" 
-                                  SelectedItem="{Binding DetailLevel}" 
-                                  ToolTip="DetailLevel"
-                                  Margin="0,2"/>
-                        <CheckBox IsChecked="{Binding IncludeNonVisibleObjects}" 
-                                  Content="IncludeNonVisibleObjects"
-                                  Margin="0,2"/>
+                            ToolTip="View" />
+                        <CheckBox
+                            Margin="0,2"
+                            Content="ComputeReferences"
+                            IsChecked="{Binding ComputeReferences}" />
+                        <ComboBox
+                            Margin="0,2"
+                            ItemsSource="{Binding ViewDetailLevels}"
+                            SelectedItem="{Binding DetailLevel}"
+                            ToolTip="DetailLevel" />
+                        <CheckBox
+                            Margin="0,2"
+                            Content="IncludeNonVisibleObjects"
+                            IsChecked="{Binding IncludeNonVisibleObjects}" />
                     </StackPanel>
                 </GroupBox>
             </DataTemplate>

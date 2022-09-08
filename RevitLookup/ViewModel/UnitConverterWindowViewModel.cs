@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Text.RegularExpressions;
 using System.Reflection;
+using System.IO;
 
 namespace RevitLookupWpf.ViewModel
 {
@@ -123,7 +124,7 @@ namespace RevitLookupWpf.ViewModel
             {
                 TargetData = string.Empty;
             }
-
+            
             var strBuilder = new StringBuilder();
             int endIndex = 0;
             foreach (Match match in matchs)

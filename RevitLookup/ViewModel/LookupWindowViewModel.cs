@@ -129,7 +129,7 @@ namespace RevitLookupWpf.ViewModel
 
         private void OpenUnitConverterClick()
         {
-            var unitConverterWindow = new UnitConverterWindow(UnitConverter.SourceValue);
+            var unitConverterWindow = new UnitConverterWindow(LookupData?.UnitConverter.SourceValue);
             unitConverterWindow?.ShowDialog();
         }
         #endregion

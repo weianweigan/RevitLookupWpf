@@ -128,12 +128,6 @@
       <AddinItem Include="$(TargetDir)$(AssemblyName).*" />
       <!--Files to copy to Revit add-ins folder-->
       <AddinItem Include="$(TargetDir)*.dll" />
-      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.dll" />
-      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.Extras.dll" />
-      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.Platform.dll" />
-      <AddinItem Include="$(TargetDir)Microsoft.Xaml.Behaviors.dll" />
-      <AddinItem Include="$(TargetDir)System.Windows.Interactivity.dll" />
-      <AddinItem Include="$(TargetDir)Newtonsoft.Json.dll" />
     </ItemGroup>
 
     <PropertyGroup>

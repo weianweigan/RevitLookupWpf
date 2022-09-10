@@ -12,6 +12,7 @@ namespace RevitLookupWpf.ViewModel
     {
         private string _targetData;
         private string _converterData;
+        private Exception _ex;
         private RelayCommand _closeCommand;
 
         public UnitConverterWindowViewModel(string converterData)
@@ -35,8 +36,8 @@ namespace RevitLookupWpf.ViewModel
         }
 
 #if R19 || R20
-        private DisplayUnitType _selectedUnitType;
-        private DisplayUnitType _selectedTargetUnitType;
+        private DisplayUnitType _selectedUnitType = DisplayUnitType.DUT_DECIMAL_FEET;
+        private DisplayUnitType _selectedTargetUnitType =  DisplayUnitType.DUT_METERS;
 
         public List<DisplayUnitType> UnitTypes { get; set; } =
             Enum.GetValues(typeof(DisplayUnitType))
@@ -61,9 +62,8 @@ namespace RevitLookupWpf.ViewModel
             }
         }
 #else
-        private string _selectedUnitType = nameof(UnitTypeId.Inches);
+        private string _selectedUnitType = nameof(UnitTypeId.Feet);
         private string _selectedTargetUnitType = nameof(UnitTypeId.Meters);
-        private Exception _ex;
 
         public List<string> UnitTypes { get; set; }
 
@@ -137,7 +137,7 @@ namespace RevitLookupWpf.ViewModel
                 int endIndex = 0;
                 foreach (Match match in matchs)
                 {
-                    strBuilder.Append(ConverterData.Substring(endIndex, match.Index));
+                    strBuilder.Append(ConverterData.Substring(endIndex, match.Index-endIndex));
                     endIndex = match.Index + match.Length;
 
                     var value = double.Parse(match.Value);

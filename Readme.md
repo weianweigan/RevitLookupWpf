@@ -16,15 +16,11 @@
 
 # Introduction
 
-Interactive Revit RFA and RVT project database exploration tool to view and navigate BIM element parameters, properties and relationships.The project was developed to support programmers using RevitAPI to quickly look up and work efficiently with parameter objects.
+Interactive Revit RFA and RVT project database exploration tool to view and navigate BIM element parameters, properties and relationships.The project was developed to support programmers using Revit API to quickly look up and work efficiently with parameter objects.
 
-### Addin
+The advantage of project RevitLookupWpf is that it allows the user to delve into full methods and properties, which makes it easier for professionals to discover revit's hidden functions.
 
-![addin](./pic/addin.png)
-
-### Window
-
-![window](./pic/window.png)
+![Main Interface of Revit Lookup Wpf](./pic/window.png)
 
 ## Installation
 
@@ -33,26 +29,52 @@ Please follow last release at section [Release](https://github.com/weianweigan/R
 **Note:** The release currently supports 5 version Revit : 2019, 2020, 2021, 2022 , 2023
 
 ---
-## Build
+### Revit Add-in
 
-Debugging:
+With RevitlookupWpf inside, you can use some features like:
 
-- Run **Debug Profile** in Visual Studio or **Run Configuration** in JetBrains Rider. The required files have been added. All project files will be automatically copied to the Revit plugins folder.
+- [x] Snoop DB : Explore the database of Revit API.
+- [x] Snoop Active Document : Explore the active document of Revit project current.
+- [x] Snoop Active View : Explore the active view of Revit project current.
+- [x] Snoop Current Selection : Explore the element current selected of Revit project current.
+- [x] Snoop Points : Explore the some points by pick select in project.
+- [x] Snoop Faces : Explore some faces contains inside Geometry Element.
+- [x] Snoop Edges : Explore some edges contains inside Geometry Element.
+- [x] Snoop Points On Elements : Explore the points on Element by pick select Points. 
+- [x] Snoop Geometry Element  : Explore Geometry Element.
+- [x] Snoop Linked Element : Explore all Element inside Revit Linked project.
+- [x] Snoop UIApplication : Explore UIApplication Revit project.
+- [x] Snoop Search Elements  :Explore all element in document current and linked document by Id. 
 
-Creating a package:
+![](pic/SnoopElement.gif)
 
-- Open the terminal of your IDE.
-- Install Nuke global tools `dotnet tool install Nuke.GlobalTool --global`.
-- Run `nuke` command.
-- The generated package will be in the **output** folder.
+### Dynamo Revit Package
 
-For more information on building, see the [**RevitTemplates**](https://github.com/Nice3point/RevitTemplates) Wiki page.
+Happy to say that RevitLookupWpf also support snoop everything inside inviroment Dynamo Revit. Some feature will be support included:
 
-**Note:** The project currently supports 4 version nearest with current year.
+- [x] Snoop Revit Element (**Dynamo Element** _Wraped_ from **Revit Element**)
+- [x] Snoop Current Selection
+- [x] Snoop Active Document 
+- [x] Snoop Active View
+- [x] Snoop Object (Everything objects defined in Dynamo)
 
-Please refer to the [CHANGELOG](CHANGELOG.md) for details.
+![](pic/DynamoSnoop.gif)
 
----
+**Note** : Please download package **RevitlookupWpf** And package **DynamoIronPython2.7** before starting Snoop in enviroment Dynamo Revit. 
+
+### Advanced
+
+- Allow show help information **Properties** and **Methods** :
+
+![](pic/Help.gif)
+
+- Connect with [RevitAPIDocs](https://www.revitapidocs.com/)
+
+![](pic/Revitapidocs.gif)
+
+- Set Value input method require input parameters
+
+![](pic/SetInputMethod.gif)
 
 ## Author
 

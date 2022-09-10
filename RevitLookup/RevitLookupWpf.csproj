@@ -11,7 +11,6 @@
     <NoWarn>1701;1702;CS0649;CS0168</NoWarn>
     <Configurations>Debug R22;Debug R19;Debug R23</Configurations>
     <Configurations>$(Configurations);Release R19;Release R20;Release R21; Release R22;Release R23</Configurations>
-    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
     <DebugSymbols>true</DebugSymbols>
@@ -128,13 +127,13 @@
       <RootItem Include="$(ProjectDir)*.addin" />
       <AddinItem Include="$(TargetDir)$(AssemblyName).*" />
       <!--Files to copy to Revit add-ins folder-->
-	  <AddinItem Include="$(TargetDir)CommonServiceLocator.dll" />
-	  <AddinItem Include="$(TargetDir)GalaSoft.*.dll" />
-	  <AddinItem Include="$(TargetDir)System.Windows.Interactivity.dll" />
-	  <AddinItem Include="$(TargetDir)Newtonsoft.Json.dll" />
-      <AddinItem Include="$(TargetDir)System.*.dll" />
-      <AddinItem Include="$(TargetDir)SharpDX.*.dll" />
-      <AddinItem Include="$(TargetDir)Helix*.dll" />
+      <AddinItem Include="$(TargetDir)*.dll" />
+      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.dll" />
+      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.Extras.dll" />
+      <AddinItem Include="$(TargetDir)GalaSoft.MvvmLight.Platform.dll" />
+      <AddinItem Include="$(TargetDir)Microsoft.Xaml.Behaviors.dll" />
+      <AddinItem Include="$(TargetDir)System.Windows.Interactivity.dll" />
+      <AddinItem Include="$(TargetDir)Newtonsoft.Json.dll" />
     </ItemGroup>
 
     <PropertyGroup>
@@ -150,15 +149,5 @@
     </ItemGroup>
 
     <Copy SourceFiles="@(AddinFiles)" DestinationFolder="$(AppData)\Autodesk\Revit\Addins\$(RevitVersion)\%(RecursiveDir)" Condition="$(Configuration.Contains('Debug'))" />
-  </Target>
-
-  <Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">
-    <!-- Work around https://github.com/dotnet/wpf/issues/6792 -->
-
-    <ItemGroup>
-      <FilteredAnalyzer Include="@(Analyzer-&gt;Distinct())" />
-      <Analyzer Remove="@(Analyzer)" />
-      <Analyzer Include="@(FilteredAnalyzer)" />
-    </ItemGroup>
   </Target>
 </Project>

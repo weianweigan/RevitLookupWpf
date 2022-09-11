@@ -60,7 +60,7 @@ Happy to say that RevitLookupWpf also support snoop everything inside inviroment
 
 ![](pic/DynamoSnoop.gif)
 
-**Note** : Please download package **RevitlookupWpf** And package **DynamoIronPython2.7** before starting Snoop in enviroment Dynamo Revit. 
+**Note** : Please download package **RevitlookupWpf** And package **DynamoIronPython2.7**( if using Revit 2023 or higher) before starting Snoop in environment Dynamo Revit. 
 
 ### Advanced
 
@@ -76,7 +76,7 @@ Happy to say that RevitLookupWpf also support snoop everything inside inviroment
 
 ![](pic/SetInputMethod.gif)
 
-- Preview Geometry and convert Unit
+- Preview Geometry(Mesh,Solid,Face,Line,Curve,Point) and convert Unit
 
 ![](pic/PreviewGeometry.gif)
 

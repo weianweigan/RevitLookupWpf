@@ -10,7 +10,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+using RevitLookupWpf.GeometryConverter;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys;
 using RevitLookupWpf.PropertySys.BaseProperty;
@@ -24,6 +24,7 @@ namespace RevitLookupWpf.ViewModel
 {
     public class LookupViewModel : ViewModelBase
     {
+        #region Fields
         private PropertyList _propertyList;
         private ListCollectionView _dataSource;
         private ObservableCollection<InstanceNode> _roots;
@@ -33,11 +34,17 @@ namespace RevitLookupWpf.ViewModel
         private RelayCommand _copy;
         private RelayCommand _helpCommand;
         public LookupWindow _lookupWindow;
-        
+        private RelayCommand _preViewCommand;
+        #endregion
+
+        #region Ctor
         public LookupViewModel(LookupWindow lookupWindow)
         {
             _lookupWindow = lookupWindow;
         }
+        #endregion
+
+        #region Properties
         public ObservableCollection<InstanceNode> Roots
         {
             get => _roots; set
@@ -47,6 +54,85 @@ namespace RevitLookupWpf.ViewModel
             }
         }
 
+        public PropertyList PropertyList
+        {
+            get => _propertyList; set
+            {
+                if (value != null && object.ReferenceEquals(_propertyList, value))
+                {
+                    return;
+                }
+
+                Set(ref _propertyList, value);
+
+                if (_propertyList != null)
+                {
+                    DataSource = new ListCollectionView(_propertyList);
+                    DataSource.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Descending));
+                    DataSource.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+                    DataSource.GroupDescriptions?.Add(new PropertyGroupDescription("Category"));
+                }
+            }
+        }
+
+        public ListCollectionView DataSource
+        {
+            get { return _dataSource; }
+            set
+            {
+                _dataSource = value;
+                RaisePropertyChanged(nameof(DataSource));
+            }
+        }
+
+        public LookupViewModel LookupData
+        {
+            get => _lookupData; set
+            {
+                LookupDataChanging();
+                Set(ref _lookupData, value);
+                RaisePropertyChanged("LookupData.DataSource");
+                RaisePropertyChanged("LookupData.OpenInNewWindowCommand");
+                //Remove back items
+                if (LookupData?.Next != null)
+                {
+                    LookupData.Next = null;
+                    LookupDataChanged();
+                }
+            }
+        }
+
+        public LookupViewModel Next { get; set; }
+
+        public string Name { get; set; }
+
+        public string NaviName { get; set; }
+
+        public PropertyBase SelectedProperty
+        {
+            get => _selectedProperty;
+            set
+            {
+                Set(ref _selectedProperty, value);
+                OpenInNewWindowCommand.RaiseCanExecuteChanged();
+                PreviewCommand.RaiseCanExecuteChanged();
+                if (_selectedProperty != null)
+                    UnitConverter.Update(_selectedProperty);
+            }
+        }
+
+        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??= new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
+       
+        public RelayCommand HelpCommand => _helpCommand ?? new RelayCommand(HelpClick);
+        
+        public RelayCommand CopyCommand => _copy ?? new RelayCommand(CopyClick);
+
+        public RelayCommand PreviewCommand => _preViewCommand ?? new RelayCommand(PreViewClick, CanPreview);
+
+        public UnitConverterViewModel UnitConverter { get; } = new UnitConverterViewModel();
+        #endregion
+
+        #region 
         private void GetNaviName()
         {
             if (Roots?.Any() == true)
@@ -81,56 +167,6 @@ namespace RevitLookupWpf.ViewModel
             return null;
         }
 
-        public PropertyList PropertyList
-        {
-            get => _propertyList; set
-            {
-                if (value != null && object.ReferenceEquals(_propertyList, value))
-                {
-                    return;
-                }
-
-                Set(ref _propertyList, value);
-
-                if (_propertyList != null)
-                {
-                    DataSource = new ListCollectionView(_propertyList);
-                    DataSource.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Descending));
-                    DataSource.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
-                    DataSource.GroupDescriptions?.Add(new PropertyGroupDescription("Category"));
-                }
-            }
-        }
-
-        public ListCollectionView DataSource
-        {
-            get { return _dataSource; }
-            set
-            {
-
-                _dataSource = value;
-                RaisePropertyChanged(nameof(DataSource));
-            }
-        }
-
-        public LookupViewModel Next { get; set; }
-        public string Name { get; set; }
-
-        public string NaviName { get; set; }
-
-        public PropertyBase SelectedProperty
-        {
-            get => _selectedProperty;
-            set
-            {
-                Set(ref _selectedProperty, value);
-                OpenInNewWindowCommand.RaiseCanExecuteChanged();
-            }
-        }
-        public RelayCommand OpenInNewWindowCommand => _openInNewWindowCommand ??= new RelayCommand(OpenInNewWindow, CanOpenInNewWindow);
-        public RelayCommand HelpCommand => _helpCommand ?? new RelayCommand(HelpClick);
-        public RelayCommand CopyCommand => _copy ?? new RelayCommand(CopyClick);
-
         void CopyClick()
         {
             if (SelectedProperty is ExceptionProperty exceptionProperty)
@@ -162,6 +198,7 @@ namespace RevitLookupWpf.ViewModel
                 Clipboard.SetText(parametersProperty.Value.ToString());
             }
         }
+
         void HelpClick()
         {
             try
@@ -236,24 +273,21 @@ namespace RevitLookupWpf.ViewModel
             return false;
         }
 
-        public LookupViewModel LookupData
-        {
-            get => _lookupData; set
-            {
-                Set(ref _lookupData, value);
-                RaisePropertyChanged(() => LookupData.DataSource);
-                RaisePropertyChanged(() => LookupData.OpenInNewWindowCommand);
-                //Remove back items
-                if (LookupData?.Next != null)
-                {
-                    LookupData.Next = null;
-                    LookupDataChanged();
-                }
-            }
-        }
-
         protected virtual void LookupDataChanged()
         {
         }
+
+        private void PreViewClick()
+        {
+            GeometryPreviewManager.Preview(_selectedProperty);
+        }
+
+        private bool CanPreview()
+        {
+            return SelectedProperty?.IsGeometeryObject == true;
+        }
+
+        protected virtual void LookupDataChanging() { }
+        #endregion
     }
 }

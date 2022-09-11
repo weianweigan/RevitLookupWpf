@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.Extension;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;

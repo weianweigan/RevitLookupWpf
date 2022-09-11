@@ -7,5 +7,7 @@
             Value = value.Replace("\n"," ").Replace("\r"," ");
             IsClass = true;
         }
+
+        public override bool NeedUnitConvert => Name == "AsValueString";
     }
 }

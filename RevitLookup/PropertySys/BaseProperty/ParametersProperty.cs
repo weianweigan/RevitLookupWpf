@@ -1,5 +1,4 @@
 ﻿using Autodesk.Revit.UI;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.Helpers;

@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
 using RevitLookupWpf.Helpers;
 using RevitLookupWpf.View;
 using System.Windows.Input;
@@ -21,6 +20,10 @@ namespace RevitLookupWpf.PropertySys.BaseProperty
         public bool IsMethod { get; set; }
 
         public string ToolTip { get; set; }
+
+        public virtual bool IsGeometeryObject { get; } = false;
+
+        public virtual bool NeedUnitConvert { get; } = false;
 
         //Not use because we can't use or P to check,still more method, properties other,
         //so we will change to search result relative

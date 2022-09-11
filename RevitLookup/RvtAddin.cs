@@ -3,6 +3,7 @@
  * 1.Addin Class
  */
 
+using System.IO;
 using System.Reflection;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.UI;
@@ -16,6 +17,7 @@ namespace RevitLookupWpf
         #region Public Methods
         public Result OnStartup(UIControlledApplication application)
         {
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
             RevitInfoManager.Version = GetRevitVersion(application.ControlledApplication);
             //InitUI(application);
             CreateRibbonPanel(application);
@@ -82,6 +84,21 @@ namespace RevitLookupWpf
         {
             var buttonData = new PushButtonData(command.FullName, buttonText, Assembly.GetAssembly(command).Location, command.FullName);
             return pullDownButton.AddPushButton(buttonData);
+        }
+
+        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            AssemblyName assemblyName = new AssemblyName(args.Name);
+
+            var dir = Path.GetDirectoryName(typeof(RvtAddin).Assembly.Location);
+            var dllLocation = Path.Combine(dir, assemblyName.Name + ".dll");
+
+            if (File.Exists(dllLocation))
+            {
+                return Assembly.LoadFrom(dllLocation);
+            }
+
+            return null;
         }
         #endregion
     }

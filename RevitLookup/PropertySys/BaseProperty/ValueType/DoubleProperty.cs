@@ -6,5 +6,7 @@
         {
             Value = value;
         }
+
+        public override bool NeedUnitConvert => true;
     }
 }

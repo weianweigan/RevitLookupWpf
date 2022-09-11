@@ -1,9 +1,10 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"                    
-                    xmlns:controls="clr-namespace:RevitLookupWpf.Controls">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:RevitLookupWpf.Controls"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/ParameterGrid.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/RevitLookupWpf;component/Themes/ParameterGrid.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="controls:SplitDropDownItem">
         <Setter Property="Template">
@@ -11,44 +12,54 @@
                 <ControlTemplate TargetType="controls:SplitDropDownItem">
                     <Grid x:Name="_parameterGroup">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="20" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{TemplateBinding Text}"
-                                   FontWeight="Black"
-                                   ToolTip="{TemplateBinding ToolTip}">
+                        <TextBlock
+                            FontWeight="Black"
+                            Text="{TemplateBinding Text}"
+                            ToolTip="{TemplateBinding ToolTip}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseLeftButtonUp">
-                                    <i:InvokeCommandAction Command="{Binding SelectedCommand}"/>
+                                    <i:InvokeCommandAction Command="{Binding SelectedCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBlock>
-                        <Button x:Name="PART_Btn" Grid.Column="1"
-                                Width="15" Height="15"
-                                HorizontalAlignment="Right"
-                                Background="White" BorderBrush="Gray">
-                            <Image Source="{StaticResource dropdownDrawingImage}"/>
+                        <Button
+                            x:Name="PART_Btn"
+                            Grid.Column="1"
+                            Width="15"
+                            Height="15"
+                            HorizontalAlignment="Right"
+                            Background="White"
+                            BorderBrush="Gray">
+                            <Image Source="{StaticResource dropdownDrawingImage}" />
                         </Button>
-                        <Popup x:Name="PART_Popup"
-                               Placement="Bottom" 
-                               PopupAnimation="Scroll"
-                               PlacementTarget="{Binding ElementName=_parameterGroup}"
-                               Width="{Binding ActualWidth,ElementName=_parameterGroup}"
-                               StaysOpen="False">
-                            <Border BorderThickness="1"
-                        BorderBrush="Black" Background="White">
+                        <Popup
+                            x:Name="PART_Popup"
+                            Width="{Binding ActualWidth, ElementName=_parameterGroup}"
+                            Placement="Bottom"
+                            PlacementTarget="{Binding ElementName=_parameterGroup}"
+                            PopupAnimation="Scroll"
+                            StaysOpen="False">
+                            <Border
+                                Background="White"
+                                BorderBrush="Black"
+                                BorderThickness="1">
                                 <Grid>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="30"/>
+                                        <RowDefinition />
+                                        <RowDefinition Height="30" />
                                     </Grid.RowDefinitions>
-                                    <ItemsControl Style="{StaticResource ParmeterGrid}"
-                                      ItemsSource="{Binding Parameters}">
-                                    </ItemsControl>
-                                    <Button Width="75" Height="23"
-                                            Grid.Row="1" 
-                                            x:Name="PART_ApplyBtn"
-                                            Command="{TemplateBinding ApplyCommand}">Apply</Button>
+                                    <ItemsControl ItemsSource="{Binding Parameters}" Style="{StaticResource ParmeterGrid}" />
+                                    <Button
+                                        x:Name="PART_ApplyBtn"
+                                        Grid.Row="1"
+                                        Width="75"
+                                        Height="23"
+                                        Command="{TemplateBinding ApplyCommand}">
+                                        Apply
+                                    </Button>
                                 </Grid>
                             </Border>
                         </Popup>

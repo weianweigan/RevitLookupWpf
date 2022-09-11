@@ -1,11 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using GalaSoft.MvvmLight.CommandWpf;
+using Autodesk.Revit.UI;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using RevitLookupWpf.PropertySys;
-using System.Linq;
-using Autodesk.Revit.DB;
-using Autodesk.Revit.UI;
+using RevitLookupWpf.PropertySys.BaseProperty.ReferenceType;
+using RevitLookupWpf.PropertySys.BaseProperty.ValueType;
+using RevitLookupWpf.Unit;
 using RevitLookupWpf.View;
 using InstanceNode = RevitLookupWpf.InstanceTree.InstanceNode;
 
@@ -19,12 +20,13 @@ namespace RevitLookupWpf.ViewModel
 
         private RelayCommand _selectedItemChangedCommand;
         private ObservableCollection<LookupViewModel> _items;
-       
+        private ICommand _openUnitConverterCommand;
+
         #endregion
 
         #region Ctor
 
-        public LookupWindowViewModel(LookupWindow lookupWindow):base(lookupWindow)
+        public LookupWindowViewModel(LookupWindow lookupWindow) : base(lookupWindow)
         {
             LookupData = this;
             Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
@@ -40,7 +42,9 @@ namespace RevitLookupWpf.ViewModel
 
         public ICommand CloseCommand => _closeCommand ??= (_closeCommand = new RelayCommand(CloseAction));
 
-        public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items , value); }
+        public ObservableCollection<LookupViewModel> Items { get => _items; set => Set(ref _items, value); }
+
+        public ICommand OpenUnitConverterCommand { get => _openUnitConverterCommand ??= new RelayCommand(OpenUnitConverterClick);}
         #endregion
 
         #region Public Methods
@@ -55,6 +59,7 @@ namespace RevitLookupWpf.ViewModel
 
             return LookupData.Roots.Any();
         }
+
         public ICommand SelectedItemChangedCommand
         {
             get
@@ -115,13 +120,18 @@ namespace RevitLookupWpf.ViewModel
             {
                 LookupData.Next = vm;
                 LookupData = vm;
-                Items = new ObservableCollection<LookupViewModel>( GetAllSnoopItems());
+                Items = new ObservableCollection<LookupViewModel>(GetAllSnoopItems());
             }
 
             root.IsSelected = true;
             root.IsExpanded = true;
         }
 
+        private void OpenUnitConverterClick()
+        {
+            var unitConverterWindow = new UnitConverterWindow(LookupData?.UnitConverter.SourceValue);
+            unitConverterWindow?.ShowDialog();
+        }
         #endregion
 
         protected override void LookupDataChanged()

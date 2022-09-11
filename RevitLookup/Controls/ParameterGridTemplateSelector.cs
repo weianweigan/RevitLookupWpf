@@ -27,6 +27,8 @@ namespace RevitLookupWpf.Controls
         public DataTemplate BuiltInParameterDataTemplate { get; set; }
 
         public DataTemplate GuidDataTemplate { get; set; }
+
+        public DataTemplate OptionsDataTemplate { get; set; }
         #endregion
 
         #region Public Methods
@@ -62,6 +64,9 @@ namespace RevitLookupWpf.Controls
                     break;
                 case nameof(GuidParameter):
                     dataTemplate = GuidDataTemplate;
+                    break;
+                case nameof(OptionsParameter):
+                    dataTemplate = OptionsDataTemplate;
                     break;
                 default:
                     //break;

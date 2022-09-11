@@ -20,7 +20,7 @@ namespace RevitLookupWpf.ViewModel
         DocCurrent,
         DocLinked
     }
-    public class SnoopSearchViewModel : ViewModelBase
+    public class SnoopSearchViewModel : ObservableObject
     {
         public SearchWindow SearchWindow { get; set; }
         private string _value;

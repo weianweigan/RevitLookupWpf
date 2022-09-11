@@ -21,6 +21,7 @@ namespace RevitLookupWpf.View
             this.SetOwnerWindow();
             this.Closed += LookupWindow_Closed;
         }
+
         public LookupWindow(ExternalCommandData data) : this()
         {
             _viewModel = new LookupWindowViewModel(this);
@@ -32,11 +33,12 @@ namespace RevitLookupWpf.View
         {
             return _viewModel.SetRvtInstance(rvtObject);
         }
+
         private void LookupWindow_Closed(object sender, EventArgs e)
         {
             this.Closed -= LookupWindow_Closed;
 
-            Messenger.Default.Unregister(_viewModel);
+            Messenger.Default.Unregister<LookupWindowViewModel>(_viewModel);
         }
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

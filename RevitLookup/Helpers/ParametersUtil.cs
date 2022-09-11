@@ -17,6 +17,7 @@ namespace RevitLookupWpf.Helpers
         public static List<Type> AllowTypes { get; } = new List<Type>()
         {
             typeof(Autodesk.Revit.DB.View),
+            typeof(Autodesk.Revit.DB.Options),
         };
 
         public static bool IsInputable(this ParameterInfo parameter)
@@ -85,6 +86,9 @@ namespace RevitLookupWpf.Helpers
                     break;
                 case "Autodesk.Revit.DB.View":
                     parameter = new ViewParameter(parameterInfo);
+                    break;
+                case "Autodesk.Revit.DB.Options":
+                    parameter = new OptionsParameter(parameterInfo);
                     break;
                 default:
                     //parameter = new StringParameter(parameterInfo);

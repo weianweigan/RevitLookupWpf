@@ -124,7 +124,7 @@
                 </Grid>
             </DataTemplate>
         </controls:PropertyDataGridValueTemplateSelector.ExceptionDataTemplate>
-        <!--  DeafultObject  -->
+        <!--  Default Object  -->
         <controls:PropertyDataGridValueTemplateSelector.DefaultObjectDataTemplate>
             <DataTemplate DataType="{x:Type referenceType:DefaultObjectProperty}">
                 <TextBlock FontWeight="Black" Text="{Binding ValueType}">

@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using Autodesk.Revit.DB;
+﻿using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using RevitLookupWpf.View;
 
@@ -15,10 +13,9 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
             if (value != null)
             {
                 Value = value;
-                ValueType = value.GetType()?.Name;
+                ValueType = value.GetType()?.FullName;
             }
         }
-
         public string ValueType { get; set; }
 
         public ICommand SelectedCommand => _selectedCommand ??= new RelayCommand(Selected);
@@ -37,5 +34,6 @@ namespace RevitLookupWpf.PropertySys.BaseProperty.ReferenceType
                 NaviRvtObj(Value);
             }
         }
+        
     }
 }

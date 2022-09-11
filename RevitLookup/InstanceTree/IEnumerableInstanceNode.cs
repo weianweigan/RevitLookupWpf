@@ -8,8 +8,8 @@ namespace RevitLookupWpf.InstanceTree
     {
         public IEnumerableInstanceNode(IEnumerable rvtObject) : base(rvtObject)
         {
-            Name = RvtObject?.GetType().Name;
             GetChild();
+            Name = RvtObject?.GetType().Name + $" [{Children.Count}]";
         }
 
         private void GetChild()
@@ -18,12 +18,20 @@ namespace RevitLookupWpf.InstanceTree
             {
                 Children = new ObservableCollection<InstanceNode>();
             }
-            foreach (var item in RvtObject)
+
+            Index = -1;
+            foreach (object item in RvtObject)
             {
                 InstanceNode node = InstanceNode.Create(item);
                 Children.Add(node);
             }
-            if (Children.Any()) Children = Children.OrderBy(x => x.Name).ToObservableCollection();
+
+            if (Children.Any())
+            {
+                Children = Children.OrderBy(x => x.Name).ToObservableCollection();
+                Children.ToList().ForEach(x=>x.Index= Index+=1);
+                Children.ToList().ForEach(x=>x.Name= $"[{x.Index}] {x.Name}");
+            }
         }
 
     }

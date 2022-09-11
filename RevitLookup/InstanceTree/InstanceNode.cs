@@ -120,7 +120,7 @@ namespace RevitLookupWpf.InstanceTree
                         node = new BoundingBoxXYZInstanceNode(boundsXYZ);
                         break;
                     case EdgeArray edgeArray:
-                        node = new IEnumerableInstanceNode(edgeArray);
+                        node = new EdgeArrayInstanceNode(edgeArray);
                         node.IsExpanded = true;
                         break;
                     default:
@@ -136,8 +136,8 @@ namespace RevitLookupWpf.InstanceTree
         #endregion
 
         #region Properties
-        public string Name { get; protected set; }
-
+        public string Name { get; protected internal set; }
+        public int Index { get; set; }
         public bool IsSelected
         {
             get => _isSelected; set

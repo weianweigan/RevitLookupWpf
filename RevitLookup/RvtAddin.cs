@@ -66,7 +66,7 @@ namespace RevitLookupWpf
             var pulldownButton = (PulldownButton)ribbonPanel.AddItem(pulldownButtonData);
             pulldownButton.Image = BitmapSourceConverter.ToImageSource(Resource.search, BitmapSourceConverter.ImageType.Small);
             pulldownButton.LargeImage = BitmapSourceConverter.ToImageSource(Resource.search, BitmapSourceConverter.ImageType.Large);
-            AddPushButton(pulldownButton, typeof(SnoopDBCommand), "Snoop DB...");
+            AddPushButtonAva(pulldownButton, typeof(SnoopDBCommand), "Snoop DB...(Working In Process)");
             AddPushButton(pulldownButton, typeof(SnoopActiveDocCommand), "Snoop Active Document...");
             AddPushButton(pulldownButton, typeof(SnoopActiveViewCommand), "Snoop Active View...");
             AddPushButton(pulldownButton, typeof(SnoopCurrentSelectionCommand), "Snoop Current Selections...");
@@ -85,7 +85,13 @@ namespace RevitLookupWpf
             var buttonData = new PushButtonData(command.FullName, buttonText, Assembly.GetAssembly(command).Location, command.FullName);
             return pullDownButton.AddPushButton(buttonData);
         }
-
+        private static PushButton AddPushButtonAva(PulldownButton pullDownButton, Type command, string buttonText)
+        {
+            var buttonData = new PushButtonData(command.FullName, buttonText, Assembly.GetAssembly(command).Location,
+                command.FullName);
+            buttonData.AvailabilityClassName = typeof(SnoopDBCommandAvail).FullName;
+            return pullDownButton.AddPushButton(buttonData);
+        }
         private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             AssemblyName assemblyName = new AssemblyName(args.Name);

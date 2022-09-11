@@ -48,3 +48,12 @@ namespace RevitLookupWpf.Commands
         }
     }
 }
+
+public class SnoopDBCommandAvail : IExternalCommandAvailability {
+    public SnoopDBCommandAvail() {
+    }
+
+    public bool IsCommandAvailable(UIApplication uiApp, CategorySet selectedCategories) {
+        return false;
+    }
+}

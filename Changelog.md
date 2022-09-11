@@ -1,4 +1,7 @@
 # Changelog
+- 2022-09-11 **1.0.5**
+  - Support Preview Geometry And Unit Convert
+  - Add Support Dynamo Revit Package (Version 2019-2023)
 - 2022-04-07 **1.0.4**
   - Support Revit 2023
   - Fix some nuget package

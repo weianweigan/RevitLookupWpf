@@ -76,6 +76,10 @@ Happy to say that RevitLookupWpf also support snoop everything inside inviroment
 
 ![](pic/SetInputMethod.gif)
 
+- Preview Geometry and convert Unit
+
+![](pic/PreviewGeometry.gif)
+
 ## Author
 
 Originally implemented by [weianweigan](https://github.com/weianweigan), contribute with [Chuong Ho](https://github.com/chuongmep).

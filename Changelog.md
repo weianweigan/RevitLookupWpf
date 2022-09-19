@@ -1,4 +1,8 @@
 # Changelog
+- 2022-09-19 **1.0.6**
+  - Improve show value type.
+  - Improve show tree view index
+  - Limit feature snoop DB not available at the moment.
 - 2022-09-11 **1.0.5**
   - Support Preview Geometry And Unit Convert
   - Add Support Dynamo Revit Package (Version 2019-2023)

@@ -84,6 +84,50 @@ namespace RevitLookupWpf.ViewModel
                 RaisePropertyChanged(nameof(DataSource));
             }
         }
+        private ICollectionView itemsView;
+
+        public ICollectionView ItemsView
+        {
+            get
+            {
+                if (itemsView == null)
+                {
+                    itemsView = CollectionViewSource.GetDefaultView(DataSource);
+                    itemsView.Filter = filterSearchText;
+                }
+                return itemsView;
+            }
+            set => RaisePropertyChanged(nameof(itemsView));
+        }
+        private bool filterSearchText(dynamic item)
+        {
+            if (SearchText != null || SearchText != "")
+            {
+                return SearchText != null && item.Name.ToUpper().Contains(SearchText.ToUpper());
+            }
+        
+            return true;
+        }
+        private string _searchText;
+
+        public string SearchText
+        {
+            get
+            {
+                if (_searchText == null)
+                {
+                    _searchText = "";
+                  
+                }
+                return _searchText;
+            }
+            set
+            {
+                Set(ref _searchText, value);
+                RaisePropertyChanged(nameof(SearchText));
+                ItemsView.Refresh();
+            }
+        }
 
         public LookupViewModel LookupData
         {

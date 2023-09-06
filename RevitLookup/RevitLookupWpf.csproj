@@ -124,6 +124,10 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
   <Target Name="CopyFiles" AfterTargets="CoreBuild">
     <ItemGroup>
       <RootItem Include="$(ProjectDir)*.addin" />

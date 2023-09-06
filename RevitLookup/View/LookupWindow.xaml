@@ -71,15 +71,17 @@
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="7*" />
             </Grid.ColumnDefinitions>
-            <TreeView
+            <controls:ExtendedTreeView
                 Grid.Row="0"
+                x:Name="TreeView"
                 FontSize="10"
                 BorderThickness="1"
                 BorderBrush="{StaticResource RevitBlue}"
                 ItemsSource="{Binding LookupData.Roots}"
+                SelectedItem_="{Binding LookupData.Root,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                SelectedItemChanged="TreeView_SelectedItemChanged">
+                >
                 <!--<i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectedItemChanged">
                         <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
@@ -124,7 +126,7 @@
                         </Grid>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
-            </TreeView>
+            </controls:ExtendedTreeView>
             <GridSplitter
                 Grid.Row="0"
                 Grid.Column="1"

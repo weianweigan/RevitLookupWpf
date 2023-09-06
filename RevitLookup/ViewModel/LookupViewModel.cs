@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
@@ -35,6 +36,7 @@ namespace RevitLookupWpf.ViewModel
         private RelayCommand _helpCommand;
         public LookupWindow _lookupWindow;
         private RelayCommand _preViewCommand;
+        private InstanceNode root;
         #endregion
 
         #region Ctor
@@ -51,6 +53,31 @@ namespace RevitLookupWpf.ViewModel
             {
                 Set(ref _roots, value);
                 GetNaviName();
+            }
+        }
+        public InstanceNode Root
+        {
+            get
+            {
+                if(root==null && Roots.Count>0)
+                {
+                    root = Roots[0];
+                }
+                if (root != null)
+                {
+                    root.Snoop();
+                    if (root.PropertyList != null)
+                    {
+                        PropertyList = root.PropertyList;
+                    }
+                }
+                return root;
+            }
+            set
+            {
+                
+                Set(ref root, value);
+                RaisePropertyChanged(nameof(Root));
             }
         }
 

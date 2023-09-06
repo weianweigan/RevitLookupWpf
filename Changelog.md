@@ -1,4 +1,6 @@
 # Changelog
+- 2022-09-19 **1.0.7**
+  - Supported Search feature with field name
 - 2022-09-19 **1.0.6**
   - Improve show value type.
   - Improve show tree view index

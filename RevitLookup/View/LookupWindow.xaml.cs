@@ -41,10 +41,10 @@ namespace RevitLookupWpf.View
             Messenger.Default.Unregister<LookupWindowViewModel>(_viewModel);
         }
 
-        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            _viewModel.SelectedItemChangedCommand?.Execute(null);
-        }
+        // private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        // {
+        //     _viewModel.SelectedItemChangedCommand?.Execute(null);
+        // }
 
         private void LookupWindow_OnClosing(object sender, CancelEventArgs e)
         {

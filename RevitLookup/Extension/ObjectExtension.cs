@@ -31,6 +31,7 @@ namespace RevitLookupWpf.Extension
 
             list.Inheri = GetBaseChain(type);
 
+           
             //properties
             var propertyInfos = type.GetProperties();
 
@@ -55,9 +56,17 @@ namespace RevitLookupWpf.Extension
 
             //Methods
             var methodInfos = type.GetMethods()
-                .Where(p => !p.Name.StartsWith("get_") && !p.Name.StartsWith("set_"))
-                .Where(m => !m.Name.StartsWith("add_") && !m.Name.StartsWith("remove_"))
-                .Where(xyz=>!xyz.Name.StartsWith("op_"))
+                .Where(x=>x.IsPublic || x.IsPrivate)
+                //  .Where(x=>!x.IsSpecialName)
+                //  .Where(x=>!x.IsGenericMethod)
+                // .Where(x=>!x.IsGenericMethodDefinition)
+                // .Where(x=>!x.IsAbstract)
+                // .Where(x=>!x.IsConstructor)
+                //  .Where(x=>!x.IsFamily)
+                //  .Where(x=>!x.IsFamilyAndAssembly)
+                //  .Where(x=>!x.IsFamilyOrAssembly)
+                .Where(x=>!x.IsSpecialName)
+                .Where(x=>!x.IsStatic)
                 .Where(p => p.Name != "Dispose")
                 .ToList();
             //.OrderBy(p => p.Name);
@@ -94,8 +103,6 @@ namespace RevitLookupWpf.Extension
             };
 
             list.AddRange(methodPropeties);
-            //list.Sort((p1,p2) => p1.Name.CompareTo(p2.Name));
-
             return list;
         }
         #endregion

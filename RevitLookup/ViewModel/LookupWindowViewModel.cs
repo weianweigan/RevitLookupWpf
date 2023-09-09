@@ -60,18 +60,18 @@ namespace RevitLookupWpf.ViewModel
             return LookupData.Roots.Any();
         }
 
-        public ICommand SelectedItemChangedCommand
-        {
-            get
-            {
-                if (_selectedItemChangedCommand == null)
-                {
-                    _selectedItemChangedCommand = new RelayCommand(PerformSelectedItemChanged);
-                }
-
-                return _selectedItemChangedCommand;
-            }
-        }
+        // public ICommand SelectedItemChangedCommand
+        // {
+        //     get
+        //     {
+        //         if (_selectedItemChangedCommand == null)
+        //         {
+        //             _selectedItemChangedCommand = new RelayCommand(PerformSelectedItemChanged);
+        //         }
+        //
+        //         return _selectedItemChangedCommand;
+        //     }
+        // }
 
         protected IEnumerable<LookupViewModel> GetAllSnoopItems()
         {
@@ -84,21 +84,21 @@ namespace RevitLookupWpf.ViewModel
             }
         }
 
-        private void PerformSelectedItemChanged()
-        {
-            if (LookupData.Roots == null)
-            {
-                return;
-            }
-
-            var selectedNode = GetSelectedNode();
-            if (selectedNode != null)
-            {
-                selectedNode.Snoop();
-                LookupData.PropertyList = selectedNode.PropertyList;
-            }
-
-        }
+        // private void PerformSelectedItemChanged()
+        // {
+        //     if (LookupData.Roots == null)
+        //     {
+        //         return;
+        //     }
+        //
+        //     var selectedNode = GetSelectedNode();
+        //     if (selectedNode != null)
+        //     {
+        //         selectedNode.Snoop();
+        //         LookupData.PropertyList = selectedNode.PropertyList;
+        //     }
+        //
+        // }
 
         private void OnNavigation(RvtObjectMessage objectMessage)
         {

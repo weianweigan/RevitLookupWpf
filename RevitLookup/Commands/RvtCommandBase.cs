@@ -1,8 +1,9 @@
 ﻿/*
  * Created By WeiGan 2021.9.9
- * 
+ *
  */
 
+using System.Windows;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.Exceptions;
 using Autodesk.Revit.UI;
@@ -23,7 +24,7 @@ namespace RevitLookupWpf.Commands
             catch (Exception e)
             {
                 result = Result.Failed;
-                throw new  ArgumentException(e.ToString());
+                MessageBox.Show(e.Message);
             }
             finally
             {
